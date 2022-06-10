@@ -43,6 +43,13 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
 
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+  }
+
+  use "Mephistophiles/surround.nvim"
+
   -- nvim tree
     use {
         'kyazdani42/nvim-tree.lua',
@@ -65,7 +72,8 @@ return packer.startup(function(use)
   }
  
   -- terminal
-  --
+  use "akinsho/toggleterm.nvim"
+
   -- colorscheme
   use "lunarvim/darkplus.nvim"
 
