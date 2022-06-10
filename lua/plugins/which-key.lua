@@ -165,12 +165,12 @@ local mappings = {
   --   v = { "<cmd>vsplit<cr>", "VSplit" },
   -- },
 
-  r = {
-    name = "Replace",
-    r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-    f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
-  },
+  -- r = {
+  --   name = "Replace",
+  --   r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+  --   w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+  --   f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+  -- },
 
   -- d = {
   --   name = "Debug",
@@ -193,11 +193,12 @@ local mappings = {
 
   f = {
     name = "Find",
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
     C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)"},
     f = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "Find files",
+      "Find Files",
     },
     t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
     ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
