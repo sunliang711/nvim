@@ -13,6 +13,6 @@ require "plugins.bufferline"
 require "plugins.lualine"
 require "plugins.gitsigns"
 require "plugins.toggleterm"
--- require "plugins.comment"
+require "plugins.comment"
 
 require "plugins.which-key"

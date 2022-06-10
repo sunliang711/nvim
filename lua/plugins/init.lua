@@ -63,7 +63,7 @@ return packer.startup(function(use)
   }
 
   -- comment
-  -- use "numToStr/Comment.nvim"
+  use "numToStr/Comment.nvim"
 
   -- git
   use {
