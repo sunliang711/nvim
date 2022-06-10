@@ -56,14 +56,14 @@ comment.setup {
 
     ---LHS of extra mappings
     ---@type table
-    extra = {
-        ---Add comment on the line above
-        above = 'gcO',
-        ---Add comment on the line below
-        below = 'gco',
-        ---Add comment at the end of line
-        eol = 'gcA',
-    },
+    -- extra = {
+    --     ---Add comment on the line above
+    --     above = 'gcO',
+    --     ---Add comment on the line below
+    --     below = 'gco',
+    --     ---Add comment at the end of line
+    --     eol = 'gcA',
+    -- },
 
     ---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
     ---NOTE: If `mappings = false` then the plugin won't create any mappings
