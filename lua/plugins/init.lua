@@ -43,6 +43,9 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
 
+  -- speed up loading lua modules in neovim
+  use "lewis6991/impatient.nvim"
+
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
@@ -55,6 +58,8 @@ return packer.startup(function(use)
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons'
     }
+
+  -- use "lukas-reineke/indent-blankline.nvim"
 
   -- telescope
   use {

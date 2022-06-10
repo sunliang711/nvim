@@ -4,6 +4,8 @@ require "functions"
 require "autocmds"
 
 require "plugins"
+require "plugins.impatient"
+-- require "plugins.indent-blankline"
 require "plugins.alpha"
 require "plugins.surround"
 require "plugins.nvim-tree"
