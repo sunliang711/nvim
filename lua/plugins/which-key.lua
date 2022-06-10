@@ -151,6 +151,7 @@ local mappings = {
 
   o = {
     name = "Options",
+    h = { '<cmd>checkhealth<cr>', "Check Health" },
     w = { '<cmd>lua require("functions").toggle_option("wrap")<cr>', "Wrap" },
     r = { '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', "Relative" },
     l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
