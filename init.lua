@@ -1,5 +1,5 @@
 local F = require "functions"
-local C = require "pluginloader"
+require "pluginloader"
 require "options"
 require "keymaps"
 require "autocmds"
