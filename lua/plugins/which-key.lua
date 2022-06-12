@@ -204,7 +204,7 @@ local mappings = {
     t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
     ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     h = { "<cmd>Telescope command_history<cr>", "Command History" },
-    i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+    -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
@@ -328,6 +328,7 @@ local mappings = {
 
 local vopts = {
   mode = "v", -- VISUAL mode
+  -- prefix = "<leader>",
   prefix = "<leader>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps

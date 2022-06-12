@@ -91,15 +91,17 @@ return packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
  
+  use "rcarriga/nvim-notify"
  
   -- neoscroll
   use "karb94/neoscroll.nvim"
 
   -- -- treesitter
-  --   use {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   run = ":TSUpdate",
-  -- }
+    use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+
   -- cmp (completion)
   use "hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-buffer"
