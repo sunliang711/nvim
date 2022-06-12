@@ -1,5 +1,23 @@
 local fn = vim.fn
-local C = require "pluginloader"
+local C  = require "pluginloader"
+
+-- C["impatient"] = true
+-- C["notify"] = true
+-- C["treesitter"] = true
+-- C["cmp"] = true
+-- C["alpha"] = true
+-- C["surround"] = true
+-- C["nvimtree"] = true
+-- C["neoscroll"] = true
+-- C["colorscheme"] = true
+-- C["bufferline"] = true
+-- C["lualine"] = true
+-- C["gitsigns"] = true
+-- C["toggleterm"] = true
+-- C["comment"] = true
+-- C["whichkey"] = true
+-- C["telescope"] = true
+-- print(vim.inspect(C))
 
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -47,25 +65,25 @@ return packer.startup(function(use)
   -- speed up loading lua modules in neovim
   use { 
     "lewis6991/impatient.nvim",
-    cond = function() return C["impatient"] end
+    cond = C["impatient"]
   }
 
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    cond = function() return C["alpha"] end
+    cond = C["alpha"]
   }
 
   use {
     "Mephistophiles/surround.nvim",
-    cond = function() return C["surround"] end
+    cond = C["surround"]
   }
 
   -- nvim tree
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
-        cond = function() return C["nvimtree"] end
+        cond = C["nvimtree"]
     }
 
   -- use "lukas-reineke/indent-blankline.nvim"
@@ -74,26 +92,26 @@ return packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
-    cond = function() return C["telescope"] end
+    cond = C["telescope"]
   }
 
   -- comment
   use {
     "numToStr/Comment.nvim",
-    cond = function() return C["comment"] end
+    cond = C["comment"]
   }
 
   -- git
   use {
     'lewis6991/gitsigns.nvim',
-    cond = function() return C["gitsigns"] end
+    cond = C["gitsigns"]
     -- tag = 'release' -- To use the latest release
   }
  
   -- terminal
   use {
     "akinsho/toggleterm.nvim",
-    cond = function() return C["toggleterm"] end
+    cond = C["toggleterm"]
   }
 
   -- colorscheme
@@ -105,61 +123,61 @@ return packer.startup(function(use)
         'akinsho/bufferline.nvim',
         tag = "v2.*",
         requires = 'kyazdani42/nvim-web-devicons',
-        cond = function() return C["bufferline"] end
+        cond = C["bufferline"]
 
   }
   -- lualine
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    cond = function() return C["lualine"] end
+    cond = C["lualine"]
   }
  
   use {
     "rcarriga/nvim-notify",
-    cond = function() return C["notify"] end
+    cond = C["notify"]
 
   }
  
   -- neoscroll
   use {
     "karb94/neoscroll.nvim",
-    cond = function() return C["neoscroll"] end
+    cond = C["neoscroll"]
   }
 
   -- -- treesitter
     use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    cond = function() return C["treesitter"] end
+    cond = C["treesitter"]
   }
 
   -- cmp (completion)
   use {
     "hrsh7th/nvim-cmp",
-    cond =function() return C["cmp"] end
+    cond = C["cmp"]
   }
   use {
     "hrsh7th/cmp-buffer",
-    cond =function() return C["cmp"] end
+    cond = C["cmp"]
   }
   use {
     "hrsh7th/cmp-path",
-    cond =function() return C["cmp"] end
+    cond = C["cmp"]
   }
   use {
     "hrsh7th/cmp-cmdline",
-    cond =function() return C["cmp"] end
+    cond = C["cmp"]
   }
   use {
     "hrsh7th/cmp-nvim-lua",
-    cond =function() return C["cmp"] end
+    cond = C["cmp"]
   }
 
   -- which key
   use {
     "folke/which-key.nvim",
-    cond =function() return C["whichkey"] end
+    cond = C["whichkey"]
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
