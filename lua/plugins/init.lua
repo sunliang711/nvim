@@ -81,6 +81,7 @@ return packer.startup(function(use)
 
   -- colorscheme
   use "lunarvim/darkplus.nvim"
+  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
   -- bufferline
   use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
@@ -93,6 +94,18 @@ return packer.startup(function(use)
  
   -- neoscroll
   use "karb94/neoscroll.nvim"
+
+  -- -- treesitter
+  --   use {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   run = ":TSUpdate",
+  -- }
+  -- cmp (completion)
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lua"
 
   -- which key
   use "folke/which-key.nvim"
