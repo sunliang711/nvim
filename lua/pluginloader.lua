@@ -1,7 +1,7 @@
 
 local M = {}
 
-M.debug = true
+M.debug = false
 
 
 -- NOTE: the following key is the same name with lua module file, eg plugins.impatient.lua, plugins.notify.lua

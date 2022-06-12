@@ -1,22 +1,6 @@
 local fn = vim.fn
 local C  = require "pluginloader"
 
--- C["impatient"] = true
--- C["notify"] = true
--- C["treesitter"] = true
--- C["cmp"] = true
--- C["alpha"] = true
--- C["surround"] = true
--- C["nvimtree"] = true
--- C["neoscroll"] = true
--- C["colorscheme"] = true
--- C["bufferline"] = true
--- C["lualine"] = true
--- C["gitsigns"] = true
--- C["toggleterm"] = true
--- C["comment"] = true
--- C["whichkey"] = true
--- C["telescope"] = true
 -- print(vim.inspect(C))
 
 -- Automatically install packer
@@ -65,25 +49,25 @@ return packer.startup(function(use)
   -- speed up loading lua modules in neovim
   use { 
     "lewis6991/impatient.nvim",
-    cond = C["impatient"]
+    disable = not C["impatient"]
   }
 
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    cond = C["alpha"]
+    disable = not C["alpha"]
   }
 
   use {
     "Mephistophiles/surround.nvim",
-    cond = C["surround"]
+    disable = not C["surround"]
   }
 
   -- nvim tree
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
-        cond = C["nvimtree"]
+        disable = not C["nvimtree"]
     }
 
   -- use "lukas-reineke/indent-blankline.nvim"
@@ -92,26 +76,26 @@ return packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
-    cond = C["telescope"]
+    disable = not C["telescope"]
   }
 
   -- comment
   use {
     "numToStr/Comment.nvim",
-    cond = C["comment"]
+    disable = not C["comment"]
   }
 
   -- git
   use {
     'lewis6991/gitsigns.nvim',
-    cond = C["gitsigns"]
+    disable = not C["gitsigns"]
     -- tag = 'release' -- To use the latest release
   }
  
   -- terminal
   use {
     "akinsho/toggleterm.nvim",
-    cond = C["toggleterm"]
+    disable = not C["toggleterm"]
   }
 
   -- colorscheme
@@ -123,61 +107,61 @@ return packer.startup(function(use)
         'akinsho/bufferline.nvim',
         tag = "v2.*",
         requires = 'kyazdani42/nvim-web-devicons',
-        cond = C["bufferline"]
+        disable = not C["bufferline"]
 
   }
   -- lualine
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    cond = C["lualine"]
+    disable = not C["lualine"]
   }
  
   use {
     "rcarriga/nvim-notify",
-    cond = C["notify"]
+    disable = not C["notify"]
 
   }
  
   -- neoscroll
   use {
     "karb94/neoscroll.nvim",
-    cond = C["neoscroll"]
+    disable = not C["neoscroll"]
   }
 
   -- -- treesitter
     use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    cond = C["treesitter"]
+    disable = not C["treesitter"]
   }
 
   -- cmp (completion)
   use {
     "hrsh7th/nvim-cmp",
-    cond = C["cmp"]
+    disable = not C["cmp"]
   }
   use {
     "hrsh7th/cmp-buffer",
-    cond = C["cmp"]
+    disable = not C["cmp"]
   }
   use {
     "hrsh7th/cmp-path",
-    cond = C["cmp"]
+    disable = not C["cmp"]
   }
   use {
     "hrsh7th/cmp-cmdline",
-    cond = C["cmp"]
+    disable = not C["cmp"]
   }
   use {
     "hrsh7th/cmp-nvim-lua",
-    cond = C["cmp"]
+    disable = not C["cmp"]
   }
 
   -- which key
   use {
     "folke/which-key.nvim",
-    cond = C["whichkey"]
+    disable = not C["whichkey"]
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
