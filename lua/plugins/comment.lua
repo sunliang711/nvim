@@ -75,7 +75,7 @@ comment.setup {
         basic = true,
         ---Extra mapping
         ---Includes `gco`, `gcO`, `gcA`
-        extra = true,
+        extra = false,
         ---Extended mapping
         ---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
         extended = false,

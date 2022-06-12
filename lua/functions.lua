@@ -114,4 +114,23 @@ function M.smart_quit()
   end
 end
 
+function M.load_module(enable, path, debug)
+    if enable then
+        if debug then
+            vim.notify("load " .. path)
+        end
+        require(path)
+    end
+end
+
+local C = require("pluginloader")
+function M.load_plugin_config(plugin)
+    if C[plugin] then
+        if C.debug then
+            vim.notify("load plugins." .. plugin)
+        end
+        require("plugins." .. plugin)
+    end
+end
+
 return M
