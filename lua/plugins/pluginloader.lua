@@ -1,6 +1,13 @@
 local M = {}
 
-M.debug = true
+-- Not work
+-- if vim.env.DEBUG_NVIM == 1 then
+--     M.debug = true
+-- else
+--     M.debug = false
+-- end
+
+M.debug = false
 
 -- NOTE: the following key is the same name with lua module file, eg plugins.impatient.lua, plugins.notify.lua
 --
