@@ -195,7 +195,8 @@ local mappings = {
 
   f = {
     name = "Find",
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
+    b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
+    B = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
     C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)"},
     f = {

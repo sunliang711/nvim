@@ -62,6 +62,10 @@ return packer.startup(function(use)
     "Mephistophiles/surround.nvim",
     disable = not C["surround"]
   }
+  -- use {
+  --   "ur4ltz/surround.nvim",
+  --   disable = not C["surround"]
+  -- }
 
   -- nvim tree
     use {

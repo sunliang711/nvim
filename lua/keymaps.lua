@@ -30,3 +30,4 @@ keymap("n", "]b", "<cmd>bnext<cr>", opts)
 keymap("n", "[b", "<cmd>bprevious<cr>", opts)
 
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
+
