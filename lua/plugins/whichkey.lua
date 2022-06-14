@@ -150,15 +150,28 @@ local mappings = {
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
 
-  u = {
-    name = "Utils",
-    h = { '<cmd>checkhealth<cr>', "Check Health" },
+  t = {
+    name = "Tools",
+    c = { '<cmd>checkhealth<cr>', "Check Health" },
     w = { '<cmd>lua require("functions").toggle_option("wrap")<cr>', "Wrap" },
     r = { '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', "Relative" },
     l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
-    c = { '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', "Cursorcolumn" },
+    -- c = { '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', "Cursorcolumn" },
     s = { '<cmd>lua require("functions").toggle_option("spell")<cr>', "Spell" },
     t = { '<cmd>lua require("functions").toggle_tabline()<cr>', "Tabline" },
+    ["1"] = { ":1ToggleTerm<cr>", "1" },
+    ["2"] = { ":2ToggleTerm<cr>", "2" },
+    ["3"] = { ":3ToggleTerm<cr>", "3" },
+    ["4"] = { ":4ToggleTerm<cr>", "4" },
+    -- n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+    -- u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+    -- t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+    -- p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+    t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
   },
 
   -- s = {
@@ -194,25 +207,29 @@ local mappings = {
   -- require("dapui").toggle()
 
   f = {
-    name = "Find",
+    name = "File",
     b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
-    B = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-    C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)"},
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "Find Files",
-    },
-    t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-    ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-    h = { "<cmd>Telescope command_history<cr>", "Command History" },
-    -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
-    l = { "<cmd>Telescope resume<cr>", "Last Search" },
-    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    f = { "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", "Find Files" },
     r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-    R = { "<cmd>Telescope registers<cr>", "Registers" },
+    t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+    -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+    -- w = { "<cmd>wall<cr>", "save all"},
+    w = { '<cmd>lua require("functions").save_all()<CR>', "Quit" },
+    q = { "<cmd>wqall<cr>","save all and quit"},
+    Q = { "<cmd>qall!<cr>","quit without save!!"},
+    ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+  },
+
+  ["l"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+
+  c = {
+    name = "Commands and Keymaps",
+    r = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    h = { "<cmd>Telescope command_history<cr>", "Command History" },
     c = { "<cmd>Telescope commands<cr>", "Commands" },
+
   },
 
   g = {
@@ -306,20 +323,6 @@ local mappings = {
   --   x = { "<cmd>SnipTerminate<cr>", "Terminate" },
   -- },
 
-  t = {
-    name = "Terminal",
-    ["1"] = { ":1ToggleTerm<cr>", "1" },
-    ["2"] = { ":2ToggleTerm<cr>", "2" },
-    ["3"] = { ":3ToggleTerm<cr>", "3" },
-    ["4"] = { ":4ToggleTerm<cr>", "4" },
-    -- n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    -- u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-    -- t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    -- p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-  },
 
   -- T = {
   --   name = "Treesitter",
