@@ -116,7 +116,7 @@ end
 
 function M.save_all()
     vim.cmd "wall"
-    vim.notify({"All Files Saved"},"info", {timeout=1000})
+    vim.notify({ "All Files Saved" },"info", { timeout=1000 })
 end
 
 return M
