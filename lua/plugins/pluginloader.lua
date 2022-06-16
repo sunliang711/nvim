@@ -14,6 +14,12 @@ else
     M["treesitter"] = false
 end
 
+if ( env['enable_lsp'] == '1' ) then
+    M['lsp'] = true
+else
+    M['lsp'] = false
+end
+
 -- NOTE: the following key is the same name with lua module file, eg plugins.impatient.lua, plugins.notify.lua
 --
 M["impatient"] = true

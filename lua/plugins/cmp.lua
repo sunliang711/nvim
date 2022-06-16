@@ -3,6 +3,12 @@ if not cmp_status_ok then
   return
 end
 
+local lsp_loaded = true
+local status_ok,lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+  lsp_loaded = false
+end
+
 -- local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
 -- if not cmp_dap_status_ok then
 --   return
@@ -24,6 +30,20 @@ local icons = require "icons"
 
 local kind_icons = icons.kind
 
+local sources = {
+    { name = "buffer" },
+    { name = "path" },
+    { name = "nvim_lua" },
+    -- { name = "nvim_lsp" },
+    -- { name = "luasnip" },
+    -- { name = "cmp_tabnine" },
+    -- { name = "emoji" },
+    -- { name = "dap" },
+}
+if lsp_loaded then
+    table.insert(sources, { name = "nvim_lsp" })
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -41,15 +61,16 @@ cmp.setup {
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+    -- not works?
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-e>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<CR>"] = cmp.mapping.confirm { 
+            behavior = cmp.ConfirmBehavior.Replace,
+            -- behavior = cmp.ConfirmBehavior.Insert,
+            select = true 
+    },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -57,8 +78,8 @@ cmp.setup {
       --   luasnip.expand()
       -- elseif luasnip.expand_or_jumpable() then
       --   luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
+      -- elseif check_backspace() then
+      --   fallback()
       else
         fallback()
       end
@@ -94,8 +115,8 @@ cmp.setup {
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       -- NOTE: order matters
       vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[Nvim]",
+        nvim_lsp = "[NVIM LSP]",
+        nvim_lua = "[Nvim lua]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -112,20 +133,12 @@ cmp.setup {
       return vim_item
     end,
   },
-  sources = {
-    { name = "buffer" },
-    { name = "path" },
-    { name = "nvim_lua" },
-    -- { name = "nvim_lsp" },
-    -- { name = "luasnip" },
-    -- { name = "cmp_tabnine" },
-    -- { name = "emoji" },
-    -- { name = "dap" },
-  },
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
+  sources = sources,
+  -- confirm_opts = {
+  --   -- behavior = cmp.ConfirmBehavior.Replace,
+  --   behavior = cmp.ConfirmBehavior.Insert,
+  --   select = true,
+  -- },
   -- documentation = true,
   window = {
     -- documentation = "native",

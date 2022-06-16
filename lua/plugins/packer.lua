@@ -162,6 +162,22 @@ return packer.startup(function(use)
     disable = not C["cmp"]
   }
 
+  -- lsp
+  use {
+    {
+        "williamboman/nvim-lsp-installer",
+        disable = not C["lsp"]
+    },
+    {
+        "neovim/nvim-lspconfig",
+        after = "nvim-lsp-installer",
+        disable = not C["lsp"]
+    },
+    {
+        "hrsh7th/cmp-nvim-lsp", -- lsp source for nvim-cmp
+    }
+  }
+
   -- which key
   use {
     "folke/which-key.nvim",
