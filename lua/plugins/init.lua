@@ -24,5 +24,4 @@ F.load_p_config("lsp")
 
 F.load_p_config("whichkey")
 
-vim.notify("all plugins loaded","info")
-
+vim.notify("all plugins loaded", "info")
