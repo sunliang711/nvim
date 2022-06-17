@@ -114,6 +114,7 @@ local mappings = {
       ["]"] = {"<cmd>bnext<cr>","right tab"},
       ["-"] = { "<cmd>split<cr>", "HSplit" },
       ["|"] = { "<cmd>vsplit<cr>", "VSplit" },
+      q = { "<cmd>q<cr>", "Close Window" },
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
   ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
