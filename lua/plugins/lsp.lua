@@ -29,7 +29,12 @@ local servers = {
 
 -- auto format
 vim.cmd [[
-  autocmd BufWritePre *.html,*.css,*.yaml,*.yml,*.json,*.sh,*.sol,*.lua,*.go,*.rs,*.js,*.py,*.c,*.ts lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.html,*.css lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.yaml,*.yml,*.json lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.py,*.lua,*.sh lua vim.lsp.buf.formatting_sync()
 ]]
 
 local function lsp_keymaps(bufnr)
