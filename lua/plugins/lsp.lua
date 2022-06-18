@@ -53,7 +53,13 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.formatting( { async = true} )<CR>", opts)
+
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]]
+    vim.cmd [[ command! Rename execute 'lua vim.lsp.buf.rename()' ]]
+    vim.cmd [[ command! Definition execute 'lua vim.lsp.buf.definition()' ]]
+    vim.cmd [[ command! Declaration execute 'lua vim.lsp.buf.declaration()' ]]
+    vim.cmd [[ command! Implementation execute 'lua vim.lsp.buf.implementation()' ]]
+    vim.cmd [[ command! Reference execute 'lua vim.lsp.buf.references()' ]]
 
 end
 
