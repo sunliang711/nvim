@@ -29,12 +29,12 @@ local servers = {
 
 -- auto format
 vim.cmd [[
-  autocmd BufWritePre *.html,*.css lua vim.lsp.buf.formatting_sync()
-  autocmd BufWritePre *.yaml,*.yml,*.json lua vim.lsp.buf.formatting_sync()
-  autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.formatting_sync()
-  autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.formatting_sync()
-  autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.formatting_sync()
-  autocmd BufWritePre *.py,*.lua,*.sh lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.html,*.css lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.yaml,*.yml,*.json lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.py,*.lua,*.sh lua vim.lsp.buf.format { async = true }
 ]]
 
 local function lsp_keymaps(bufnr)
@@ -43,17 +43,18 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format { async = true} <CR>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]]
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.formatting( { async = true} )<CR>", opts)
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]]
+    -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]]
 
 end
 
