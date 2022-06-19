@@ -36,6 +36,7 @@ M["gitsigns"] = true
 M["toggleterm"] = true
 M["comment"] = true
 M["whichkey"] = true
+M["hop"] = true
 M["telescope"] = true
 
 return M
