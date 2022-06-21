@@ -34,7 +34,7 @@ vim.cmd [[
   autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.format { async = true }
   autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.format { async = true }
   autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.py,*.lua,*.sh lua vim.lsp.buf.format { async = true }
+  autocmd BufWritePre *.py,*.sh lua vim.lsp.buf.format { async = true }
 ]]
 
 local function lsp_keymaps(bufnr)
@@ -82,7 +82,7 @@ function enable_format_on_save()
 end
 
 function disable_format_on_save()
-    M.remove_augroup "format_on_save"
+    remove_augroup "format_on_save"
     vim.notify "Disabled format on save"
 end
 

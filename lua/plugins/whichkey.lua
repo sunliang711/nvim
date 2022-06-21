@@ -135,10 +135,10 @@ local mappings = {
     l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
     -- c = { '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', "Cursorcolumn" },
     s = { '<cmd>lua require("functions").toggle_option("spell")<cr>', "Spell" },
-    t = { '<cmd>lua require("functions").toggle_tabline()<cr>', "Tabline" },
+    -- t = { '<cmd>lua require("functions").toggle_tabline()<cr>', "Tabline" },
     t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal Terminal" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical Terminal" },
     m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
   },
@@ -331,7 +331,7 @@ local vopts = {
 }
 local vmappings = {
   ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
-  s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
+  -- s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 
 which_key.setup(setup)
