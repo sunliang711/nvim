@@ -28,14 +28,15 @@ local servers = {
 }
 
 -- auto format
-vim.cmd [[
-  autocmd BufWritePre *.html,*.css lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.yaml,*.yml,*.json lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.format { async = true }
-  autocmd BufWritePre *.py,*.sh lua vim.lsp.buf.format { async = true }
-]]
+-- vim.cmd [[
+--   autocmd BufWritePre *.html,*.css lua vim.lsp.buf.format { async = true }
+--   autocmd BufWritePre *.yaml,*.yml,*.json lua vim.lsp.buf.format { async = true }
+--   autocmd BufWritePre *.c,*.cpp lua vim.lsp.buf.format { async = true }
+--   autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.format { async = true }
+--   autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.format { async = true }
+--   autocmd BufWritePre *.py,*.sh lua vim.lsp.buf.format { async = true }
+-- ]]
+
 
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }

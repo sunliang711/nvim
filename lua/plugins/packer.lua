@@ -167,6 +167,11 @@ return packer.startup(function(use)
         disable = not C["cmp"]
     }
 
+    use {
+        "rust-lang/rust.vim",
+        disable = not C["lsp"]
+    }
+
     -- lsp
     use {
         {
