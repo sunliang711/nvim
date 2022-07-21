@@ -176,6 +176,14 @@ return packer.startup(function(use)
         "hrsh7th/cmp-nvim-lua",
         disable = not C["cmp"]
     }
+    use {
+        "L3MON4D3/LuaSnip", --snippet engine
+        disable = not C["cmp"]
+    }
+    use {
+        "rafamadriz/friendly-snippets",
+        disable = not C["cmp"]
+    }
 
     use {
         "rust-lang/rust.vim",
