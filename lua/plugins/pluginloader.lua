@@ -38,5 +38,6 @@ M["comment"] = true
 M["whichkey"] = true
 M["hop"] = true
 M["telescope"] = true
+M["autopairs"] = true
 
 return M

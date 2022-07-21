@@ -96,6 +96,11 @@ return packer.startup(function(use)
         -- tag = 'release' -- To use the latest release
     }
 
+    use {
+        'windwp/nvim-autopairs',
+        disable = not C["autopairs"]
+    }
+
     -- terminal
     use {
         "akinsho/toggleterm.nvim",
