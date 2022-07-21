@@ -37,6 +37,7 @@ if vim.fn.has('nvim-0.8') == 1 then
       autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.format { async = true }
       autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.format { async = true }
       autocmd BufWritePre *.py,*.sh lua vim.lsp.buf.format { async = true }
+      autocmd BufWritePre *.lua lua vim.lsp.buf.format { async = true }
     ]]
 else
     -- nvim 0.7 works
@@ -47,6 +48,7 @@ else
       autocmd BufWritePre *.rs,*.go lua vim.lsp.buf.formatting_sync()
       autocmd BufWritePre *.ts,*.js lua vim.lsp.buf.formatting_sync()
       autocmd BufWritePre *.py,*.sh lua vim.lsp.buf.formatting_sync()
+      autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
     ]]
 end
 

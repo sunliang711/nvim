@@ -150,6 +150,11 @@ return packer.startup(function(use)
         disable = not C["treesitter"]
     }
 
+    use {
+        "RRethy/nvim-treesitter-endwise",
+        disable = not C["treesitter"]
+    }
+
     -- cmp (completion)
     use {
         "hrsh7th/nvim-cmp",
