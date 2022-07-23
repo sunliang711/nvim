@@ -36,6 +36,7 @@ local sources = {
     { name = "nvim_lua" },
     -- { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = 'nvim_lsp_signature_help' },
     -- { name = "cmp_tabnine" },
     -- { name = "emoji" },
     -- { name = "dap" },

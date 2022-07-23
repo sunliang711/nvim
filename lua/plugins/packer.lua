@@ -155,6 +155,11 @@ return packer.startup(function(use)
         disable = not C["treesitter"]
     }
 
+    use {
+        "windwp/nvim-ts-autotag",
+        disable = not C["treesitter"]
+    }
+
     -- cmp (completion)
     use {
         "hrsh7th/nvim-cmp",
@@ -182,6 +187,10 @@ return packer.startup(function(use)
     }
     use {
         "rafamadriz/friendly-snippets",
+        disable = not C["cmp"]
+    }
+    use {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
         disable = not C["cmp"]
     }
 

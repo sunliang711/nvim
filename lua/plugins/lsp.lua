@@ -24,7 +24,8 @@ local servers = {
     'gopls', 'sumneko_lua',
     'html', 'cssls',
     'yamlls', 'jsonls',
-    'bashls', 'solc'
+    'bashls', 'solc',
+    'emmet_ls'
 }
 
 -- auto format
