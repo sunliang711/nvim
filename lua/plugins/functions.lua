@@ -3,7 +3,7 @@ local M = {}
 function M.load_p_config(plugin)
     if C[plugin] then
         if C.debug then
-            vim.notify("load plugins." .. plugin)
+            vim.notify("Load plugins." .. plugin)
         end
         require("plugins." .. plugin)
     end
