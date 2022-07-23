@@ -13,7 +13,6 @@ M.setup = function()
     M.enable_format_on_save()
     local icons = require "icons"
     local signs = {
-
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
         { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
         { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
@@ -25,8 +24,8 @@ M.setup = function()
     end
 
     local config = {
-        -- disable virtual text
-        virtual_text = false,
+        -- inlay virtual text
+        virtual_text = true,
         -- show signs
         signs = {
             active = signs,
@@ -110,29 +109,29 @@ end
 M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
-    attach_navic(client, bufnr)
+    -- attach_navic(client, bufnr)
 
     -- for tsserver
-    if client.name == "tsserver" then
-        require("lsp-inlayhints").setup_autocmd(bufnr, "typescript/inlayHints")
-    end
+    -- if client.name == "tsserver" then
+    --     require("lsp-inlayhints").setup_autocmd(bufnr, "typescript/inlayHints")
+    -- end
+    --
+    -- -- if client.name ~= "rust_analyzer" then
+    -- if client.name == "pyright" then
+    --     if client.server_capabilities.inlayHintProvider then
+    --         require("lsp-inlayhints").setup_autocmd(bufnr)
+    --     end
+    -- end
 
-    -- if client.name ~= "rust_analyzer" then
-    if client.name == "pyright" then
-        if client.server_capabilities.inlayHintProvider then
-            require("lsp-inlayhints").setup_autocmd(bufnr)
-        end
-    end
-
-    if client.name == "jdt.ls" then
-        -- TODO: instantiate capabilities in java file later
-        M.capabilities.textDocument.completion.completionItem.snippetSupport = false
-        vim.lsp.codelens.refresh()
-        if JAVA_DAP_ACTIVE then
-            require("jdtls").setup_dap { hotcodereplace = "auto" }
-            require("jdtls.dap").setup_dap_main_class_configs()
-        end
-    end
+    -- if client.name == "jdt.ls" then
+    --     -- TODO: instantiate capabilities in java file later
+    --     M.capabilities.textDocument.completion.completionItem.snippetSupport = false
+    --     vim.lsp.codelens.refresh()
+    --     if JAVA_DAP_ACTIVE then
+    --         require("jdtls").setup_dap { hotcodereplace = "auto" }
+    --         require("jdtls.dap").setup_dap_main_class_configs()
+    --     end
+    -- end
 end
 
 function M.enable_format_on_save()
