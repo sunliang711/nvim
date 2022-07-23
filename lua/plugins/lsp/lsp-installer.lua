@@ -109,7 +109,8 @@ for _, server in pairs(servers) do
     --     goto continue
     -- end
 
-    vim.notify("config lsp for: " .. server)
+    -- debug
+    -- vim.notify("config lsp for: " .. server)
     lspconfig[server].setup(opts)
     ::continue::
 end
