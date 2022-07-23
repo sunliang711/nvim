@@ -189,10 +189,10 @@ return packer.startup(function(use)
         "rafamadriz/friendly-snippets",
         disable = not C["cmp"]
     }
-    use {
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        disable = not C["cmp"]
-    }
+    -- use {
+    --     "hrsh7th/cmp-nvim-lsp-signature-help",
+    --     disable = not C["cmp"]
+    -- }
 
     use {
         "rust-lang/rust.vim",
@@ -212,6 +212,11 @@ return packer.startup(function(use)
         },
         {
             "hrsh7th/cmp-nvim-lsp", -- lsp source for nvim-cmp
+            disable = not C["lsp"]
+        },
+        {
+            "ray-x/lsp_signature.nvim",
+            disable = not C["lsp"]
         }
     }
 
