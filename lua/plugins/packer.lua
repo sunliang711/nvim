@@ -122,7 +122,10 @@ return packer.startup(function(use)
     -- lualine
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        requires = {
+            { 'kyazdani42/nvim-web-devicons', opt = true },
+            { 'SmiteshP/nvim-navic' },
+        },
         disable = not C["lualine"]
     }
 
@@ -226,6 +229,13 @@ return packer.startup(function(use)
         },
         {
             "RRethy/vim-illuminate",
+            disable = not C["lsp"]
+        },
+        {
+            "SmiteshP/nvim-navic",
+            requires = {
+                { "nvim-treesitter/nvim-treesitter" }
+            },
             disable = not C["lsp"]
         },
         -- {
