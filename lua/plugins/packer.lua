@@ -217,6 +217,10 @@ return packer.startup(function(use)
         {
             "ray-x/lsp_signature.nvim",
             disable = not C["lsp"]
+        },
+        {
+            "RRethy/vim-illuminate",
+            disable = not C["lsp"]
         }
     }
 
