@@ -182,12 +182,18 @@ return packer.startup(function(use)
         disable = not C["cmp"]
     }
     use {
-        "L3MON4D3/LuaSnip", --snippet engine
-        disable = not C["cmp"]
-    }
-    use {
-        "rafamadriz/friendly-snippets",
-        disable = not C["cmp"]
+        {
+            'saadparwaiz1/cmp_luasnip',
+            disable = not C["cmp"]
+        },
+        {
+            "L3MON4D3/LuaSnip", --snippet engine
+            disable = not C["cmp"]
+        },
+        {
+            "rafamadriz/friendly-snippets",
+            disable = not C["cmp"]
+        },
     }
     -- use {
     --     "hrsh7th/cmp-nvim-lsp-signature-help",
