@@ -57,9 +57,20 @@ function M.setup()
             disable = not C["alpha"]
         }
 
+        -- use {
+        --     "Mephistophiles/surround.nvim",
+        --     disable = not C["surround"]
+        -- }
+
         use {
-            "Mephistophiles/surround.nvim",
-            disable = not C["surround"]
+            {
+                "tpope/vim-surround",
+                disable = not C["surround"]
+            },
+            {
+                "tpope/vim-repeat",
+                disable = not C["surround"]
+            }
         }
         -- use {
         --   "ur4ltz/surround.nvim",
@@ -239,6 +250,14 @@ function M.setup()
             },
             -- {
             --     "lvimuser/lsp-inlayhints.nvim",
+            --     disable = not C["lsp"]
+            -- },
+
+            -- {
+            --     "jose-elias-alvarez/null-ls.nvim",
+            --     requires = {
+            --         { "nvim-lua/plenary.nvim" }
+            --     },
             --     disable = not C["lsp"]
             -- },
         }
