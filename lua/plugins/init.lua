@@ -1,12 +1,13 @@
-local F = require "plugins.functions"
+local F = require "functions"
 
 -- load plugin manager
-require "plugins.packer"
+require "plugins.packer".setup()
 
 -- load notify first to use vim.notify function
 F.load_p_config("notify")
 -- load impatient second to imporve startup time for neovim
 F.load_p_config("impatient")
+
 F.load_p_config("alpha")
 F.load_p_config("bufferline")
 F.load_p_config("autopairs")
