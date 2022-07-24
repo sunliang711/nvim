@@ -101,6 +101,7 @@ function M.setup()
             end, {
                 "i",
                 "s",
+                "c",
             }),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -113,6 +114,7 @@ function M.setup()
             end, {
                 "i",
                 "s",
+                "c",
             }),
         },
         formatting = {
@@ -172,6 +174,17 @@ function M.setup()
         },
 
     }
+
+    cmp.setup.cmdline(':', {
+        sources = {
+            { name = 'cmdline' }
+        }
+    })
+    cmp.setup.cmdline('/', {
+        sources = {
+            { name = 'buffer' }
+        }
+    })
 end
 
 return M
