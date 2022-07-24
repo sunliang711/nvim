@@ -72,8 +72,10 @@ function M.setup()
         end,
 
         mapping = cmp.mapping.preset.insert {
-            ["<C-k>"] = cmp.mapping.select_prev_item(),
-            ["<C-j>"] = cmp.mapping.select_next_item(),
+            -- ["<C-k>"] = cmp.mapping.select_prev_item(),
+            -- ["<C-j>"] = cmp.mapping.select_next_item(),
+            ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c", "s" }),
+            ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c", "s" }),
             ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
             ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
             -- not works?
@@ -84,7 +86,7 @@ function M.setup()
             ["<CR>"] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
                 -- behavior = cmp.ConfirmBehavior.Insert,
-                select = true
+                select = false
             }),
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
