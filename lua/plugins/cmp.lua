@@ -140,14 +140,6 @@ function M.setup()
                     buffer = "[Buffer]",
                     path = "[Path]",
                     emoji = "[Emoji]",
-
-                    -- nvim_lsp = "",
-                    -- nvim_lua = "",
-                    -- luasnip = "",
-                    -- buffer = "",
-                    -- path = "",
-                    -- emoji = "",
-                    -- dap = "",
                 })[entry.source.name]
                 return vim_item
             end,
@@ -177,15 +169,22 @@ function M.setup()
 
     }
 
-    cmp.setup.cmdline(':', {
-        sources = {
-            { name = 'cmdline' }
-        }
-    })
+    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
         sources = {
             { name = 'buffer' }
         }
+    })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+            { name = 'cmdline' }
+        })
     })
 end
 
