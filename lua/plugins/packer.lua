@@ -29,12 +29,12 @@ function M.setup()
             vim.cmd [[packadd packer.nvim]]
         end
         -- Autocommand that reloads neovim whenever you save the packer.lua file
-        vim.cmd [[
-          augroup packer_user_config
-            autocmd!
-            autocmd BufWritePost packer.lua source <afile> | PackerSync
-          augroup end
-        ]]
+        -- vim.cmd [[
+        --   augroup packer_user_config
+        --     autocmd!
+        --     autocmd BufWritePost packer.lua source <afile> | PackerSync
+        --   augroup end
+        -- ]]
 
     end
 
@@ -120,6 +120,7 @@ function M.setup()
         -- colorscheme
         use "lunarvim/darkplus.nvim"
         use { "ellisonleao/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } }
+        use { "sainnhe/everforest" }
 
         -- bufferline
         use {
