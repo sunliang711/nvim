@@ -118,6 +118,7 @@ function M.setup()
             ["-"] = { "<cmd>split<cr>", "HSplit" },
             ["|"] = { "<cmd>vsplit<cr>", "VSplit" },
             q = { "<cmd>q<cr>", "Close Window" },
+            f = { "<cmd>NvimTreeFindFile<cr>", "focus file in nvim tree" },
         },
         ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
         ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
