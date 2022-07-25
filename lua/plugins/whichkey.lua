@@ -144,6 +144,7 @@ function M.setup()
             v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical Terminal" },
             m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
             C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+            e = { "<cmd>edit ~/.config/nvim/init.lua<cr>", "edit init.lua" },
         },
         f = {
             name = "File",
