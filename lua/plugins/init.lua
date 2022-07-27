@@ -21,6 +21,7 @@ F.load_p_config("nvimtree")
 F.load_p_config("surround")
 F.load_p_config("toggleterm")
 F.load_p_config("hop")
+F.load_p_config("telescope")
 
 F.load_p_config("treesitter")
 F.load_p_config("lsp")

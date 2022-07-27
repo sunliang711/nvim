@@ -1,20 +1,20 @@
 local M = {}
 local env = vim.fn.environ()
 
-if( env['debug_nvim'] == '1' ) then
+if (env['debug_nvim'] == '1') then
     M.debug = true
 else
     M.debug = false
 end
 
 -- treesitter is a HEAVY plugin, so enable it by environment variable (enable_treesitter),default is disable
-if( env['enable_treesitter'] == '1' ) then
+if (env['enable_treesitter'] == '1') then
     M["treesitter"] = true
 else
     M["treesitter"] = false
 end
 
-if ( env['enable_lsp'] == '1' ) then
+if (env['enable_lsp'] == '1') then
     M['lsp'] = true
 else
     M['lsp'] = false
@@ -39,5 +39,6 @@ M["whichkey"] = true
 M["hop"] = true
 M["telescope"] = true
 M["autopairs"] = true
+M["telescope"] = true
 
 return M
