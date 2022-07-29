@@ -249,6 +249,11 @@ function M.setup()
                 },
                 disable = not C["lsp"]
             },
+            {
+                "glepnir/lspsaga.nvim",
+                branch = "main",
+                disable = not C["lsp"]
+            },
             -- {
             --     "lvimuser/lsp-inlayhints.nvim",
             --     disable = not C["lsp"]
