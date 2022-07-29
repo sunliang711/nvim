@@ -25,7 +25,8 @@ function M.setup()
 
 
     saga.init_lsp_saga {
-        border_style = "single",
+        -- "single" | "double" | "rounded" | "bold" | "plus"
+        border_style = "bold",
         --the range of 0 for fully opaque window (disabled) to 100 for fully
         --transparent background. Values between 0-30 are typically most useful.
         saga_winblend = 0,
