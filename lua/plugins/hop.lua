@@ -16,32 +16,32 @@ function M.setup()
     keymap('n', 'gp', "<cmd>HopPattern<cr>", opts)
 
     -- keymap("n", "]b", "<cmd>bnext<cr>", opts)
-    vim.api.nvim_set_keymap('n', 'f',
+    keymap('n', 'f',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
         , {})
-    vim.api.nvim_set_keymap('n', 'F',
+    keymap('n', 'F',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
         , {})
-    vim.api.nvim_set_keymap('o', 'f',
+    keymap('o', 'f',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>"
         , {})
-    vim.api.nvim_set_keymap('o', 'F',
+    keymap('o', 'F',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>"
         , {})
 
     -- maybe wrong config
-    vim.api.nvim_set_keymap('', 't',
+    keymap('', 't',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
         , {})
-    vim.api.nvim_set_keymap('', 'T',
+    keymap('', 'T',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
         , {})
 
-    vim.api.nvim_set_keymap('n', '<leader>e',
+    keymap('n', '<leader>e',
         "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-    vim.api.nvim_set_keymap('v', '<leader>e',
+    keymap('v', '<leader>e',
         "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-    vim.api.nvim_set_keymap('o', '<leader>e',
+    keymap('o', '<leader>e',
         "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>"
         , {})
 end
