@@ -135,7 +135,7 @@ function M.setup()
             'nvim-lualine/lualine.nvim',
             requires = {
                 { 'kyazdani42/nvim-web-devicons', opt = true },
-                { 'SmiteshP/nvim-navic' },
+                -- { 'SmiteshP/nvim-navic' },
             },
             disable = not C["lualine"]
         }
@@ -245,7 +245,7 @@ function M.setup()
             {
                 "SmiteshP/nvim-navic",
                 requires = {
-                    { "nvim-treesitter/nvim-treesitter" }
+                    { "neovim/nvim-lspconfig" }
                 },
                 disable = not C["lsp"]
             },

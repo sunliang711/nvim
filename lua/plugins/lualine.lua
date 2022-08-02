@@ -165,7 +165,13 @@ function M.setup()
         end,
     }
 
-    local navic = require('nvim-navic')
+    local status_navic, navic = pcall(require, 'nvim-navic')
+    local lualine_c
+    if not status_navic then
+        lualine_c = { current_signature, cond = hide_in_width }
+    else
+        lualine_c = { navic.get_location, cond = navic.is_available }
+    end
 
     lualine.setup {
         options = {
@@ -183,7 +189,8 @@ function M.setup()
             lualine_b = { diagnostics },
             lualine_c = {
                 -- { current_signature, cond = hide_in_width }
-                { navic.get_location, cond = navic.is_available }
+                -- { navic.get_location, cond = navic.is_available }
+                lualine_c
             },
             -- lualine_x = { diff, spaces, "encoding", filetype },
             lualine_x = { diff, spaces, filetype },
