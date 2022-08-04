@@ -78,7 +78,7 @@ local function attach_navic(client, bufnr)
     navic.attach(client, bufnr)
 end
 
-local saga_status, saga = pcall(require, 'lspsaga')
+local saga_status, _ = pcall(require, 'lspsaga')
 
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }

@@ -254,6 +254,10 @@ function M.setup()
                 branch = "main",
                 disable = not C["lsp"]
             },
+            {
+                "simrat39/rust-tools.nvim",
+                disable = not C["lsp"]
+            },
             -- {
             --     "lvimuser/lsp-inlayhints.nvim",
             --     disable = not C["lsp"]

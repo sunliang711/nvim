@@ -1,5 +1,5 @@
 return {
-    cmd = { "pyright-languageserver","--studio" },
+    -- cmd = { "pyright-languageserver","--studio" },
     settings = {
         python = {
             analysis = {

@@ -9,7 +9,10 @@ function M.setup()
     local opts = { noremap = true, silent = true }
 
     -- lsp finder to find the cursor word definition and reference
-    vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true, noremap = true })
+
+    if vim.fn.has('nvim-0.8') == 1 then
+        vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true, noremap = true })
+    end
     -- or use command LspSagaFinder
     -- vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
 

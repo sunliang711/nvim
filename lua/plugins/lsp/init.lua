@@ -5,6 +5,7 @@ function M.setup()
     require("plugins.lsp.lsp-installer")
     require("plugins.lsp.handlers").setup()
     require("plugins.lsp.lspsaga").setup()
+    -- require("plugins.lsp.rust-tools").setup()
 
     -- TODO not work
     -- require("plugins.lsp.null-ls").setup()
