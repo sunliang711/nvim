@@ -139,6 +139,10 @@ function M.setup()
             },
             disable = not C["lualine"]
         }
+        use {
+            'arkav/lualine-lsp-progress',
+            disable = not C["lsp"]
+        }
 
         use {
             "rcarriga/nvim-notify",

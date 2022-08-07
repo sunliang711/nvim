@@ -173,6 +173,9 @@ function M.setup()
         lualine_c = { navic.get_location, cond = navic.is_available }
     end
 
+    -- lualine-lsp-pgoress plugin
+    local used_lualine_c = { lualine_c, 'lsp_progress' }
+
     lualine.setup {
         options = {
             globalstatus = true,
@@ -187,11 +190,12 @@ function M.setup()
         sections = {
             lualine_a = { mode, branch },
             lualine_b = { diagnostics },
-            lualine_c = {
-                -- { current_signature, cond = hide_in_width }
-                -- { navic.get_location, cond = navic.is_available }
-                lualine_c
-            },
+            lualine_c = used_lualine_c,
+            -- lualine_c = {
+            --     -- { current_signature, cond = hide_in_width }
+            --     -- { navic.get_location, cond = navic.is_available }
+            --     lualine_c
+            -- },
             -- lualine_x = { diff, spaces, "encoding", filetype },
             lualine_x = { diff, spaces, filetype },
             lualine_y = { progress },
