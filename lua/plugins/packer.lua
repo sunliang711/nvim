@@ -226,12 +226,20 @@ function M.setup()
         -- lsp
         use {
             {
-                "williamboman/nvim-lsp-installer",
+                "williamboman/mason.nvim",
                 disable = not C["lsp"]
             },
             {
+                "williamboman/mason-lspconfig.nvim",
+                disalbe = not C["lsp"]
+            },
+            -- {
+            --     "williamboman/nvim-lsp-installer",
+            --     disable = not C["lsp"]
+            -- },
+            {
                 "neovim/nvim-lspconfig",
-                after = "nvim-lsp-installer",
+                -- after = "nvim-lsp-installer",
                 disable = not C["lsp"]
             },
             {

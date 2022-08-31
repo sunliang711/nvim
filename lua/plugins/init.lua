@@ -25,11 +25,10 @@ function M.setup()
     F.load_p_config("toggleterm")
     F.load_p_config("hop")
     F.load_p_config("telescope")
+    F.load_p_config("whichkey")
 
     F.load_p_config("treesitter")
     F.load_p_config("lsp")
-
-    F.load_p_config("whichkey")
 
     vim.notify("All plugins loaded", "info")
 end

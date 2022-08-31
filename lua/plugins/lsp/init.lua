@@ -3,6 +3,8 @@ local M = {}
 function M.setup()
     require("plugins.lsp.lsp-signature")
     require("plugins.lsp.lsp-installer")
+    require("plugins.lsp.mason").setup()
+    require("plugins.lsp.mason-lspconfig")
     require("plugins.lsp.handlers").setup()
     require("plugins.lsp.lspsaga").setup()
     -- require("plugins.lsp.rust-tools").setup()
