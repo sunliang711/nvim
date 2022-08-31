@@ -19,11 +19,13 @@ function M.setup()
     vim.keymap.set("n", "<leader>to", "<cmd>LSoutlineToggle<CR>", opts)
     vim.keymap.set("n", "<leader>pd", "<cmd>Lspsaga preview_definition<CR>", opts)
 
-    local action = require("lspsaga.action")
-    -- scroll down hover doc or scroll in definition preview
-    vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
-    -- scroll up hover doc
-    vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
+    local action_status, action = pcall(require, "lspsaga.action")
+    if action_status then
+        -- scroll down hover doc or scroll in definition preview
+        vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
+        -- scroll up hover doc
+        vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
+    end
 
 
 
