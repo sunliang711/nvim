@@ -88,21 +88,22 @@ local function lsp_keymaps(bufnr)
     if saga_status then
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
         -- show hover doc and press twice will jumpto hover window
-        vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
+        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
         -- or use command
-        -- vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+        -- vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
 
 
         local action = require("lspsaga.codeaction")
         -- code action
-        vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true, noremap = true })
-        vim.keymap.set("v", "<leader>ca", function()
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
-            action.range_code_action()
-        end, { silent = true, noremap = true })
+        -- vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true, noremap = true })
+
+        -- vim.keymap.set("v", "<leader>ca", function()
+        --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
+        --     action.range_code_action()
+        -- end, { silent = true, noremap = true })
         -- or use command
-        -- vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
-        -- vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
+        vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
+        vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
     else
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
