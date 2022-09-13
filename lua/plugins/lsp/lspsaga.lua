@@ -49,9 +49,9 @@ function M.setup()
         -- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
         diagnostic_header = { " ", " ", " ", "ﴞ " },
         -- show diagnostic source
-        show_diagnostic_source = true,
+        -- show_diagnostic_source = true,
         -- add bracket or something with diagnostic source, just have 2 elements
-        diagnostic_source_bracket = {},
+        -- diagnostic_source_bracket = {},
         -- preview lines of lsp_finder and definition preview
         max_preview_lines = 10,
         -- use emoji lightbulb in default
@@ -91,7 +91,7 @@ function M.setup()
         },
         -- rename_action_quit = "<C-c>",
         rename_action_quit = "q",
-        definition_preview_icon = "  ",
+        -- definition_preview_icon = "  ",
         -- show symbols in winbar must nightly
         symbol_in_winbar = {
             in_custom = false,
