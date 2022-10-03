@@ -39,7 +39,7 @@ function M.setup()
     end
 
     local function plugins(use)
-        local C = require "plugins.pluginloader"
+        local C = require "functions".merge_settings()
         -- print(vim.inspect(C))
 
         -- My plugins here
@@ -48,40 +48,40 @@ function M.setup()
         -- speed up loading lua modules in neovim
         use {
             "lewis6991/impatient.nvim",
-            disable = not C["impatient"]
+            disable = not C["impatient"].enable
         }
 
         use {
             'goolord/alpha-nvim',
             requires = { 'kyazdani42/nvim-web-devicons' },
-            disable = not C["alpha"]
+            disable = not C["alpha"].enable
         }
 
         -- use {
         --     "Mephistophiles/surround.nvim",
-        --     disable = not C["surround"]
+        --     disable = not C["surround"].enable
         -- }
 
         use {
             {
                 "tpope/vim-surround",
-                disable = not C["surround"]
+                disable = not C["surround"].enable
             },
             {
                 "tpope/vim-repeat",
-                disable = not C["surround"]
+                disable = not C["surround"].enable
             }
         }
         -- use {
         --   "ur4ltz/surround.nvim",
-        --   disable = not C["surround"]
+        --   disable = not C["surround"].enable
         -- }
 
         -- nvim tree
         use {
             'kyazdani42/nvim-tree.lua',
             requires = 'kyazdani42/nvim-web-devicons',
-            disable = not C["nvimtree"]
+            disable = not C["nvimtree"].enable
         }
 
         -- use "lukas-reineke/indent-blankline.nvim"
@@ -90,31 +90,31 @@ function M.setup()
         use {
             'nvim-telescope/telescope.nvim',
             requires = { { 'nvim-lua/plenary.nvim' } },
-            disable = not C["telescope"]
+            disable = not C["telescope"].enable
         }
 
         -- comment
         use {
             "numToStr/Comment.nvim",
-            disable = not C["comment"]
+            disable = not C["comment"].enable
         }
 
         -- git
         use {
             'lewis6991/gitsigns.nvim',
-            disable = not C["gitsigns"]
+            disable = not C["gitsigns"].enable
             -- tag = 'release' -- To use the latest release
         }
 
         use {
             'windwp/nvim-autopairs',
-            disable = not C["autopairs"]
+            disable = not C["autopairs"].enable
         }
 
         -- terminal
         use {
             "akinsho/toggleterm.nvim",
-            disable = not C["toggleterm"]
+            disable = not C["toggleterm"].enable
         }
 
         -- colorscheme
@@ -127,7 +127,7 @@ function M.setup()
             'akinsho/bufferline.nvim',
             tag = "v2.*",
             requires = 'kyazdani42/nvim-web-devicons',
-            disable = not C["bufferline"]
+            disable = not C["bufferline"].enable
 
         }
         -- lualine
@@ -137,23 +137,23 @@ function M.setup()
                 { 'kyazdani42/nvim-web-devicons', opt = true },
                 -- { 'SmiteshP/nvim-navic' },
             },
-            disable = not C["lualine"]
+            disable = not C["lualine"].enable
         }
         use {
             'arkav/lualine-lsp-progress',
-            disable = not C["lsp"]
+            disable = not C["lsp"].enable
         }
 
         use {
             "rcarriga/nvim-notify",
-            disable = not C["notify"]
+            disable = not C["notify"].enable
 
         }
 
         -- neoscroll
         use {
             "karb94/neoscroll.nvim",
-            disable = not C["neoscroll"]
+            disable = not C["neoscroll"].enable
         }
 
         use {
@@ -165,114 +165,114 @@ function M.setup()
         use {
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
-            disable = not C["treesitter"]
+            disable = not C["treesitter"].enable
         }
 
         use {
             "RRethy/nvim-treesitter-endwise",
-            disable = not C["treesitter"]
+            disable = not C["treesitter"].enable
         }
 
         use {
             "windwp/nvim-ts-autotag",
-            disable = not C["treesitter"]
+            disable = not C["treesitter"].enable
         }
 
         -- cmp (completion)
         use {
             "hrsh7th/nvim-cmp",
-            disable = not C["cmp"]
+            disable = not C["cmp"].enable
         }
         use {
             "hrsh7th/cmp-buffer",
-            disable = not C["cmp"]
+            disable = not C["cmp"].enable
         }
         use {
             "hrsh7th/cmp-path",
-            disable = not C["cmp"]
+            disable = not C["cmp"].enable
         }
         use {
             "hrsh7th/cmp-cmdline",
-            disable = not C["cmp"]
+            disable = not C["cmp"].enable
         }
         use {
             "hrsh7th/cmp-nvim-lua",
-            disable = not C["cmp"]
+            disable = not C["cmp"].enable
         }
         use {
             {
                 'saadparwaiz1/cmp_luasnip',
-                disable = not C["cmp"]
+                disable = not C["cmp"].enable
             },
             {
                 "L3MON4D3/LuaSnip", --snippet engine
-                disable = not C["cmp"]
+                disable = not C["cmp"].enable
             },
             {
                 "rafamadriz/friendly-snippets",
-                disable = not C["cmp"]
+                disable = not C["cmp"].enable
             },
         }
         -- use {
         --     "hrsh7th/cmp-nvim-lsp-signature-help",
-        --     disable = not C["cmp"]
+        --     disable = not C["cmp"].enable
         -- }
 
         use {
             "rust-lang/rust.vim",
-            disable = not C["lsp"]
+            disable = not C["lsp"].enable
         }
 
         -- lsp
         use {
             {
                 "williamboman/mason.nvim",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "williamboman/mason-lspconfig.nvim",
-                disalbe = not C["lsp"]
+                disalbe = not C["lsp"].enable
             },
             -- {
             --     "williamboman/nvim-lsp-installer",
-            --     disable = not C["lsp"]
+            --     disable = not C["lsp"].enable
             -- },
             {
                 "neovim/nvim-lspconfig",
                 -- after = "nvim-lsp-installer",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "hrsh7th/cmp-nvim-lsp", -- lsp source for nvim-cmp
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "ray-x/lsp_signature.nvim",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "RRethy/vim-illuminate",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "SmiteshP/nvim-navic",
                 requires = {
                     { "neovim/nvim-lspconfig" }
                 },
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "glepnir/lspsaga.nvim",
                 branch = "main",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             {
                 "simrat39/rust-tools.nvim",
-                disable = not C["lsp"]
+                disable = not C["lsp"].enable
             },
             -- {
             --     "lvimuser/lsp-inlayhints.nvim",
-            --     disable = not C["lsp"]
+            --     disable = not C["lsp"].enable
             -- },
 
             -- {
@@ -280,14 +280,14 @@ function M.setup()
             --     requires = {
             --         { "nvim-lua/plenary.nvim" }
             --     },
-            --     disable = not C["lsp"]
+            --     disable = not C["lsp"].enable
             -- },
         }
 
         -- which key
         use {
             "folke/which-key.nvim",
-            disable = not C["whichkey"]
+            disable = not C["whichkey"].enable
         }
 
 

@@ -2,3 +2,4 @@
 *.swp
 .idea/
 /plugin
+/lua/plugins_config_user.lua

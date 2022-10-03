@@ -119,13 +119,51 @@ function M.save_all()
     vim.notify({ "All Files Saved" }, "info", { timeout = 1000 })
 end
 
-function M.load_p_config(plugin)
-    local C = require("plugins.pluginloader")
-    if C[plugin] then
-        if C.debug then
-            vim.notify("Load plugins." .. plugin)
+-- function M.load_p_config(plugin)
+--     local C = require("plugins.pluginloader")
+--     if C[plugin] then
+--         if C.debug then
+--             vim.notify("Load plugins." .. plugin)
+--         end
+--         require("plugins." .. plugin).setup()
+--     end
+-- end
+
+function M.merge_settings()
+    local settings_default = require("plugins_config_default")
+
+    local status_ok, settings_user = pcall(require, "plugins_config_user")
+    if status_ok then
+        -- "force": use value from the rightmost map
+        settings_default = vim.tbl_deep_extend("force", settings_default, settings_user)
+    end
+
+    return settings_default
+end
+
+function M.load_plugins()
+    local settings_default = M.merge_settings()
+
+    -- print(vim.inspect(settings_default))
+
+    -- TODO: load plugin in sequence
+    for plugin_name, setting in pairs(settings_default) do
+        if type(setting) == "table" then
+            -- for debug
+            -- print("type:" .. type(setting))
+            -- print("load " .. plugin_name)
+            -- print("setting: " .. vim.inspect(setting))
+            if setting.enable then
+                if settings_default.debug then
+                    vim.notify("Load plugin " .. plugin_name)
+                end
+                require(setting.module_path).setup()
+            end
         end
-        require("plugins." .. plugin).setup()
+    end
+
+    if settings_default.debug then
+        vim.notify("All plugins loaded", "info")
     end
 end
 
