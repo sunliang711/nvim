@@ -165,13 +165,15 @@ function M.setup()
         end,
     }
 
-    local status_navic, navic = pcall(require, 'nvim-navic')
-    local lualine_c
-    if not status_navic then
-        lualine_c = { current_signature, cond = hide_in_width }
-    else
-        lualine_c = { navic.get_location, cond = navic.is_available }
+    local lualine_c = { current_signature, cond = hide_in_width }
+    -- nvim < v0.8 use nvim-navic
+    if vim.fn.has('nvim-0.8') == 0 then
+        local status_navic, navic = pcall(require, 'nvim-navic')
+        if status_navic then
+            lualine_c = { navic.get_location, cond = navic.is_available }
+        end
     end
+
 
     -- lualine-lsp-pgoress plugin
     local used_lualine_c = { lualine_c, 'lsp_progress' }
