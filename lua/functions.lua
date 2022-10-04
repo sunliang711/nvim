@@ -119,20 +119,23 @@ function M.save_all()
     vim.notify({ "All Files Saved" }, "info", { timeout = 1000 })
 end
 
--- function M.load_p_config(plugin)
---     local C = require("plugins.pluginloader")
---     if C[plugin] then
---         if C.debug then
---             vim.notify("Load plugins." .. plugin)
---         end
---         require("plugins." .. plugin).setup()
---     end
--- end
+M.default_config_file = "plugins_config_default"
+M.user_config_file = "plugins_config_user"
+
+-- TODO
+function M.config_plugin()
+    local status_ok, settings_user = pcall(require, M.user_config_file)
+    if not status_ok then
+        local copy_cmd = "cp " .. M.default_config_file .. " " .. M.user_config_file
+        vim.fn.system(copy_cmd)
+    end
+    vim.cmd("edit " .. M.user_config_file)
+end
 
 function M.merge_settings()
-    local settings_default = require("plugins_config_default")
+    local settings_default = require(M.default_config_file)
 
-    local status_ok, settings_user = pcall(require, "plugins_config_user")
+    local status_ok, settings_user = pcall(require, M.user_config_file)
     if status_ok then
         -- "force": use value from the rightmost map
         settings_default = vim.tbl_deep_extend("force", settings_default, settings_user)
@@ -155,9 +158,9 @@ function M.load_plugins()
             -- print("setting: " .. vim.inspect(setting))
             if setting.enable then
                 if settings_default.debug then
-                    vim.notify("Load plugin " .. plugin_name)
+                    vim.notify("Load plugin config: " .. plugin_name)
                 end
-                require(setting.module_path).setup()
+                require(setting.config_module_path).setup()
             end
         end
     end
