@@ -180,7 +180,7 @@ M.autopairs = {
 }
 
 M.treesitter = {
-    enable = true,
+    enable = false,
     config_module_path = "plugins.treesitter",
     packer_use = {
         {
