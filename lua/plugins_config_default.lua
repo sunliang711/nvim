@@ -197,7 +197,7 @@ M.treesitter = {
 }
 
 M.lsp = {
-    enable = true,
+    enable = false,
     config_module_path = "plugins.lsp",
     packer_use = {
         {
