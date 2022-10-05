@@ -157,6 +157,21 @@ M.on_attach = function(client, bufnr)
     -- end
 end
 
+-- if vim.fn.has('nvim-0.8') == 1 then
+--     vim.cmd [[
+--         augroup format_on_save
+--           autocmd!
+--           autocmd BufWritePre * lua vim.lsp.buf.format { async = true }
+--         augroup end
+--   ]]
+-- else
+--     vim.cmd [[
+--         augroup format_on_save
+--           autocmd!
+--           autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+--         augroup end
+--   ]]
+-- end
 function M.enable_format_on_save()
     vim.cmd [[
     augroup format_on_save
@@ -164,7 +179,7 @@ function M.enable_format_on_save()
       autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
     augroup end
   ]]
-    vim.notify "Enabled format on save"
+    vim.notify "Enable format on save"
 end
 
 function M.disable_format_on_save()

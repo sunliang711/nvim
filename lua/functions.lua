@@ -141,31 +141,47 @@ function M.merge_settings()
         settings_default = vim.tbl_deep_extend("force", settings_default, settings_user)
     end
 
-    return settings_default
+    -- transfrom table1 to table2 (table2 can sort by order)
+    -- table1 format { plugin1=>{}, plugin2=>{}}
+    -- table2 format { {plugin1}, {plugin2}}
+    local all_settings = {}
+    for plugin_name, setting in pairs(settings_default) do
+        if type(setting) == 'table' then
+            setting['name'] = plugin_name
+            table.insert(all_settings, setting)
+        end
+    end
+    table.sort(all_settings, M.compare_by_order)
+
+    return settings_default.debug, all_settings
+end
+
+function M.compare_by_order(a, b)
+    return a['load_order'] < b['load_order']
 end
 
 function M.load_plugins()
-    local settings_default = M.merge_settings()
+    local debug, all_settings = M.merge_settings()
 
-    -- print(vim.inspect(settings_default))
+    -- Debug
+    -- print(vim.inspect(all_settings))
 
-    -- TODO: load plugin in sequence
-    for plugin_name, setting in pairs(settings_default) do
+    for _, setting in pairs(all_settings) do
         if type(setting) == "table" then
             -- for debug
             -- print("type:" .. type(setting))
             -- print("load " .. plugin_name)
             -- print("setting: " .. vim.inspect(setting))
             if setting.enable then
-                if settings_default.debug then
-                    vim.notify("Load plugin config: " .. plugin_name)
+                if debug then
+                    vim.notify("Load plugin config: " .. setting.name)
                 end
                 require(setting.config_module_path).setup()
             end
         end
     end
 
-    if settings_default.debug then
+    if debug then
         vim.notify("All plugins loaded", "info")
     end
 end

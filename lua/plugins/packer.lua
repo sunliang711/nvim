@@ -41,13 +41,13 @@ function M.setup()
     local function plugins(use)
         use "wbthomason/packer.nvim" -- Have packer manage itself
 
-        local C = require "functions".merge_settings()
+        local debug, all_settings = require "functions".merge_settings()
         -- print(vim.inspect(C))
-        for plugin_name, setting in pairs(C) do
+        for _, setting in pairs(all_settings) do
             if type(setting) == "table" then
                 if setting.enable then
-                    if C.debug then
-                        vim.notify("Pack load plugin " .. plugin_name)
+                    if debug then
+                        vim.notify("Pack load plugin " .. setting.name)
                     end
                     use(setting.packer_use)
                 end

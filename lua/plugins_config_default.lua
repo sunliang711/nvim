@@ -4,6 +4,7 @@ M.debug = false
 
 M.impatient = {
     enable = true,
+    load_order = 1,
     config_module_path = "plugins.impatient",
     packer_use = {
         "lewis6991/impatient.nvim",
@@ -12,6 +13,7 @@ M.impatient = {
 
 M.notify = {
     enable = true,
+    load_order = 2,
     config_module_path = "plugins.notify",
     packer_use = {
         "rcarriga/nvim-notify",
@@ -20,6 +22,7 @@ M.notify = {
 
 M.cmp = {
     enable = true,
+    load_order = 3,
     config_module_path = "plugins.cmp",
     packer_use = {
         {
@@ -51,6 +54,7 @@ M.cmp = {
 
 M.alpha = {
     enable = true,
+    load_order = 4,
     config_module_path = "plugins.alpha",
     packer_use = {
         'goolord/alpha-nvim',
@@ -60,6 +64,7 @@ M.alpha = {
 
 M.surround = {
     enable = true,
+    load_order = 5,
     config_module_path = "plugins.surround",
     packer_use = {
         {
@@ -73,6 +78,7 @@ M.surround = {
 
 M.nvimtree = {
     enable = true,
+    load_order = 6,
     config_module_path = "plugins.nvimtree",
     packer_use = {
         'kyazdani42/nvim-tree.lua',
@@ -82,6 +88,7 @@ M.nvimtree = {
 
 M.neoscroll = {
     enable = true,
+    load_order = 7,
     config_module_path = "plugins.neoscroll",
     packer_use = {
         "karb94/neoscroll.nvim",
@@ -90,6 +97,7 @@ M.neoscroll = {
 
 M.colorscheme = {
     enable = true,
+    load_order = 8,
     config_module_path = "plugins.colorscheme",
     packer_use = {
         { "lunarvim/darkplus.nvim" },
@@ -100,6 +108,7 @@ M.colorscheme = {
 
 M.bufferline = {
     enable = true,
+    load_order = 9,
     config_module_path = "plugins.bufferline",
     packer_use = {
         'akinsho/bufferline.nvim',
@@ -110,6 +119,7 @@ M.bufferline = {
 
 M.lualine = {
     enable = true,
+    load_order = 10,
     config_module_path = "plugins.lualine",
     packer_use = {
         'nvim-lualine/lualine.nvim',
@@ -122,6 +132,7 @@ M.lualine = {
 
 M.gitsigns = {
     enable = true,
+    load_order = 11,
     config_module_path = "plugins.gitsigns",
     packer_use = {
         'lewis6991/gitsigns.nvim',
@@ -131,6 +142,7 @@ M.gitsigns = {
 
 M.toggleterm = {
     enable = true,
+    load_order = 12,
     config_module_path = "plugins.toggleterm",
     packer_use = {
         "akinsho/toggleterm.nvim",
@@ -139,6 +151,7 @@ M.toggleterm = {
 
 M.comment = {
     enable = true,
+    load_order = 13,
     config_module_path = "plugins.comment",
     packer_use = {
         "numToStr/Comment.nvim",
@@ -147,6 +160,7 @@ M.comment = {
 
 M.whichkey = {
     enable = true,
+    load_order = 14,
     config_module_path = "plugins.whichkey",
     packer_use = {
         "folke/which-key.nvim",
@@ -155,6 +169,7 @@ M.whichkey = {
 
 M.hop = {
     enable = true,
+    load_order = 15,
     config_module_path = "plugins.hop",
     packer_use = {
         'phaazon/hop.nvim',
@@ -164,6 +179,7 @@ M.hop = {
 
 M.telescope = {
     enable = true,
+    load_order = 16,
     config_module_path = "plugins.telescope",
     packer_use = {
         'nvim-telescope/telescope.nvim',
@@ -173,6 +189,7 @@ M.telescope = {
 
 M.autopairs = {
     enable = true,
+    load_order = 17,
     config_module_path = "plugins.autopairs",
     packer_use = {
         'windwp/nvim-autopairs',
@@ -181,6 +198,7 @@ M.autopairs = {
 
 M.treesitter = {
     enable = false,
+    load_order = 18,
     config_module_path = "plugins.treesitter",
     packer_use = {
         {
@@ -198,6 +216,7 @@ M.treesitter = {
 
 M.lsp = {
     enable = false,
+    load_order = 19,
     config_module_path = "plugins.lsp",
     packer_use = {
         {
