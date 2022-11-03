@@ -7,7 +7,8 @@ if not status_cmp_ok then
     return
 end
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+-- M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
     M.enable_format_on_save()
@@ -93,7 +94,7 @@ local function lsp_keymaps(bufnr)
         -- vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
 
 
-        local action = require("lspsaga.codeaction")
+        -- local action = require("lspsaga.codeaction")
         -- code action
         -- vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true, noremap = true })
 

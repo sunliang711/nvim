@@ -141,7 +141,7 @@ function M.merge_settings()
         settings_default = vim.tbl_deep_extend("force", settings_default, settings_user)
     end
 
-    -- transfrom table1 to table2 (table2 can sort by order)
+    -- transfrom table1 to table2 (table2 can sort by order) (map => array)
     -- table1 format { plugin1=>{}, plugin2=>{}}
     -- table2 format { {plugin1}, {plugin2}}
     local all_settings = {}

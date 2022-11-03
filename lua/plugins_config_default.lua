@@ -256,7 +256,10 @@ M.lsp = {
         },
         {
             "rust-lang/rust.vim",
-        }
+        },
+        -- {
+        --     "julesdesmit/aleo.vim",
+        -- }
     }
 }
 
