@@ -69,8 +69,8 @@ return {
     --]]
         -- cmd = { os.getenv "HOME" .. "/.local/bin/rust-analyzer" },
         -- cmd = { "rustup", "run", "nightly", os.getenv "HOME" .. "/.local/bin/rust-analyzer" },
-        on_attach = require("plugins.lsp.handlers").on_attach,
-        capabilities = require("plugins.lsp.handlers").capabilities,
+        on_attach = require("plugin-configs.lsp.handlers").on_attach,
+        capabilities = require("plugin-configs.lsp.handlers").capabilities,
 
         settings = {
             ["rust-analyzer"] = {

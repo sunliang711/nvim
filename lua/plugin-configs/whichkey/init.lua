@@ -124,16 +124,15 @@ function M.setup()
         ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
         ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
         p = {
-            name = "Packer",
-            c = { "<cmd>PackerCompile<cr>", "Compile" },
-            i = { "<cmd>PackerInstall<cr>", "Install" },
-            s = { "<cmd>PackerSync<cr>", "Sync" },
-            S = { "<cmd>PackerStatus<cr>", "Status" },
-            u = { "<cmd>PackerUpdate<cr>", "Update" },
+            name = "Lazy",
+            s = { "<cmd>Lazy sync<cr>", "sync plugins" },
+            l = { "<cmd>Lazy log<cr>", "lazy log" },
+            p = { "<cmd>Lazy show<cr>", "lazy show" },
+            b = { "<cmd>Lazy build<cr>", "lazy build" },
         },
         t = {
             name = "Tools",
-            c = { '<cmd>checkhealth<cr>', "Check Health" },
+            c = { "<cmd>checkhealth<cr>", "Check Health" },
             w = { '<cmd>lua require("functions").toggle_option("wrap")<cr>', "Wrap" },
             r = { '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', "Relative" },
             l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
@@ -151,8 +150,10 @@ function M.setup()
             name = "File",
             b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
             F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)" },
-            f = { "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-                "Find Files" },
+            f = {
+                "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+                "Find Files",
+            },
             r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
             t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
             -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
@@ -171,7 +172,6 @@ function M.setup()
             k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
             h = { "<cmd>Telescope command_history<cr>", "Command History" },
             c = { "<cmd>Telescope commands<cr>", "Commands" },
-
         },
 
         g = {
@@ -226,7 +226,6 @@ function M.setup()
         -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
         -- ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
 
-
         -- s = {
         --   name = "Split",
         --   s = { "<cmd>split<cr>", "HSplit" },
@@ -258,7 +257,6 @@ function M.setup()
         -- require("dapui").open()
         -- require("dapui").close()
         -- require("dapui").toggle()
-
 
         -- l = {
         --   name = "LSP",
@@ -318,7 +316,6 @@ function M.setup()
         --   t = { "<cmd>SnipRunToggle<cr>", "Toggle" },
         --   x = { "<cmd>SnipTerminate<cr>", "Terminate" },
         -- },
-
 
         -- T = {
         --   name = "Treesitter",

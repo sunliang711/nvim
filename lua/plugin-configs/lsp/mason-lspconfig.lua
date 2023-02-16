@@ -32,8 +32,8 @@ local opts = {}
 
 for _, server in pairs(servers) do
     opts = {
-        on_attach = require("plugins.lsp.handlers").on_attach,
-        capabilities = require("plugins.lsp.handlers").capabilities,
+        on_attach = require("plugin-configs.lsp.handlers").on_attach,
+        capabilities = require("plugin-configs.lsp.handlers").capabilities,
     }
 
     server = vim.split(server, "@")[1]
@@ -99,7 +99,7 @@ for _, server in pairs(servers) do
     -- end
 
     if server == "rust_analyzer" then
-        local rust_opts = require "plugins.lsp.settings.rust"
+        local rust_opts = require "plugin-configs.lsp.settings.rust"
         opts = vim.tbl_deep_extend("force", rust_opts, opts)
         local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
         if not rust_tools_status_ok then

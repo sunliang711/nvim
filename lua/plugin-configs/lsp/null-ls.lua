@@ -82,7 +82,7 @@ function M.setup()
             -- hover
             b.hover.dictionary,
         },
-        on_attach = require("plugins.lsp.handlers").on_attach
+        on_attach = require("plugin-configs.lsp.handlers").on_attach
     })
 end
 
