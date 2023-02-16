@@ -13,7 +13,12 @@ function M.setup()
 
     local tree_cb = nvim_tree_config.nvim_tree_callback
 
-    nvim_tree.setup {
+    nvim_tree.setup({
+        update_focused_file = {
+            enable = true,
+            update_root = false,
+            ignore_list = {},
+        },
         view = {
             side = "left",
             mappings = {
@@ -26,19 +31,17 @@ function M.setup()
                     -- { key = "H", action = "toggl_dotfiles" },
                     -- { key = "?", action = "toggle_help" }
 
-                    { key = "a", cb = tree_cb "create" },
-                    { key = "d", cb = tree_cb "remove" },
-                    { key = "r", cb = tree_cb "rename" },
-                    { key = "U", cb = tree_cb "dir_up" },
-                    { key = "H", cb = tree_cb "toggle_dotfiles" },
-                    { key = "?", cb = tree_cb "toggle_help" },
-                    { key = "v", cb = tree_cb "vsplit" }
-                }
-            }
-        }
-    }
-
-
+                    { key = "a", cb = tree_cb("create") },
+                    { key = "d", cb = tree_cb("remove") },
+                    { key = "r", cb = tree_cb("rename") },
+                    { key = "U", cb = tree_cb("dir_up") },
+                    { key = "H", cb = tree_cb("toggle_dotfiles") },
+                    { key = "?", cb = tree_cb("toggle_help") },
+                    { key = "v", cb = tree_cb("vsplit") },
+                },
+            },
+        },
+    })
 end
 
 return M
