@@ -1,5 +1,5 @@
-require "config"
+require("config")
 
-require "basic"
+require("basic")
 
-require "plugins".setup()
+require("plugins").setup()
