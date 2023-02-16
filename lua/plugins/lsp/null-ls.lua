@@ -27,20 +27,62 @@ function M.setup()
         return
     end
 
+    local b = null_ls.builtins
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-    local formatting = null_ls.builtins.formatting
+    -- local formatting = null_ls.builtins.formatting
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    local diagnostics = null_ls.builtins.diagnostics
+    -- local diagnostics = null_ls.builtins.diagnostics
+
+    local with_diagnostics_code = function(builtin)
+        return builtin.with {
+            diagnostics_format = "#{m} [#{c}]",
+        }
+    end
+
+    local with_root_file = function(builtin, file)
+        return builtin.with {
+            condition = function(utils)
+                return utils.root_has_file(file)
+            end,
+        }
+    end
 
     null_ls.setup({
         debug = false,
         sources = {
-            formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+            -- formatting
+            -- npm install -g @fsouza/prettierd
+            b.formatting.prettierd,
+            -- go install mvdan.cc/sh/v3/cmd/shfmt@latest
+            b.formatting.shfmt,
+            -- npm install -g fixjson
+            b.formatting.fixjson,
             -- pip install black
-            formatting.black.with({ extra_args = { "--fast" } }),
-            formatting.stylua,
+            b.formatting.black.with { extra_args = { "--fast" } },
+            -- pip install isort
+            b.formatting.isort,
+            with_root_file(b.formatting.stylua, "stylua.toml"),
+            -- cargo install stylua
+            b.formatting.stylua,
+
             -- diagnostics.flake8
+            -- diagnostics
+            b.diagnostics.write_good,
+            -- b.diagnostics.markdownlint,
+            -- b.diagnostics.eslint_d,
+            b.diagnostics.flake8,
+            b.diagnostics.tsc,
+            with_root_file(b.diagnostics.selene, "selene.toml"),
+            with_diagnostics_code(b.diagnostics.shellcheck),
+
+            -- code actions
+            b.code_actions.gitsigns,
+            b.code_actions.gitrebase,
+
+            -- hover
+            b.hover.dictionary,
         },
+        on_attach = require("plugins.lsp.handlers").on_attach
     })
 end
 

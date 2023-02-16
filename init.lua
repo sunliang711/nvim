@@ -1,6 +1,5 @@
-require "options".setup()
-require "keymaps".setup()
-require "commands".setup()
-require "autocmds".setup()
+require "config"
+
+require "basic"
 
 require "plugins".setup()

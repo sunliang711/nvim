@@ -119,8 +119,8 @@ function M.save_all()
     vim.notify({ "All Files Saved" }, "info", { timeout = 1000 })
 end
 
-M.default_config_file = "plugins_config_default"
-M.user_config_file = "plugins_config_user"
+M.default_config_file = "default_plugins"
+M.user_config_file = "user_plugins"
 
 -- TODO
 function M.config_plugin()
