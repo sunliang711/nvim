@@ -55,7 +55,6 @@ function M.setup()
     end
 
     vim.opt.list = true
-
     vim.opt.listchars = { eol = '↲', tab = '▸ ', trail = '˽' }
     --
     -- vim.cmd "set whichwrap+=<,>,[,],h,l"

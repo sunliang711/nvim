@@ -198,8 +198,8 @@ function M.setup()
             --     -- { navic.get_location, cond = navic.is_available }
             --     lualine_c
             -- },
-            -- lualine_x = { diff, spaces, "encoding", filetype },
-            lualine_x = { diff, spaces, filetype },
+            lualine_x = { diff, spaces, "encoding", filetype },
+            -- lualine_x = { diff, spaces, filetype },
             lualine_y = { progress },
             lualine_z = { location },
         },

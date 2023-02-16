@@ -257,6 +257,9 @@ M.lsp = {
         {
             "rust-lang/rust.vim",
         },
+        {
+            "jose-elias-alvarez/null-ls.nvim"
+        }
         -- {
         --     "julesdesmit/aleo.vim",
         -- }

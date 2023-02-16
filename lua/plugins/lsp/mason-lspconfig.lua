@@ -8,7 +8,7 @@ end
 local servers = {
     'clangd', 'rust_analyzer',
     'pyright', 'tsserver',
-    'gopls', 'sumneko_lua',
+    'gopls', 'lua_ls',
     'html', 'cssls',
     'yamlls', 'jsonls',
     'bashls', 'solc',

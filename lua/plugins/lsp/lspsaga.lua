@@ -1,178 +1,95 @@
 local M = {}
 
 function M.setup()
-    local saga_status, saga = pcall(require, 'lspsaga')
-    if not saga_status then
-        return
-    end
+    require("lspsaga").setup({})
 
-    local opts = { noremap = true, silent = true }
-
-    -- lsp finder to find the cursor word definition and reference
-
-    if vim.fn.has('nvim-0.8') == 1 then
-        vim.keymap.set("n", "gh", require("lspsaga.finder").lsp_finder, { silent = true, noremap = true })
-    end
-    -- or use command LspSagaFinder
-    -- vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
-
-    vim.keymap.set("n", "<leader>to", "<cmd>LSoutlineToggle<CR>", opts)
-    vim.keymap.set("n", "<leader>pd", "<cmd>Lspsaga preview_definition<CR>", opts)
-
-    local action_status, action = pcall(require, "lspsaga.action")
-    if action_status then
-        -- scroll down hover doc or scroll in definition preview
-        vim.keymap.set("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, { silent = true })
-        -- scroll up hover doc
-        vim.keymap.set("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, { silent = true })
-    end
-
-    local enable_symbol_in_winbar = false
-    if vim.fn.has('nvim-0.8') == 1 then
-        enable_symbol_in_winbar = true
-        -- Example:
-        local function get_file_name(include_path)
-            local file_name = require('lspsaga.symbolwinbar').get_file_name()
-            if vim.fn.bufname '%' == '' then return '' end
-            if include_path == false then return file_name end
-            -- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
-            local sep = vim.loop.os_uname().sysname == 'Windows' and '\\' or '/'
-            local path_list = vim.split(string.gsub(vim.fn.expand '%:~:.:h', '%%', ''), sep)
-            local file_path = ''
-            for _, cur in ipairs(path_list) do
-                file_path = (cur == '.' or cur == '~') and '' or
-                    file_path .. cur .. ' ' .. '%#LspSagaWinbarSep#>%*' .. ' %*'
-            end
-            return file_path .. file_name
-        end
-
-        local function config_winbar_or_statusline()
-            local exclude = {
-                ['terminal'] = true,
-                ['toggleterm'] = true,
-                ['prompt'] = true,
-                ['NvimTree'] = true,
-                ['help'] = true,
-            } -- Ignore float windows and exclude filetype
-            if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-                vim.wo.winbar = ''
-            else
-                local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
-                local sym
-                if ok then sym = lspsaga.get_symbol_node() end
-                local win_val = ''
-                win_val = get_file_name(true) -- set to true to include path
-                if sym ~= nil then win_val = win_val .. sym end
-                vim.wo.winbar = win_val
-                -- if work in statusline
-                vim.wo.stl = win_val
-            end
-        end
-
-        local events = { 'BufEnter', 'BufWinEnter', 'CursorMoved' }
-
-        vim.api.nvim_create_autocmd(events, {
-            pattern = '*',
-            callback = function() config_winbar_or_statusline() end,
-        })
-
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'LspsagaUpdateSymbol',
-            callback = function() config_winbar_or_statusline() end,
-        })
-    end
-
-
-    saga.init_lsp_saga {
-        -- "single" | "double" | "rounded" | "bold" | "plus"
-        border_style = "bold",
-        --the range of 0 for fully opaque window (disabled) to 100 for fully
-        --transparent background. Values between 0-30 are typically most useful.
-        saga_winblend = 0,
-        -- when cursor in saga window you config these to move
-        move_in_saga = { prev = '<C-p>', next = '<C-n>' },
-        -- Error, Warn, Info, Hint
-        -- use emoji like
-        -- { "🙀", "😿", "😾", "😺" }
-        -- or
-        -- { "😡", "😥", "😤", "😐" }
-        -- and diagnostic_header can be a function type
-        -- must return a string and when diagnostic_header
-        -- is function type it will have a param `entry`
-        -- entry is a table type has these filed
-        -- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
-        diagnostic_header = { " ", " ", " ", "ﴞ " },
-        -- show diagnostic source
-        -- show_diagnostic_source = true,
-        -- add bracket or something with diagnostic source, just have 2 elements
-        -- diagnostic_source_bracket = {},
-        -- preview lines of lsp_finder and definition preview
-        max_preview_lines = 10,
-        -- use emoji lightbulb in default
-        code_action_icon = "💡",
-        -- if true can press number to execute the codeaction in codeaction window
-        code_action_num_shortcut = true,
-        -- same as nvim-lightbulb but async
-        code_action_lightbulb = {
-            enable = true,
-            sign = true,
-            enable_in_insert = true,
-            sign_priority = 20,
-            virtual_text = true,
-        },
-        -- finder icons
-        finder_icons = {
-            def = '  ',
-            ref = '諭 ',
-            link = '  ',
-        },
-        -- custom finder title winbar function type
-        -- param is current word with symbol icon string type
-        -- return a winbar format string like `%#CustomFinder#Test%*`
-        -- finder_title_bar = function(param) do your stuff here end,
-        finder_action_keys = {
-            open = "o",
-            vsplit = "s",
-            split = "i",
-            tabe = "t",
-            quit = "q",
-            scroll_down = "<C-f>",
-            scroll_up = "<C-b>", -- quit can be a table
-        },
-        code_action_keys = {
-            quit = "q",
-            exec = "<CR>",
-        },
-        -- rename_action_quit = "<C-c>",
-        rename_action_quit = "q",
-        -- definition_preview_icon = "  ",
-        -- show symbols in winbar must nightly
-        symbol_in_winbar = {
-            in_custom = enable_symbol_in_winbar,
-            enable = enable_symbol_in_winbar,
-            separator = ' ',
-            show_file = true,
-            click_support = false,
-        },
-        -- show outline
-        show_outline = {
-            win_position = 'right',
-            -- set the special filetype in there which in left like nvimtree neotree defx
-            left_with = '',
-            win_width = 30,
-            auto_enter = true,
-            auto_preview = true,
-            virt_text = '┃',
-            jump_key = 'o',
-            -- auto refresh when change buffer
-            auto_refresh = true,
-        },
-        -- if you don't use nvim-lspconfig you must pass your server name and
-        -- the related filetypes into this table
-        -- like server_filetype_map = { metals = { "sbt", "scala" } }
-        server_filetype_map = {},
-    }
-
+    -- local keymap = vim.keymap.set
+    --
+    -- -- LSP finder - Find the symbol's definition
+    -- -- If there is no definition, it will instead be hidden
+    -- -- When you use an action in finder like "open vsplit",
+    -- -- you can use <C-t> to jump back
+    -- keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
+    --
+    -- -- Code action
+    -- keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+    --
+    -- -- Rename all occurrences of the hovered word for the entire file
+    -- keymap("n", "gr", "<cmd>Lspsaga rename<CR>")
+    --
+    -- -- Rename all occurrences of the hovered word for the selected files
+    -- keymap("n", "gr", "<cmd>Lspsaga rename ++project<CR>")
+    --
+    -- -- Peek definition
+    -- -- You can edit the file containing the definition in the floating window
+    -- -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+    -- -- It also supports tagstack
+    -- -- Use <C-t> to jump back
+    -- keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
+    --
+    -- -- Go to definition
+    -- keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+    --
+    -- -- Peek type definition
+    -- -- You can edit the file containing the type definition in the floating window
+    -- -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+    -- -- It also supports tagstack
+    -- -- Use <C-t> to jump back
+    -- keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
+    --
+    -- -- Go to type definition
+    -- keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
+    --
+    --
+    -- -- Show line diagnostics
+    -- -- You can pass argument ++unfocus to
+    -- -- unfocus the show_line_diagnostics floating window
+    -- keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+    --
+    -- -- Show cursor diagnostics
+    -- -- Like show_line_diagnostics, it supports passing the ++unfocus argument
+    -- keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+    --
+    -- -- Show buffer diagnostics
+    -- keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+    --
+    -- -- Diagnostic jump
+    -- -- You can use <C-o> to jump back to your previous location
+    -- keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+    -- keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+    --
+    -- -- Diagnostic jump with filters such as only jumping to an error
+    -- keymap("n", "[E", function()
+    --     require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+    -- end)
+    -- keymap("n", "]E", function()
+    --     require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+    -- end)
+    --
+    -- -- Toggle outline
+    -- keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+    --
+    -- -- Hover Doc
+    -- -- If there is no hover doc,
+    -- -- there will be a notification stating that
+    -- -- there is no information available.
+    -- -- To disable it just use ":Lspsaga hover_doc ++quiet"
+    -- -- Pressing the key twice will enter the hover window
+    -- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+    --
+    -- -- If you want to keep the hover window in the top right hand corner,
+    -- -- you can pass the ++keep argument
+    -- -- Note that if you use hover with ++keep, pressing this key again will
+    -- -- close the hover window. If you want to jump to the hover window
+    -- -- you should use the wincmd command "<C-w>w"
+    -- keymap("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
+    --
+    -- -- Call hierarchy
+    -- keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+    -- keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+    --
+    -- -- Floating terminal
+    -- keymap({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 end
 
 return M
