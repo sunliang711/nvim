@@ -6,8 +6,10 @@ function M.setup()
         return
     end
 
-    local status_theme_ok, theme = pcall(require, "lualine.themes.darkplus_dark")
+    local status_theme_ok, theme = pcall(require, "lualine.themes.gruvbox")
     if not status_theme_ok then
+        -- vim.notify("cannot find lualine theme", "warn")
+        vim.notify("cannot find lualine theme", "error")
         return
     end
 
@@ -28,7 +30,7 @@ function M.setup()
         no = "#569cd6",
         s = "#ce9178",
         S = "#ce9178",
-        [""] = "#ce9178",
+        -- [""] = "#ce9178",
         ic = "#dcdcaa",
         R = "#d16969",
         Rv = "#d16969",
@@ -58,7 +60,7 @@ function M.setup()
         return vim.fn.winwidth(0) > 80
     end
 
-    local icons = require "icons"
+    local icons = require("icons")
 
     local diagnostics = {
         "diagnostics",
@@ -167,18 +169,17 @@ function M.setup()
 
     local lualine_c = { current_signature, cond = hide_in_width }
     -- nvim < v0.8 use nvim-navic
-    if vim.fn.has('nvim-0.8') == 0 then
-        local status_navic, navic = pcall(require, 'nvim-navic')
+    if vim.fn.has("nvim-0.8") == 0 then
+        local status_navic, navic = pcall(require, "nvim-navic")
         if status_navic then
             lualine_c = { navic.get_location, cond = navic.is_available }
         end
     end
 
-
     -- lualine-lsp-pgoress plugin
-    local used_lualine_c = { lualine_c, 'lsp_progress' }
+    local used_lualine_c = { lualine_c, "lsp_progress" }
 
-    lualine.setup {
+    lualine.setup({
         options = {
             globalstatus = true,
             icons_enabled = true,
@@ -213,7 +214,7 @@ function M.setup()
         },
         tabline = {},
         extensions = {},
-    }
+    })
 end
 
 return M

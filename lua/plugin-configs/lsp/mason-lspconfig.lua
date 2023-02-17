@@ -110,6 +110,13 @@ for _, server in pairs(servers) do
         goto continue
     end
 
+    if server == 'lua_ls' then
+        local lua_opts = require('plugin-configs.lsp.settings.lua_ls')
+        opts = vim.tbl_deep_extend("force", lua_opts, opts)
+        -- -- debug
+        -- print("lua_ls opts: " .. vim.inspect(opts))
+    end
+
     -- debug
     -- vim.notify("Config lsp for: " .. server)
     lspconfig[server].setup(opts)
