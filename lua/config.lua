@@ -3,6 +3,6 @@ PLUGINS = {
         enabled = false,
     },
     nvim_cmp = {
-        enabled = false,
+        enabled = true,
     },
 }

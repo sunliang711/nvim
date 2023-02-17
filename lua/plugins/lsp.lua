@@ -1,5 +1,4 @@
 return {
-
     "neovim/nvim-lspconfig",
     dependencies = {
         { "williamboman/mason.nvim" },
@@ -27,8 +26,9 @@ return {
             "j-hui/fidget.nvim",
         },
     },
-
+    enabled = PLUGINS.lsp.enabled,
+    cond = PLUGINS.lsp.enabled,
     config = function()
-		require("plugin-configs.lsp").setup()
+        require("plugin-configs.lsp").setup()
     end,
 }
