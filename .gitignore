@@ -3,3 +3,4 @@
 .idea/
 /plugin
 /lua/user_plugins.lua
+/lua/config.lua

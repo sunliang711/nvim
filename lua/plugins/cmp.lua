@@ -9,8 +9,8 @@ return {
         "L3MON4D3/LuaSnip", --snippet engine
         "rafamadriz/friendly-snippets",
     },
-    enabled = PLUGINS.nvim_cmp.enabled,
-    cond = PLUGINS.nvim_cmp.enabled,
+    -- enabled = PLUGINS.nvim_cmp.enabled,
+    -- cond = PLUGINS.nvim_cmp.enabled,
     config = function()
         require("plugin-configs.cmp").setup()
     end,
