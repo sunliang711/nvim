@@ -69,10 +69,12 @@ for _, server in pairs(servers) do
     --     goto continue
     -- end
     --
-    -- if server == "tsserver" then
-    --     local tsserver_opts = require "plugins.lsp.settings.tsserver"
-    --     opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
-    -- end
+    if server == "tsserver" then
+        local tsserver_opts = require "plugin-configs.lsp.settings.tsserver"
+        opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
+        -- debug
+        -- print("tsserver opts:" .. vim.inspect(opts))
+    end
     --
     -- if server == "pyright" then
     --     local pyright_opts = require "plugins.lsp.settings.pyright"

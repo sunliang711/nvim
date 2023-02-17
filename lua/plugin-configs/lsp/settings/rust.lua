@@ -1,4 +1,4 @@
-return {
+local M = {
     tools = {
         on_initialized = function()
             vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
@@ -84,3 +84,5 @@ return {
         },
     },
 }
+
+return M
