@@ -15,21 +15,21 @@ else
     this="$(cd $(dirname $rpath) && pwd)"
 fi
 
-if [ -r ${SHELLRC_ROOT}/shellrc.d/shelllib ];then
+if [ -r ${SHELLRC_ROOT}/shellrc.d/shelllib ]; then
     source ${SHELLRC_ROOT}/shellrc.d/shelllib
-elif [ -r /tmp/shelllib ];then
+elif [ -r /tmp/shelllib ]; then
     source /tmp/shelllib
 else
     # download shelllib then source
     shelllibURL=https://gitee.com/sunliang711/init2/raw/master/shell/shellrc.d/shelllib
     (cd /tmp && curl -s -LO ${shelllibURL})
-    if [ -r /tmp/shelllib ];then
+    if [ -r /tmp/shelllib ]; then
         source /tmp/shelllib
     fi
 fi
 
 # available VARs: user, home, rootID
-# available functions: 
+# available functions:
 #    _err(): print "$*" to stderror
 #    _command_exists(): check command "$1" existence
 #    _require_command(): exit when command "$1" not exist
@@ -57,26 +57,31 @@ fi
 #    _errorln(): error log with \n
 #    _checkService(): check $1 exist in systemd
 
-
 ###############################################################################
 # write your code below (just define function[s])
 # function is hidden when begin with '_'
-install(){
-    set -ex
-    npm install -g @fsouza/prettierd
-    go install mvdan.cc/sh/v3/cmd/shfmt@latest
-    npm install -g fixjson
-    pip install black
-    pip install isort
-    cargo install stylua
+install() {
+    local packages=(prettierd shfmt fixjson black isort stylua write-good flake8 selene shellcheck)
+    for pkg in "${packages[@]}"; do
+        echo "install ${pkg}.."
+        nvim --headless -c "MasonInstall ${pkg}" -c "quit" >/dev/null
+    done
+    return
 
-    npm install -g write-good
-    pip install flake8
+    # npm install -g @fsouza/prettierd
+    # go install mvdan.cc/sh/v3/cmd/shfmt@latest
+    # npm install -g fixjson
+    # pip install black
+    # pip install isort
+    # cargo install stylua
+    #
+    # npm install -g write-good
+    # pip install flake8
+    #
+    # cargo install selene
+    # sudo pacman -S shellcheck
+
     npm install -g typescript
-
-    cargo install selene
-    sudo pacman -S shellcheck
-
     # -- code actions
     # b.code_actions.gitsigns,
     # b.code_actions.gitrebase,
@@ -88,13 +93,13 @@ install(){
 # write your code above
 ###############################################################################
 
-em(){
+em() {
     $ed $0
 }
 
-function _help(){
+function _help() {
     cd "${this}"
-    cat<<EOF2
+    cat <<EOF2
 Usage: $(basename $0) ${bold}CMD${reset}
 
 ${bold}CMD${reset}:
@@ -103,9 +108,10 @@ EOF2
 }
 
 case "$1" in
-     ""|-h|--help|help)
-        _help
-        ;;
-    *)
-        "$@"
+"" | -h | --help | help)
+    _help
+    ;;
+*)
+    "$@"
+    ;;
 esac
