@@ -12,9 +12,7 @@ local servers = {
     'html', 'cssls',
     'yamlls', 'jsonls',
     'bashls',
-    'solidity',
-    -- 'solc',
-    -- 'solidity_ls',
+    'solidity', 'solc', -- solidity needs solc
     -- 'solang',
     'emmet_ls'
 }
