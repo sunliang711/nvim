@@ -11,7 +11,11 @@ local servers = {
     'gopls', 'lua_ls',
     'html', 'cssls',
     'yamlls', 'jsonls',
-    'bashls', 'solc',
+    'bashls',
+    'solidity',
+    -- 'solc',
+    -- 'solidity_ls',
+    -- 'solang',
     'emmet_ls'
 }
 
