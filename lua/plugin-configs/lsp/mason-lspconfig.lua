@@ -6,24 +6,27 @@ end
 
 -- config lspconfig
 local servers = {
-    'clangd', 'rust_analyzer',
-    'pyright', 'tsserver',
-    'gopls', 'lua_ls',
-    'html', 'cssls',
-    'yamlls', 'jsonls',
-    'bashls',
-    'solidity', 'solc', -- solidity needs solc
+    "clangd",
+    "rust_analyzer",
+    "pyright",
+    "tsserver",
+    "gopls",
+    "lua_ls",
+    "html",
+    "cssls",
+    "yamlls",
+    "jsonls",
+    "bashls",
+    "solidity",
+    "solc", -- solidity needs solc
     -- 'solang',
-    'emmet_ls'
+    "emmet_ls",
 }
 
-mason_lspconfig.setup(
-    {
-        ensure_installed = servers,
-        automatic_installation = true
-    }
-)
-
+mason_lspconfig.setup({
+    ensure_installed = servers,
+    automatic_installation = true,
+})
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
@@ -72,7 +75,7 @@ for _, server in pairs(servers) do
     -- end
     --
     if server == "tsserver" then
-        local tsserver_opts = require "plugin-configs.lsp.settings.tsserver"
+        local tsserver_opts = require("plugin-configs.lsp.settings.tsserver")
         opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
         -- debug
         -- print("tsserver opts:" .. vim.inspect(opts))
@@ -103,7 +106,7 @@ for _, server in pairs(servers) do
     -- end
 
     if server == "rust_analyzer" then
-        local rust_opts = require "plugin-configs.lsp.settings.rust"
+        local rust_opts = require("plugin-configs.lsp.settings.rust")
         opts = vim.tbl_deep_extend("force", rust_opts, opts)
         local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
         if not rust_tools_status_ok then
@@ -114,8 +117,8 @@ for _, server in pairs(servers) do
         goto continue
     end
 
-    if server == 'lua_ls' then
-        local lua_opts = require('plugin-configs.lsp.settings.lua_ls')
+    if server == "lua_ls" then
+        local lua_opts = require("plugin-configs.lsp.settings.lua_ls")
         opts = vim.tbl_deep_extend("force", lua_opts, opts)
         -- -- debug
         -- print("lua_ls opts: " .. vim.inspect(opts))

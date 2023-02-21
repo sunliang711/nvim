@@ -51,7 +51,7 @@ function M.setup()
         sources = {
             -- formatting
             -- npm install -g @fsouza/prettierd
-            b.formatting.prettierd,
+            b.formatting.prettierd.with({ filetypes = { "html", "yaml", "markdown" } }),
             -- go install mvdan.cc/sh/v3/cmd/shfmt@latest
             b.formatting.shfmt.with({
                 extra_args = function(params)
