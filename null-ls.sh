@@ -61,12 +61,12 @@ fi
 # write your code below (just define function[s])
 # function is hidden when begin with '_'
 install() {
-    local packages=(prettierd shfmt fixjson black isort stylua write-good flake8 selene shellcheck)
-    for pkg in "${packages[@]}"; do
-        echo "install ${pkg}.."
-        nvim --headless -c "MasonInstall ${pkg}" -c "quit" >/dev/null
-    done
-    return
+    # local packages=(prettierd shfmt fixjson black isort stylua write-good flake8 selene shellcheck)
+    # for pkg in "${packages[@]}"; do
+    #     echo "install ${pkg}.."
+    #     nvim --headless -c "MasonInstall ${pkg}" -c "quit" >/dev/null
+    # done
+    nvim --headless -c "MasonInstall prettierd fixjson black isort stylua write-good flake8 selene shellcheck" -c "quit" >/dev/null
 
     # npm install -g @fsouza/prettierd
     # go install mvdan.cc/sh/v3/cmd/shfmt@latest
@@ -81,7 +81,8 @@ install() {
     # cargo install selene
     # sudo pacman -S shellcheck
 
-    npm install -g typescript
+    # npm install -g typescript
+
     # -- code actions
     # b.code_actions.gitsigns,
     # b.code_actions.gitrebase,
