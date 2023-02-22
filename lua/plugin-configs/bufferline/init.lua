@@ -6,11 +6,11 @@ function M.setup()
         return
     end
 
-    bufferline.setup {
+    bufferline.setup({
         options = {
             numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-            close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-            right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+            -- close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+            -- right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
             left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
             middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
             -- NOTE: this plugin is designed with this icon in mind,
@@ -124,17 +124,23 @@ function M.setup()
             duplicate_selected = {
                 fg = { attribute = "fg", highlight = "TabLineSel" },
                 bg = { attribute = "bg", highlight = "TabLineSel" },
-                underline = true, undercurl = true, italic = true,
+                underline = true,
+                undercurl = true,
+                italic = true,
             },
             duplicate_visible = {
                 fg = { attribute = "fg", highlight = "TabLine" },
                 bg = { attribute = "bg", highlight = "TabLine" },
-                underline = true, undercurl = true, italic = true,
+                underline = true,
+                undercurl = true,
+                italic = true,
             },
             duplicate = {
                 fg = { attribute = "fg", highlight = "TabLine" },
                 bg = { attribute = "bg", highlight = "TabLine" },
-                underline = true, undercurl = true, italic = true,
+                underline = true,
+                undercurl = true,
+                italic = true,
             },
 
             modified = {
@@ -167,7 +173,7 @@ function M.setup()
                 bg = { attribute = "bg", highlight = "Normal" },
             },
         },
-    }
+    })
 end
 
 return M
