@@ -62,6 +62,7 @@ function M.setup()
             -- npm install -g fixjson
             b.formatting.fixjson,
             -- pip install black
+            -- python formatter
             b.formatting.black.with({ extra_args = { "--fast" } }),
             -- pip install isort
             b.formatting.isort,

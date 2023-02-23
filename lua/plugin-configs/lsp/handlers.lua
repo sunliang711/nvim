@@ -12,7 +12,7 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
     M.enable_format_on_save()
-    local icons = require "icons"
+    local icons = require("icons")
     local signs = {
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
         { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
@@ -79,7 +79,7 @@ local function attach_navic(client, bufnr)
     navic.attach(client, bufnr)
 end
 
-local saga_status, _ = pcall(require, 'lspsaga')
+local saga_status, _ = pcall(require, "lspsaga")
 
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
@@ -92,7 +92,6 @@ local function lsp_keymaps(bufnr)
         vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
         -- or use command
         -- vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
-
 
         -- local action = require("lspsaga.codeaction")
         -- code action
@@ -121,13 +120,12 @@ local function lsp_keymaps(bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.formatting( { async = true} )<CR>", opts)
 
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]]
-    vim.cmd [[ command! Rename execute 'lua vim.lsp.buf.rename()' ]]
-    vim.cmd [[ command! Definition execute 'lua vim.lsp.buf.definition()' ]]
-    vim.cmd [[ command! Declaration execute 'lua vim.lsp.buf.declaration()' ]]
-    vim.cmd [[ command! Implementation execute 'lua vim.lsp.buf.implementation()' ]]
-    vim.cmd [[ command! Reference execute 'lua vim.lsp.buf.references()' ]]
-
+    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]])
+    vim.cmd([[ command! Rename execute 'lua vim.lsp.buf.rename()' ]])
+    vim.cmd([[ command! Definition execute 'lua vim.lsp.buf.definition()' ]])
+    vim.cmd([[ command! Declaration execute 'lua vim.lsp.buf.declaration()' ]])
+    vim.cmd([[ command! Implementation execute 'lua vim.lsp.buf.implementation()' ]])
+    vim.cmd([[ command! Reference execute 'lua vim.lsp.buf.references()' ]])
 end
 
 M.on_attach = function(client, bufnr)
@@ -137,7 +135,8 @@ M.on_attach = function(client, bufnr)
 
     -- for tsserver
     -- if client.name == "tsserver" then
-    --     require("lsp-inlayhints").setup_autocmd(bufnr, "typescript/inlayHints")
+    -- require("lsp-inlayhints").setup_autocmd(bufnr, "typescript/inlayHints")
+    -- require("lsp-inlayhints").on_attach(client, bufnr)
     -- end
     --
     -- -- if client.name ~= "rust_analyzer" then
@@ -174,22 +173,22 @@ end
 --   ]]
 -- end
 function M.enable_format_on_save()
-    vim.cmd [[
+    vim.cmd([[
     augroup format_on_save
-      autocmd! 
+      autocmd!
       autocmd BufWritePre * lua vim.lsp.buf.format()
     augroup end
-  ]]
-    vim.notify "Enable format on save"
+  ]])
+    vim.notify("Enable format on save")
 end
 
 function M.disable_format_on_save()
-    M.remove_augroup "format_on_save"
-    vim.notify "Disabled format on save"
+    M.remove_augroup("format_on_save")
+    vim.notify("Disabled format on save")
 end
 
 function M.toggle_format_on_save()
-    if vim.fn.exists "#format_on_save#BufWritePre" == 0 then
+    if vim.fn.exists("#format_on_save#BufWritePre") == 0 then
         M.enable_format_on_save()
     else
         M.disable_format_on_save()
@@ -202,6 +201,6 @@ function M.remove_augroup(name)
     end
 end
 
-vim.cmd [[ command! LspToggleAutoFormat execute 'lua require("plugin-configs.lsp.handlers").toggle_format_on_save()' ]]
+vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("plugin-configs.lsp.handlers").toggle_format_on_save()' ]])
 
 return M
