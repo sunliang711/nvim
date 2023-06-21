@@ -23,7 +23,7 @@ return {
             "jose-elias-alvarez/null-ls.nvim",
         },
         {
-            "j-hui/fidget.nvim",
+            "j-hui/fidget.nvim", tag = "legacy"
         },
     },
     enabled = PLUGINS.lsp.enabled,

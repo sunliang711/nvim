@@ -19,6 +19,13 @@ function M.setup()
         },
         prefix = "s"
     }
+
+    local status_repeat, rep = pcall(require, "repeat")
+    if not status_repeat then
+        return
+    end
+
+    rep.setup()
 end
 
 return M

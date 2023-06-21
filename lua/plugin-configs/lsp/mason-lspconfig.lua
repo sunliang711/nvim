@@ -14,7 +14,7 @@ local servers = {
     "lua_ls",
     "html",
     "cssls",
-    "yamlls",
+    -- "yamlls",
     "jsonls",
     "bashls",
     "solidity",
