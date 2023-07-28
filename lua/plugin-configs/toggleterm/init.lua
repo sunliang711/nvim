@@ -75,8 +75,8 @@ function M.setup()
     local keymap = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
 
-    keymap("n", "<C-t>", "<cmd>ToggleTerm size=30 direction=horizontal<cr>", opts)
-    keymap("t", "<C-t>", "<cmd>ToggleTerm size=30 direction=horizontal<cr>", opts)
+    keymap("n", "<C-t>", "<cmd>ToggleTerm size=30 direction=float<cr>", opts)
+    keymap("t", "<C-t>", "<cmd>ToggleTerm size=30 direction=float<cr>", opts)
 
     -- vim.api.nvim_create_autocmd( { "TermEnter" }, {
     --     pattern = { "term://*toggleterm#*" },
