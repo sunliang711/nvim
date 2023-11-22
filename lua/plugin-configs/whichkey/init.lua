@@ -318,6 +318,16 @@ function M.setup()
             },
             t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
         },
+        s = {
+            name = "Lspsaga",
+            f = { "<cmd>Lspsaga finder<cr>", "Finder" },
+            r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+            o = { "<cmd>Lspsaga outline<cr>", "Outline" },
+            a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+            t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
+            w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
+        },
+
 
         -- s = {
         --   name = "Surround",
