@@ -15,9 +15,9 @@ M.setup = function()
     local icons = require("icons")
     local signs = {
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
     }
 
     for _, sign in ipairs(signs) do
@@ -90,6 +90,7 @@ local function lsp_keymaps(bufnr)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
         -- show hover doc and press twice will jumpto hover window
         vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+        vim.keymap.set("i", "<c-k>", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
         -- or use command
         -- vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
 
@@ -107,6 +108,8 @@ local function lsp_keymaps(bufnr)
     else
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+        vim.api.nvim_buf_set_keymap(bufnr, "i", "<c-k>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+        -- vim.lsp.buf.signature_help
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     end
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
