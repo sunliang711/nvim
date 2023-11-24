@@ -6,7 +6,7 @@ end
 
 -- config lspconfig
 local servers = {
-    "clangd",
+    -- "clangd",
     "rust_analyzer",
     "pyright",
     "tsserver",
