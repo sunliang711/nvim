@@ -29,8 +29,10 @@ function M.setup()
     keymap("n", "[b", "<cmd>bprevious<cr>", opts)
 
     -- keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
-    keymap("n", "<c-,>", "<cmd>vertical resize -2<cr>", opts)
-    keymap("n", "<c-.>", "<cmd>vertical resize +2<cr>", opts)
+    keymap("n", "<up>", "<cmd> resize +2<cr>", opts)
+    keymap("n", "<down>", "<cmd>resize -2<cr>", opts)
+    keymap("n", "<left>", "<cmd>vertical resize -2<cr>", opts)
+    keymap("n", "<right>", "<cmd>vertical resize +2<cr>", opts)
 end
 
 return M
