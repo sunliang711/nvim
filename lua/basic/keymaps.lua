@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-
     local opts = { noremap = true, silent = true }
 
     local keymap = vim.api.nvim_set_keymap
@@ -10,7 +9,6 @@ function M.setup()
 
     vim.g.mapleader = ","
     vim.g.maplocalleader = ","
-
 
     -- Modes
     -- 	normal_mode = "n"
@@ -31,7 +29,8 @@ function M.setup()
     keymap("n", "[b", "<cmd>bprevious<cr>", opts)
 
     -- keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
-
+    keymap("n", "<c-,>", "<cmd>vertical resize -2<cr>", opts)
+    keymap("n", "<c-.>", "<cmd>vertical resize +2<cr>", opts)
 end
 
 return M
