@@ -288,14 +288,17 @@ function M.setup()
 
         l = {
             name = "LSP",
-            a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-            d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-            w = {
-                "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-                "Workspace Diagnostics",
-            },
-            f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
-            F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
+
+            -- Code Action
+            -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+            a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+
+            -- d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
+
+            f = { "<cmd>Lspsaga finder<cr>", "Finder" },
+            -- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
+            -- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
+
             i = { "<cmd>LspInfo<cr>", "Info" },
             I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
             j = {
@@ -307,26 +310,41 @@ function M.setup()
                 "Prev Diagnostic",
             },
             l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-            o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+
+            -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+            o = { "<cmd>Lspsaga outline<cr>", "Outline" },
+
             q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-            r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+
+            -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+            r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+
             R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+
             s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
             S = {
                 "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
                 "Workspace Symbols",
             },
-            t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
-        },
-        s = {
-            name = "Lspsaga",
-            f = { "<cmd>Lspsaga finder<cr>", "Finder" },
-            r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-            o = { "<cmd>Lspsaga outline<cr>", "Outline" },
-            a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+
+            -- t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
             t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
+
+            -- w = {
+            --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+            --     "Workspace Diagnostics",
+            -- },
             w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
         },
+        -- s = {
+        --     name = "Lspsaga",
+        --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+        --     f = { "<cmd>Lspsaga finder<cr>", "Finder" },
+        --     o = { "<cmd>Lspsaga outline<cr>", "Outline" },
+        --     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+        --     t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
+        --     w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
+        -- },
 
 
         -- s = {
