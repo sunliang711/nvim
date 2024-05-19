@@ -137,11 +137,15 @@ function M.setup()
             name = "Buffer manage",
             h = { "<cmd>BufferLineCloseLeft<cr>", "close all to the left" },
             l = { "<cmd>BufferLineCloseRight<cr>", "close all to the right" },
-            p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
-            b = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
-            n = { "<cmd>BufferLineCycleNext<cr>", "next" },
-            j = { "<cmd>BufferLinePick<cr>", "jump" },
+            o = { "<cmd>BufferLineCloseOthers<cr>", "close all other tabs" },
             c = { "<cmd>BufferLinePickClose<cr>", "pick buffer to close" },
+
+            p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
+            n = { "<cmd>BufferLineCycleNext<cr>", "next" },
+
+            b = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
+            j = { "<cmd>BufferLinePick<cr>", "jump" },
+
         },
         w = {
             name = "Window and Tab",
