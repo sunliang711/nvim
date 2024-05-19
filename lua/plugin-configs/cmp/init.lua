@@ -158,6 +158,7 @@ function M.setup()
                 vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
                 -- Source
                 vim_item.menu = ({
+                    copilot = "[Copilot]",
                     buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
                     luasnip = "[LuaSnip]",
