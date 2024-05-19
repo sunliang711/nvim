@@ -64,6 +64,34 @@ function M.setup()
         table.insert(sources, { name = "copilot", group_index = 1 })
     end
 
+    local kind_icons = {
+        Text = "",
+        Method = "󰆧",
+        Function = "󰊕",
+        Constructor = "",
+        Field = "󰇽",
+        Variable = "󰂡",
+        Class = "󰠱",
+        Interface = "",
+        Module = "",
+        Property = "󰜢",
+        Unit = "",
+        Value = "󰎠",
+        Enum = "",
+        Keyword = "󰌋",
+        Snippet = "",
+        Color = "󰏘",
+        File = "󰈙",
+        Reference = "",
+        Folder = "󰉋",
+        EnumMember = "",
+        Constant = "󰏿",
+        Struct = "",
+        Event = "",
+        Operator = "󰆕",
+        TypeParameter = "󰅲",
+    }
+
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -125,31 +153,46 @@ function M.setup()
             }),
         }),
         formatting = {
-            fields = { "kind", "abbr", "menu" },
             format = function(entry, vim_item)
                 -- Kind icons
-                vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-
-                if entry.source.name == "cmp_tabnine" then
-                    -- if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-                    -- menu = entry.completion_item.data.detail .. " " .. menu
-                    -- end
-                    vim_item.kind = icons.misc.Robot
-                end
-                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                -- NOTE: order matters
+                vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+                -- Source
                 vim_item.menu = ({
-                    copilot = "[Copilot]",
-                    nvim_lsp = "[NVIM LSP]",
-                    nvim_lua = "[Nvim lua]",
-                    luasnip = "[Snippet]",
                     buffer = "[Buffer]",
-                    path = "[Path]",
-                    emoji = "[Emoji]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[LuaSnip]",
+                    nvim_lua = "[Lua]",
+                    latex_symbols = "[LaTeX]",
                 })[entry.source.name]
                 return vim_item
             end,
         },
+        -- formatting = {
+        --     fields = { "kind", "abbr", "menu" },
+        --     format = function(entry, vim_item)
+        --         -- Kind icons
+        --         vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+        --
+        --         if entry.source.name == "cmp_tabnine" then
+        --             -- if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+        --             -- menu = entry.completion_item.data.detail .. " " .. menu
+        --             -- end
+        --             vim_item.kind = icons.misc.Robot
+        --         end
+        --         -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        --         -- NOTE: order matters
+        --         vim_item.menu = ({
+        --             copilot = "[Copilot]",
+        --             nvim_lsp = "[NVIM LSP]",
+        --             nvim_lua = "[Nvim lua]",
+        --             luasnip = "[Snippet]",
+        --             buffer = "[Buffer]",
+        --             path = "[Path]",
+        --             emoji = "[Emoji]",
+        --         })[entry.source.name]
+        --         return vim_item
+        --     end,
+        -- },
         sources = sources,
         -- confirm_opts = {
         --   -- behavior = cmp.ConfirmBehavior.Replace,
