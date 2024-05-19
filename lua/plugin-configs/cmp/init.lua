@@ -24,11 +24,11 @@ function M.setup()
 
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         callback = function()
-            local luasnip = require "luasnip"
+            local luasnip = require("luasnip")
             if luasnip.expand_or_jumpable() then
                 -- ask maintainer for option to make this silent
                 -- luasnip.unlink_current()
-                vim.cmd [[silent! lua require("luasnip").unlink_current()]]
+                vim.cmd([[silent! lua require("luasnip").unlink_current()]])
             end
         end,
     })
@@ -36,11 +36,11 @@ function M.setup()
     require("luasnip/loaders/from_vscode").lazy_load()
 
     local check_backspace = function()
-        local col = vim.fn.col "." - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+        local col = vim.fn.col(".") - 1
+        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
     end
 
-    local icons = require "icons"
+    local icons = require("icons")
 
     local kind_icons = icons.kind
 
@@ -59,7 +59,11 @@ function M.setup()
         table.insert(sources, { name = "nvim_lsp" })
     end
 
-    cmp.setup {
+    if PLUGINS.copilot.enabled then
+        table.insert(sources, { name = "copilot" })
+    end
+
+    cmp.setup({
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -71,7 +75,7 @@ function M.setup()
             return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" -- or cmp_dap.is_dap_buffer()
         end,
 
-        mapping = cmp.mapping.preset.insert {
+        mapping = cmp.mapping.preset.insert({
             -- ["<C-k>"] = cmp.mapping.select_prev_item(),
             -- ["<C-j>"] = cmp.mapping.select_next_item(),
             ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c", "s" }),
@@ -86,7 +90,7 @@ function M.setup()
             ["<CR>"] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
                 -- behavior = cmp.ConfirmBehavior.Insert,
-                select = false
+                select = false,
             }),
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -118,7 +122,7 @@ function M.setup()
                 "s",
                 "c",
             }),
-        },
+        }),
         formatting = {
             fields = { "kind", "abbr", "menu" },
             format = function(entry, vim_item)
@@ -134,6 +138,7 @@ function M.setup()
                 -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
                 -- NOTE: order matters
                 vim_item.menu = ({
+                    copilot = "[Copilot]",
                     nvim_lsp = "[NVIM LSP]",
                     nvim_lua = "[Nvim lua]",
                     luasnip = "[Snippet]",
@@ -166,25 +171,24 @@ function M.setup()
             ghost_text = true,
             -- native_menu = false,
         },
-
-    }
+    })
 
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = 'buffer' }
-        }
+            { name = "buffer" },
+        },
     })
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = 'path' }
+            { name = "path" },
         }, {
-            { name = 'cmdline' }
-        })
+            { name = "cmdline" },
+        }),
     })
 end
 
