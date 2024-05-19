@@ -45,10 +45,11 @@ function M.setup()
     local kind_icons = icons.kind
 
     local sources = {
-        { name = "buffer" },
-        { name = "path" },
-        { name = "nvim_lua" },
-        { name = "luasnip" },
+        { name = "buffer", group_index = 2 },
+        { name = "path", group_index = 2 },
+        { name = "nvim_lua", group_index = 2 },
+        { name = "luasnip", group_index = 2 },
+        { name = "emoji", group_index = 2 },
         -- { name = 'nvim_lsp_signature_help' },
         -- { name = "nvim_lsp" },
         -- { name = "cmp_tabnine" },
@@ -56,11 +57,11 @@ function M.setup()
         -- { name = "dap" },
     }
     if lsp_loaded then
-        table.insert(sources, { name = "nvim_lsp" })
+        table.insert(sources, { name = "nvim_lsp", group_index = 1 })
     end
 
     if PLUGINS.copilot.enabled then
-        table.insert(sources, { name = "copilot" })
+        table.insert(sources, { name = "copilot", group_index = 1 })
     end
 
     cmp.setup({
