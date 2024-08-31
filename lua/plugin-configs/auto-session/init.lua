@@ -6,6 +6,7 @@ function M.setup()
         return
     end
 
+    vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
     session.setup({
         log_level = "error",
         auto_session_enable_last_session = false,
