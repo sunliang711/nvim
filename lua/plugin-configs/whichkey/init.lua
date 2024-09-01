@@ -73,11 +73,11 @@ function M.setup()
     }
 
     local opts = {
-        mode = "n", -- NORMAL mode
+        mode = "v", -- NORMAL mode
         prefix = "<leader>",
         buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
         silent = true, -- use `silent` when creating keymaps
-        noremap = true, -- use `noremap` when creating keymaps
+        remap = false, -- use `noremap` when creating keymaps
         nowait = true, -- use `nowait` when creating keymaps
     }
 
@@ -86,7 +86,7 @@ function M.setup()
         prefix = "m",
         buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
         silent = true, -- use `silent` when creating keymaps
-        noremap = true, -- use `noremap` when creating keymaps
+        remap = false, -- use `noremap` when creating keymaps
         nowait = true, -- use `nowait` when creating keymaps
     }
 
@@ -107,137 +107,665 @@ function M.setup()
     }
 
     local mappings = {
-        [";"] = { "<cmd>Alpha<cr>", "Dashboard" },
-        ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
-        ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
-        p = {
-            name = "Package Manage",
-            s = { "<cmd>Lazy sync<cr>", "sync plugins" },
-            l = { "<cmd>Lazy log<cr>", "lazy log" },
-            p = { "<cmd>Lazy show<cr>", "lazy show" },
-            b = { "<cmd>Lazy build<cr>", "lazy build" },
+        -- [";"] = { "<cmd>Alpha<cr>", "Dashboard" },
+        {
+            "<leader>;",
+            "<cmd>Alpha<cr>",
+            desc = "Dashboard",
+            nowait = true,
+            remap = false,
         },
-        o = {
-            name = "Options",
-            w = { '<cmd>lua require("functions").toggle_option("wrap")<cr>', "Wrap" },
-            r = { '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', "Relative" },
-            l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
-            c = { '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', "Cursorcolumn" },
-            s = { '<cmd>lua require("functions").toggle_option("spell")<cr>', "Spell" },
-            D = { "<cmd>set background=dark<cr>", "set background to dark" },
-            L = { "<cmd>set background=light<cr>", "set background to light" },
-            C = { "<cmd>checkhealth<cr>", "Check Health" },
-            e = { "<cmd>edit ~/.config/nvim/init.lua<cr>", "edit init.lua" },
-            -- t = { '<cmd>lua require("functions").toggle_tabline()<cr>', "Tabline" },
+        -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
+        {
+            "<leader>e",
+            "<cmd>NvimTreeToggle<cr>",
+            desc = "File Explorer",
+            nowait = true,
+            remap = false,
         },
-        h = {
-            { "<cmd>nohlsearch<cr>", "No Highlight" },
+        -- ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+        {
+            "<leader>/",
+            '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>',
+            desc = "Comment",
+            nowait = true,
+            remap = false,
         },
-        b = {
-            name = "Buffer manage",
-            h = { "<cmd>BufferLineCloseLeft<cr>", "close all to the left" },
-            l = { "<cmd>BufferLineCloseRight<cr>", "close all to the right" },
-            o = { "<cmd>BufferLineCloseOthers<cr>", "close all other tabs" },
-            c = { "<cmd>BufferLinePickClose<cr>", "pick buffer to close" },
-            d = { "<cmd>bdelete<cr>", "close current buffer" },
+        -- p = {
+        --     name = "Package Manage",
+        --     s = { "<cmd>Lazy sync<cr>", "sync plugins" },
+        --     l = { "<cmd>Lazy log<cr>", "lazy log" },
+        --     p = { "<cmd>Lazy show<cr>", "lazy show" },
+        --     b = { "<cmd>Lazy build<cr>", "lazy build" },
+        -- },
+        {
+            "<leader>p",
+            group = "Package Manage",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ps",
+            "<cmd>Lazy sync<cr>",
+            desc = "sync plugins",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>pl",
+            "<cmd>Lazy log<cr>",
+            desc = "lazy log",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>pp",
+            "<cmd>Lazy show<cr>",
+            desc = "lazy show",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>pb",
+            "<cmd>Lazy build<cr>",
+            desc = "lazy build",
+            nowait = true,
+            remap = false,
+        },
+        -- o = {
+        --     name = "Options",
+        --     w = { '<cmd>lua require("functions").toggle_option("wrap")<cr>', "Wrap" },
+        --     r = { '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', "Relative" },
+        --     l = { '<cmd>lua require("functions").toggle_option("cursorline")<cr>', "Cursorline" },
+        --     c = { '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', "Cursorcolumn" },
+        --     s = { '<cmd>lua require("functions").toggle_option("spell")<cr>', "Spell" },
+        --     D = { "<cmd>set background=dark<cr>", "set background to dark" },
+        --     L = { "<cmd>set background=light<cr>", "set background to light" },
+        --     C = { "<cmd>checkhealth<cr>", "Check Health" },
+        --     e = { "<cmd>edit ~/.config/nvim/init.lua<cr>", "edit init.lua" },
+        --     -- t = { '<cmd>lua require("functions").toggle_tabline()<cr>', "Tabline" },
+        -- },
+        {
+            "<leader>o",
+            group = "Options",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ow",
+            '<cmd>lua require("functions").toggle_option("wrap")<cr>',
+            desc = "Wrap",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>or",
+            '<cmd>lua require("functions").toggle_option("relativenumber")<cr>',
+            desc = "Relative",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ol",
+            '<cmd>lua require("functions").toggle_option("cursorline")<cr>',
+            desc = "Cursorline",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>oc",
+            '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>',
+            desc = "Cursorcolumn",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>os",
+            '<cmd>lua require("functions").toggle_option("spell")<cr>',
+            desc = "Spell",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>oD",
+            "<cmd>set background=dark<cr>",
+            desc = "set background to dark",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>oL",
+            "<cmd>set background=light<cr>",
+            desc = "set background to light",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>oC",
+            "<cmd>checkhealth<cr>",
+            desc = "Check Health",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>oe",
+            "<cmd>edit ~/.config/nvim/init.lua<cr>",
+            desc = "edit init.lua",
+            nowait = true,
+            remap = false,
+        },
+        -- h = {
+        --     { "<cmd>nohlsearch<cr>", "No Highlight" },
+        -- },
+        {
+            "<leader>h",
+            group = "Highlight",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>h",
+            "<cmd>nohlsearch<cr>",
+            desc = "No Highlight",
+            nowait = true,
+            remap = false,
+        },
+        -- b = {
+        --     name = "Buffer manage",
+        --     h = { "<cmd>BufferLineCloseLeft<cr>", "close all to the left" },
+        --     l = { "<cmd>BufferLineCloseRight<cr>", "close all to the right" },
+        --     o = { "<cmd>BufferLineCloseOthers<cr>", "close all other tabs" },
+        --     c = { "<cmd>BufferLinePickClose<cr>", "pick buffer to close" },
+        --     d = { "<cmd>bdelete<cr>", "close current buffer" },
+        --
+        --     p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
+        --     n = { "<cmd>BufferLineCycleNext<cr>", "next" },
+        --
+        --     b = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
+        --     j = { "<cmd>BufferLinePick<cr>", "jump" },
+        -- },
+        {
+            "<leader>b",
+            group = "Buffer manage",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bh",
+            "<cmd>BufferLineCloseLeft<cr>",
+            desc = "close all to the left",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bl",
+            "<cmd>BufferLineCloseRight<cr>",
+            desc = "close all to the right",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bo",
+            "<cmd>BufferLineCloseOthers<cr>",
+            desc = "close all other tabs",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bc",
+            "<cmd>BufferLinePickClose<cr>",
+            desc = "pick buffer to close",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bd",
+            "<cmd>bdelete<cr>",
+            desc = "close current buffer",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bp",
+            "<cmd>BufferLineCyclePrev<cr>",
+            desc = "previous",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bn",
+            "<cmd>BufferLineCycleNext<cr>",
+            desc = "next",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bb",
+            "<cmd>BufferLineCyclePrev<cr>",
+            desc = "previous",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>bj",
+            "<cmd>BufferLinePick<cr>",
+            desc = "jump",
+            nowait = true,
+            remap = false,
+        },
+        -- w = {
+        --     name = "Window and Tab",
+        --     h = { "<c-w>h", "left window" },
+        --     j = { "<c-w>j", "bottom window" },
+        --     k = { "<c-w>k", "top window" },
+        --     l = { "<c-w>l", "right window" },
+        --     ["["] = { "<cmd>bprevious<cr>", "left tab" },
+        --     ["]"] = { "<cmd>bnext<cr>", "right tab" },
+        --     ["-"] = { "<cmd>split<cr>", "HSplit" },
+        --     ["|"] = { "<cmd>vsplit<cr>", "VSplit" },
+        --     q = { "<cmd>q<cr>", "Close Window" },
+        --     f = { "<cmd>NvimTreeFindFile<cr>", "focus file in nvim tree" },
+        -- },
+        { "<leader>w", group = "Window and Tab", nowait = true, remap = false },
+        {
+            "<leader>wh",
+            "<c-w>h",
+            desc = "left window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>wj",
+            "<c-w>j",
+            desc = "bottom window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>wk",
+            "<c-w>k",
+            desc = "top window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>wl",
+            "<c-w>l",
+            desc = "right window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>w[",
+            "<cmd>bprevious<cr>",
+            desc = "left tab",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>w]",
+            "<cmd>bnext<cr>",
+            desc = "right tab",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>w-",
+            "<cmd>split<cr>",
+            desc = "HSplit",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>w|",
+            "<cmd>vsplit<cr>",
+            desc = "VSplit",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>wq",
+            "<cmd>q<cr>",
+            desc = "Close Window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>wf",
+            "<cmd>NvimTreeFindFile<cr>",
+            desc = "focus file in nvim tree",
+            nowait = true,
+            remap = false,
+        },
+        -- q = {
+        --     name = "Quickfix",
+        --     n = { "<cmd>cnext<cr>", "next quickfix location" },
+        --     p = { "<cmd>cprevious<cr>", "previous quickfix location" },
+        --     c = { "<cmd>cclose<cr>", "close quickfix window" },
+        --
+        --     j = { "<cmd>cnext<cr>", "next quickfix location" },
+        --     k = { "<cmd>cprevious<cr>", "previous quickfix location" },
+        --     q = { "<cmd>cclose<cr>", "close quickfix window" },
+        -- },
+        { "<leader>q", group = "Quickfix", nowait = true, remap = false },
+        {
+            "<leader>qn",
+            "<cmd>cnext<cr>",
+            desc = "next quickfix location",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>qp",
+            "<cmd>cprevious<cr>",
+            desc = "previous quickfix location",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>qc",
+            "<cmd>cclose<cr>",
+            desc = "close quickfix window",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>qj",
+            "<cmd>cnext<cr>",
+            desc = "next quickfix location",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>qk",
+            "<cmd>cprevious<cr>",
+            desc = "previous quickfix location",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>qq",
+            "<cmd>cclose<cr>",
+            desc = "close quickfix window",
+            nowait = true,
+            remap = false,
+        },
+        -- T = {
+        --     name = "Terminal",
+        --     t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+        --     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal Terminal" },
+        --     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical Terminal" },
+        -- },
+        { "<leader>T", group = "Terminal", nowait = true, remap = false },
+        {
+            "<leader>Tt",
+            "<cmd>ToggleTerm direction=float<cr>",
+            desc = "Float",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>Th",
+            "<cmd>ToggleTerm size=10 direction=horizontal<cr>",
+            desc = "Horizontal Terminal",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>Tv",
+            "<cmd>ToggleTerm size=80 direction=vertical<cr>",
+            desc = "Vertical Terminal",
+            nowait = true,
+            remap = false,
+        },
+        -- f = {
+        --     name = "File",
+        --
+        --     F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)" },
+        --     f = {
+        --         "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+        --         "Find Files",
+        --     },
+        --
+        --     t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+        --     b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
+        --     r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+        --     -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+        --     w = { "<cmd>wall<cr>", "save all" },
+        --     c = { "<cmd>Telescope commands<cr>", "Commands" },
+        --
+        --     q = { "<cmd>wqall<cr>", "save all and quit" },
+        --     Q = { "<cmd>qall!<cr>", "quit without save!!" },
+        -- },
+        { "<leader>f", group = "File", nowait = true, remap = false },
+        {
+            "<leader>fF",
+            "<cmd>Telescope find_files<cr>",
+            desc = "Find Files (With Previewer)",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ff",
+            '<cmd>lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown{previewer = false})<cr>',
+            desc = "Find Files",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ft",
+            "<cmd>Telescope live_grep theme=ivy<cr>",
+            desc = "Find Text",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fb",
+            "<cmd>Telescope buffers<cr>",
+            desc = "Buffer List",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fr",
+            "<cmd>Telescope oldfiles<cr>",
+            desc = "Recent File",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fw",
+            "<cmd>wall<cr>",
+            desc = "save all",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fc",
+            "<cmd>Telescope commands<cr>",
+            desc = "Commands",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fq",
+            "<cmd>wqall<cr>",
+            desc = "save all and quit",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>fQ",
+            "<cmd>qall!<cr>",
+            desc = "quit without save!!",
+            nowait = true,
+            remap = false,
+        },
+        -- t = {
+        --     name = "Telescope",
+        --     r = { "<cmd>Telescope registers<cr>", "Registers" },
+        --     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+        --     h = { "<cmd>Telescope command_history<cr>", "Command History" },
+        --     c = { "<cmd>Telescope commands<cr>", "Commands" },
+        --     m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+        --     C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+        --     ["l"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+        --     ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+        -- },
+        { "<leader>t", group = "Telescope", nowait = true, remap = false },
+        {
+            "<leader>tr",
+            "<cmd>Telescope registers<cr>",
+            desc = "Registers",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>tk",
+            "<cmd>Telescope keymaps<cr>",
+            desc = "Keymaps",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>th",
+            "<cmd>Telescope command_history<cr>",
+            desc = "Command History",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>tc",
+            "<cmd>Telescope commands<cr>",
+            desc = "Commands",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>tm",
+            "<cmd>Telescope man_pages<cr>",
+            desc = "Man Pages",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>tC",
+            "<cmd>Telescope colorscheme<cr>",
+            desc = "Colorscheme",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>tl",
+            "<cmd>Telescope resume<cr>",
+            desc = "Last Search",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>t?",
+            "<cmd>Telescope help_tags<cr>",
+            desc = "Help",
+            nowait = true,
+            remap = false,
+        },
+        -- g = {
+        --     name = "Git",
+        --     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+        --     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+        --     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+        --     -- l = { "<cmd>GitBlameToggle<cr>", "Blame" },
+        --     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+        --     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+        --     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+        --     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+        --     u = {
+        --         "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+        --         "Undo Stage Hunk",
+        --     },
+        --     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+        --     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+        --     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+        -- },
+        { "<leader>g", group = "Git", nowait = true, remap = false },
+        {
+            "<leader>gg",
+            "<cmd>lua _LAZYGIT_TOGGLE()<CR>",
+            desc = "Lazygit",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gj",
+            "<cmd>lua require 'gitsigns'.next_hunk()<cr>",
+            desc = "Next Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gk",
+            "<cmd>lua require 'gitsigns'.prev_hunk()<cr>",
+            desc = "Prev Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gp",
+            "<cmd>lua require 'gitsigns'.preview_hunk()<cr>",
+            desc = "Preview Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gr",
+            "<cmd>lua require 'gitsigns'.reset_hunk()<cr>",
+            desc = "Reset Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gR",
+            "<cmd>lua require 'gitsigns'.reset_buffer()<cr>",
+            desc = "Reset Buffer",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gs",
+            "<cmd>lua require 'gitsigns'.stage_hunk()<cr>",
+            desc = "Stage Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gu",
+            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+            desc = "Undo Stage Hunk",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>go",
+            "<cmd>Telescope git_status<cr>",
+            desc = "Open changed file",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gb",
+            "<cmd>Telescope git_branches<cr>",
+            desc = "Checkout branch",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>gc",
+            "<cmd>Telescope git_commits<cr>",
+            desc = "Checkout commit",
+            nowait = true,
+            remap = false,
+        },
 
-            p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
-            n = { "<cmd>BufferLineCycleNext<cr>", "next" },
-
-            b = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
-            j = { "<cmd>BufferLinePick<cr>", "jump" },
-        },
-        w = {
-            name = "Window and Tab",
-            h = { "<c-w>h", "left window" },
-            j = { "<c-w>j", "bottom window" },
-            k = { "<c-w>k", "top window" },
-            l = { "<c-w>l", "right window" },
-            ["["] = { "<cmd>bprevious<cr>", "left tab" },
-            ["]"] = { "<cmd>bnext<cr>", "right tab" },
-            ["-"] = { "<cmd>split<cr>", "HSplit" },
-            ["|"] = { "<cmd>vsplit<cr>", "VSplit" },
-            q = { "<cmd>q<cr>", "Close Window" },
-            f = { "<cmd>NvimTreeFindFile<cr>", "focus file in nvim tree" },
-        },
-        q = {
-            name = "Quickfix",
-            n = { "<cmd>cnext<cr>", "next quickfix location" },
-            p = { "<cmd>cprevious<cr>", "previous quickfix location" },
-            c = { "<cmd>cclose<cr>", "close quickfix window" },
-
-            j = { "<cmd>cnext<cr>", "next quickfix location" },
-            k = { "<cmd>cprevious<cr>", "previous quickfix location" },
-            q = { "<cmd>cclose<cr>", "close quickfix window" },
-        },
-        -- ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
-        T = {
-            name = "Terminal",
-            t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-            h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal Terminal" },
-            v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical Terminal" },
-        },
-        f = {
-            name = "File",
-
-            F = { "<cmd>Telescope find_files<cr>", "Find Files (With Previewer)" },
-            f = {
-                "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-                "Find Files",
-            },
-
-            t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-            b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
-            r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-            -- i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
-            w = { "<cmd>wall<cr>", "save all" },
-            c = { "<cmd>Telescope commands<cr>", "Commands" },
-
-            q = { "<cmd>wqall<cr>", "save all and quit" },
-            Q = { "<cmd>qall!<cr>", "quit without save!!" },
-        },
-        t = {
-            name = "Telescope",
-            r = { "<cmd>Telescope registers<cr>", "Registers" },
-            k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-            h = { "<cmd>Telescope command_history<cr>", "Command History" },
-            c = { "<cmd>Telescope commands<cr>", "Commands" },
-            m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-            C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-            ["l"] = { "<cmd>Telescope resume<cr>", "Last Search" },
-            ["?"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-        },
-        g = {
-            name = "Git",
-            g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-            j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-            k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-            -- l = { "<cmd>GitBlameToggle<cr>", "Blame" },
-            p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-            r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-            R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-            s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-            u = {
-                "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-                "Undo Stage Hunk",
-            },
-            o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-            b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-            c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-            -- d = {
-            --   "<cmd>Gitsigns diffthis HEAD<cr>",
-            --   "Diff",
-            -- },
-            -- G = {
-            --     name = "Gist",
-            --     a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
-            --     d = { "<cmd>Gist -d<cr>", "Delete" },
-            --     f = { "<cmd>Gist -f<cr>", "Fork" },
-            --     g = { "<cmd>Gist -b<cr>", "Create" },
-            --     l = { "<cmd>Gist -l<cr>", "List" },
-            --     p = { "<cmd>Gist -b -p<cr>", "Create Private" },
-            -- },
-        },
         -- ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
         -- b = { "<cmd>JABSOpen<cr>", "Buffers" },
         -- ["b"] = {
@@ -290,56 +818,163 @@ function M.setup()
         -- require("dapui").close()
         -- require("dapui").toggle()
 
-        l = {
-            name = "LSP",
-
-            -- Code Action
-            -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-            a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
-
-            -- d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-
-            f = { "<cmd>Lspsaga finder<cr>", "Finder" },
-            -- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
-            -- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
-
-            i = { "<cmd>LspInfo<cr>", "Info" },
-            I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-            j = {
-                "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
-                "Next Diagnostic",
-            },
-            k = {
-                "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
-                "Prev Diagnostic",
-            },
-            l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-
-            -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-            o = { "<cmd>Lspsaga outline<cr>", "Outline" },
-
-            q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-
-            -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-            r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-
-            R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-
-            s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-            S = {
-                "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-                "Workspace Symbols",
-            },
-
-            -- t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
-            t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
-
-            -- w = {
-            --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            --     "Workspace Diagnostics",
-            -- },
-            w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
+        -- l = {
+        --     name = "LSP",
+        --
+        --     -- Code Action
+        --     -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+        --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+        --
+        --     -- d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
+        --
+        --     f = { "<cmd>Lspsaga finder<cr>", "Finder" },
+        --     -- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
+        --     -- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
+        --
+        --     i = { "<cmd>LspInfo<cr>", "Info" },
+        --     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+        --     j = {
+        --         "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
+        --         "Next Diagnostic",
+        --     },
+        --     k = {
+        --         "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
+        --         "Prev Diagnostic",
+        --     },
+        --     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+        --
+        --     -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+        --     o = { "<cmd>Lspsaga outline<cr>", "Outline" },
+        --
+        --     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+        --
+        --     -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+        --     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+        --
+        --     R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+        --
+        --     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+        --     S = {
+        --         "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+        --         "Workspace Symbols",
+        --     },
+        --
+        --     -- t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
+        --     t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
+        --
+        --     -- w = {
+        --     --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+        --     --     "Workspace Diagnostics",
+        --     -- },
+        --     w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
+        -- },
+        { "<leader>l", group = "LSP", nowait = true, remap = false },
+        {
+            "<leader>la",
+            "<cmd>Lspsaga code_action<cr>",
+            desc = "Code Action",
+            nowait = true,
+            remap = false,
         },
+        {
+            "<leader>lf",
+            "<cmd>Lspsaga finder<cr>",
+            desc = "Finder",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>li",
+            "<cmd>LspInfo<cr>",
+            desc = "Info",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lI",
+            "<cmd>LspInstallInfo<cr>",
+            desc = "Installer Info",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lj",
+            "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
+            desc = "Next Diagnostic",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lk",
+            "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
+            desc = "Prev Diagnostic",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ll",
+            "<cmd>lua vim.lsp.codelens.run()<cr>",
+            desc = "CodeLens Action",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lo",
+            "<cmd>Lspsaga outline<cr>",
+            desc = "Outline",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lq",
+            "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>",
+            desc = "Quickfix",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lr",
+            "<cmd>Lspsaga rename<cr>",
+            desc = "Rename",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lR",
+            "<cmd>TroubleToggle lsp_references<cr>",
+            desc = "References",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>ls",
+            "<cmd>Telescope lsp_document_symbols<cr>",
+            desc = "Document Symbols",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lS",
+            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            desc = "Workspace Symbols",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lt",
+            "<cmd>Lspsaga term_toggle<cr>",
+            desc = "Terminal",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>lw",
+            "<cmd>Lspsaga winbar_toggle<cr>",
+            desc = "Winbar",
+            nowait = true,
+            remap = false,
+        },
+
         -- s = {
         --     name = "Lspsaga",
         --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
@@ -392,14 +1027,25 @@ function M.setup()
         nowait = true, -- use `nowait` when creating keymaps
     }
     local vmappings = {
-        ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+        -- ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+        {
+            "<leader>/",
+            '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>',
+            desc = "Comment",
+            nowait = true,
+            remap = false,
+            mode = "v",
+        },
+
         -- s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
     }
 
     which_key.setup(setup)
-    which_key.register(mappings, opts)
-    which_key.register(vmappings, vopts)
+    -- which_key.register(mappings, opts)
+    -- which_key.register(vmappings, vopts)
     -- which_key.register(m_mappings, m_opts)
+    which_key.add(mappings, opts)
+    which_key.add(vmappings, vopts)
 end
 
 return M
