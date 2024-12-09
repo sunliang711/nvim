@@ -9,7 +9,7 @@ function M.setup()
     vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
     session.setup({
         enabled = true,
-        auto_restore_last_session = true,
+        auto_restore_last_session = false,
         log_level = "error",
         root_dir = vim.fn.stdpath("data") .. "/sessions/",
 
