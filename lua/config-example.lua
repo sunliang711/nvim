@@ -6,7 +6,7 @@ PLUGINS = {
         enabled = false,
     },
     copilot = {
-        enabled = true,
+        enabled = false,
         http_proxy = "TODO",
     },
 }
