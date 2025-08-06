@@ -10,7 +10,7 @@ function M.setup()
     require("plugin-configs.lsp.lspsaga").setup()
     -- require("plugin-configs.lsp.rust-tools").setup()
 
-    require("plugin-configs.lsp.null-ls").setup()
+    -- require("plugin-configs.lsp.null-ls").setup()
     require("plugin-configs.lsp.fidget").setup()
 
     -- reference handlers.lua line 13
