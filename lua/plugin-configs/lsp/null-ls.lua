@@ -71,8 +71,6 @@ function M.setup()
                 end,
             }),
             -- b.formatting.shfmt,
-            -- npm install -g fixjson
-            b.formatting.fixjson,
             -- pip install black
             -- python formatter
             b.formatting.black.with({ extra_args = { "--fast" } }),
@@ -87,8 +85,6 @@ function M.setup()
             b.diagnostics.write_good,
             -- b.diagnostics.markdownlint,
             -- b.diagnostics.eslint_d,
-            b.diagnostics.flake8,
-            b.diagnostics.tsc,
             with_root_file(b.diagnostics.selene, "selene.toml"),
             with_diagnostics_code(b.diagnostics.shellcheck),
 

@@ -7,7 +7,6 @@ return {
         { "hrsh7th/cmp-nvim-lsp" },
         -- lsp source for nvim-cmp
         { "ray-x/lsp_signature.nvim" },
-        { "RRethy/vim-illuminate" },
         { "SmiteshP/nvim-navic" },
         {
             "glepnir/lspsaga.nvim",

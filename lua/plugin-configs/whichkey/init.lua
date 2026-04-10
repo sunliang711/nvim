@@ -941,7 +941,7 @@ function M.setup()
         },
         {
             "<leader>lR",
-            "<cmd>TroubleToggle lsp_references<cr>",
+            "<cmd>Telescope lsp_references<cr>",
             desc = "References",
             nowait = true,
             remap = false,
