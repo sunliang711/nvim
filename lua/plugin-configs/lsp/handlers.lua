@@ -101,16 +101,20 @@ local function has_lspsaga()
 end
 
 local function lsp_keymaps(bufnr)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+    local opts = { buffer = bufnr, noremap = true, silent = true }
+    local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", opts, { desc = desc }))
+    end
+
+    map("n", "gD", vim.lsp.buf.declaration, "LSP Declaration")
+    map("n", "gd", vim.lsp.buf.definition, "LSP Definition")
+    map("n", "gI", vim.lsp.buf.implementation, "LSP Implementation")
+    map("n", "gy", vim.lsp.buf.type_definition, "LSP Type Definition")
     if has_lspsaga() then
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+        map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", "Rename")
         -- show hover doc and press twice will jumpto hover window
-        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-        vim.keymap.set("i", "<c-k>", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+        map("n", "K", "<cmd>Lspsaga hover_doc<CR>", "LSP Hover")
+        map("i", "<c-k>", "<cmd>Lspsaga hover_doc<CR>", "LSP Hover")
         -- or use command
         -- vim.keymap.set("n", "K", require("lspsaga.hover").render_hover_doc, { silent = true })
 
@@ -123,18 +127,20 @@ local function lsp_keymaps(bufnr)
         --     action.range_code_action()
         -- end, { silent = true, noremap = true })
         -- or use command
-        vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
-        vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
+        map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", "Code Action")
+        map("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", "Code Action")
     else
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "i", "<c-k>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+        map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+        map("n", "K", vim.lsp.buf.hover, "LSP Hover")
+        map("i", "<c-k>", vim.lsp.buf.hover, "LSP Hover")
         -- vim.lsp.buf.signature_help
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
     end
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format { async = true} <CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    map("n", "gr", vim.lsp.buf.references, "LSP References")
+    map("n", "gf", function()
+        vim.lsp.buf.format({ async = true })
+    end, "LSP Format")
+    map("n", "gl", vim.diagnostic.open_float, "Line Diagnostics")
     -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]]
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
