@@ -899,14 +899,14 @@ function M.setup()
         },
         {
             "<leader>lj",
-            "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
+            "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>",
             desc = "Next Diagnostic",
             nowait = true,
             remap = false,
         },
         {
             "<leader>lk",
-            "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
+            "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>",
             desc = "Prev Diagnostic",
             nowait = true,
             remap = false,

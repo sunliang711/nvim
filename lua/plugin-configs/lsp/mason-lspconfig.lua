@@ -29,20 +29,23 @@ mason_lspconfig.setup({
     automatic_installation = true,
 })
 
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-    return
-end
-
-local opts = {}
-
-for _, server in pairs(servers) do
-    opts = {
+local function enable_server(server, extra_opts)
+    local opts = {
         on_attach = require("plugin-configs.lsp.handlers").on_attach,
         capabilities = require("plugin-configs.lsp.handlers").capabilities,
     }
 
+    if extra_opts ~= nil then
+        opts = vim.tbl_deep_extend("force", opts, extra_opts)
+    end
+
+    vim.lsp.config(server, opts)
+    vim.lsp.enable(server)
+end
+
+for _, server in pairs(servers) do
     server = vim.split(server, "@")[1]
+    local opts = nil
 
     -- if server == "jsonls" then
     --     local jsonls_opts = require "plugins.lsp.settings.jsonls"
@@ -75,9 +78,9 @@ for _, server in pairs(servers) do
     --     goto continue
     -- end
     --
-    if server == "tsserver" then
+    if server == "ts_ls" then
         local tsserver_opts = require("plugin-configs.lsp.settings.tsserver")
-        opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
+        opts = tsserver_opts
         -- debug
         -- print("tsserver opts:" .. vim.inspect(opts))
     end
@@ -108,25 +111,17 @@ for _, server in pairs(servers) do
 
     if server == "rust_analyzer" then
         local rust_opts = require("plugin-configs.lsp.settings.rust")
-        opts = vim.tbl_deep_extend("force", rust_opts, opts)
-        local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
-        if not rust_tools_status_ok then
-            return
-        end
-
-        rust_tools.setup(opts)
-        goto continue
+        opts = rust_opts.server or {}
     end
 
     if server == "lua_ls" then
         local lua_opts = require("plugin-configs.lsp.settings.lua_ls")
-        opts = vim.tbl_deep_extend("force", lua_opts, opts)
+        opts = lua_opts
         -- -- debug
         -- print("lua_ls opts: " .. vim.inspect(opts))
     end
 
     -- debug
     -- vim.notify("Config lsp for: " .. server)
-    lspconfig[server].setup(opts)
-    ::continue::
+    enable_server(server, opts)
 end

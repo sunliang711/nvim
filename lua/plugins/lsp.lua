@@ -14,13 +14,10 @@ return {
             branch = "main",
         },
         {
-            "simrat39/rust-tools.nvim",
-        },
-        {
             "rust-lang/rust.vim",
         },
         {
-            "jose-elias-alvarez/null-ls.nvim",
+            "nvimtools/none-ls.nvim",
         },
         {
             "j-hui/fidget.nvim",

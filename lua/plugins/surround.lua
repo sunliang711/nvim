@@ -1,6 +1,6 @@
 return {
     "tpope/vim-surround",
-    dependencise = {
+    dependencies = {
         "tpope/vim-repeat",
     },
     config = function()

@@ -33,12 +33,18 @@ function M.setup()
     -- local diagnostics = null_ls.builtins.diagnostics
 
     local with_diagnostics_code = function(builtin)
+        if builtin == nil then
+            return nil
+        end
         return builtin.with({
             diagnostics_format = "#{m} [#{c}]",
         })
     end
 
     local with_root_file = function(builtin, file)
+        if builtin == nil then
+            return nil
+        end
         return builtin.with({
             condition = function(utils)
                 return utils.root_has_file(file)
@@ -46,9 +52,15 @@ function M.setup()
         })
     end
 
+    local filter_sources = function(sources)
+        return vim.tbl_filter(function(source)
+            return source ~= nil
+        end, sources)
+    end
+
     null_ls.setup({
         debug = false,
-        sources = {
+        sources = filter_sources({
             -- formatting
             -- npm install -g @fsouza/prettierd
             b.formatting.prettierd.with({ filetypes = { "html", "yaml", "markdown" } }),
@@ -86,7 +98,7 @@ function M.setup()
 
             -- hover
             b.hover.dictionary,
-        },
+        }),
         on_attach = require("plugin-configs.lsp.handlers").on_attach,
     })
 end

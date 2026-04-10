@@ -11,25 +11,21 @@ M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
-    M.enable_format_on_save()
+    M.enable_format_on_save(false)
     local icons = require("icons")
     local signs = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+        [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+        [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+        [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
     }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
 
     local config = {
         -- inlay virtual text
         virtual_text = true,
         -- show signs
         signs = {
-            active = signs,
+            text = signs,
         },
         update_in_insert = true,
         underline = true,
@@ -47,27 +43,41 @@ M.setup = function()
 
     vim.diagnostic.config(config)
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-        width = 60,
-        -- height = 30,
-    })
+    vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, handler_config)
+        local merged = vim.tbl_deep_extend("force", handler_config or {}, {
+            border = "rounded",
+            width = 60,
+        })
+        return vim.lsp.handlers.hover(err, result, ctx, merged)
+    end
 
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-        width = 60,
-        -- height = 30,
-    })
+    vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, handler_config)
+        local merged = vim.tbl_deep_extend("force", handler_config or {}, {
+            border = "rounded",
+            width = 60,
+        })
+        return vim.lsp.handlers.signature_help(err, result, ctx, merged)
+    end
 end
 
 local function lsp_highlight_document(client)
-    -- if client.server_capabilities.document_highlight then
-    local status_ok, illuminate = pcall(require, "illuminate")
-    if not status_ok then
+    if client == nil or not client:supports_method("textDocument/documentHighlight") then
         return
     end
-    illuminate.on_attach(client)
-    -- end
+
+    local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. vim.api.nvim_get_current_buf(), { clear = true })
+
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        group = group,
+        buffer = vim.api.nvim_get_current_buf(),
+        callback = vim.lsp.buf.document_highlight,
+    })
+
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufLeave" }, {
+        group = group,
+        buffer = vim.api.nvim_get_current_buf(),
+        callback = vim.lsp.buf.clear_references,
+    })
 end
 
 local function attach_navic(client, bufnr)
@@ -124,7 +134,7 @@ local function lsp_keymaps(bufnr)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.formatting( { async = true} )<CR>", opts)
 
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting( { async = true } )' ]])
+    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]])
     vim.cmd([[ command! Rename execute 'lua vim.lsp.buf.rename()' ]])
     vim.cmd([[ command! Definition execute 'lua vim.lsp.buf.definition()' ]])
     vim.cmd([[ command! Declaration execute 'lua vim.lsp.buf.declaration()' ]])
@@ -176,14 +186,16 @@ end
 --         augroup end
 --   ]]
 -- end
-function M.enable_format_on_save()
+function M.enable_format_on_save(notify_user)
     vim.cmd([[
     augroup format_on_save
       autocmd!
       autocmd BufWritePre * lua vim.lsp.buf.format()
     augroup end
   ]])
-    vim.notify("Enable format on save")
+    if notify_user ~= false then
+        vim.notify("Enable format on save")
+    end
 end
 
 function M.disable_format_on_save()
