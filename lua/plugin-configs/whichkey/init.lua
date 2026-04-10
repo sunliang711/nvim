@@ -975,6 +975,43 @@ function M.setup()
             remap = false,
         },
 
+        { "<leader>x", group = "Trouble", nowait = true, remap = false },
+        {
+            "<leader>xx",
+            "<cmd>Trouble diagnostics toggle<cr>",
+            desc = "Diagnostics",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>xX",
+            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            desc = "Buffer Diagnostics",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>xl",
+            "<cmd>Trouble loclist toggle<cr>",
+            desc = "Location List",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>xq",
+            "<cmd>Trouble qflist toggle<cr>",
+            desc = "Quickfix List",
+            nowait = true,
+            remap = false,
+        },
+        {
+            "<leader>xs",
+            "<cmd>Trouble symbols toggle focus=false<cr>",
+            desc = "Symbols",
+            nowait = true,
+            remap = false,
+        },
+
         -- s = {
         --     name = "Lspsaga",
         --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
