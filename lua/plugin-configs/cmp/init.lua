@@ -59,7 +59,7 @@ function M.setup()
         table.insert(sources, { name = "nvim_lsp", group_index = 1 })
     end
 
-    if PLUGINS.copilot.enabled then
+    if PLUGINS.copilot.enabled and PLUGINS.copilot.cmp then
         table.insert(sources, { name = "copilot", group_index = 1 })
     end
 

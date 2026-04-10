@@ -45,11 +45,11 @@ function M.setup()
             disable = { "css" }
         },
         autotag = {
-            enable = true,
+            enable = PLUGINS.treesitter.autotag,
             disable = { "xml" },
         },
         endwise = {
-            enable = true,
+            enable = PLUGINS.treesitter.endwise,
         }
     })
 end

@@ -5,8 +5,8 @@ return {
         config = function()
             require("copilot_cmp").setup()
         end,
-        enabled = PLUGINS.copilot.enabled,
-        cond = PLUGINS.copilot.enabled,
+        enabled = PLUGINS.copilot.enabled and PLUGINS.copilot.cmp and PLUGINS.cmp.enabled,
+        cond = PLUGINS.copilot.enabled and PLUGINS.copilot.cmp and PLUGINS.cmp.enabled,
     },
     {
         "zbirenbaum/copilot.lua",

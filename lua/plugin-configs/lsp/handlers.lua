@@ -3,12 +3,12 @@ local M = {}
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_cmp_ok then
-    return
-end
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+if status_cmp_ok then
+    -- cmp 不可用时回退到原生 capabilities，避免 require 失败
+    M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+end
 
 M.setup = function()
     M.enable_format_on_save(false)
@@ -81,6 +81,9 @@ local function lsp_highlight_document(client)
 end
 
 local function attach_navic(client, bufnr)
+    if not PLUGINS.lsp.navic then
+        return
+    end
     vim.g.navic_silence = true
     local status_ok, navic = pcall(require, "nvim-navic")
     if not status_ok then
@@ -89,7 +92,13 @@ local function attach_navic(client, bufnr)
     navic.attach(client, bufnr)
 end
 
-local saga_status, _ = pcall(require, "lspsaga")
+local function has_lspsaga()
+    if not PLUGINS.lsp.saga then
+        return false
+    end
+
+    return pcall(require, "lspsaga")
+end
 
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
@@ -97,7 +106,7 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    if saga_status then
+    if has_lspsaga() then
         vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
         -- show hover doc and press twice will jumpto hover window
         vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })

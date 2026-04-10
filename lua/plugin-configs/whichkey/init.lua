@@ -106,6 +106,169 @@ function M.setup()
         u = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
     }
 
+    local use_lsp = PLUGINS.lsp.enabled
+    local use_lspsaga = use_lsp and PLUGINS.lsp.saga
+    local use_trouble = PLUGINS.trouble.enabled
+
+    local lsp_mappings = {}
+    if use_lsp then
+        lsp_mappings = {
+            { "<leader>l", group = "LSP", nowait = true, remap = false },
+            {
+                "<leader>la",
+                use_lspsaga and "<cmd>Lspsaga code_action<cr>" or "<cmd>lua vim.lsp.buf.code_action()<cr>",
+                desc = "Code Action",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lf",
+                use_lspsaga and "<cmd>Lspsaga finder<cr>" or "<cmd>Telescope lsp_definitions<cr>",
+                desc = "Finder",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>li",
+                "<cmd>LspInfo<cr>",
+                desc = "Info",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lI",
+                "<cmd>LspInstallInfo<cr>",
+                desc = "Installer Info",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lj",
+                "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>",
+                desc = "Next Diagnostic",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lk",
+                "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>",
+                desc = "Prev Diagnostic",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>ll",
+                "<cmd>lua vim.lsp.codelens.run()<cr>",
+                desc = "CodeLens Action",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lo",
+                use_lspsaga and "<cmd>Lspsaga outline<cr>" or "<cmd>Telescope lsp_document_symbols<cr>",
+                desc = "Outline",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lq",
+                "<cmd>lua vim.diagnostic.setloclist()<cr>",
+                desc = "Quickfix",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lr",
+                use_lspsaga and "<cmd>Lspsaga rename<cr>" or "<cmd>lua vim.lsp.buf.rename()<cr>",
+                desc = "Rename",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lR",
+                "<cmd>Telescope lsp_references<cr>",
+                desc = "References",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>ls",
+                "<cmd>Telescope lsp_document_symbols<cr>",
+                desc = "Document Symbols",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>lS",
+                "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+                desc = "Workspace Symbols",
+                nowait = true,
+                remap = false,
+            },
+        }
+
+        if use_lspsaga then
+            vim.list_extend(lsp_mappings, {
+                {
+                    "<leader>lt",
+                    "<cmd>Lspsaga term_toggle<cr>",
+                    desc = "Terminal",
+                    nowait = true,
+                    remap = false,
+                },
+                {
+                    "<leader>lw",
+                    "<cmd>Lspsaga winbar_toggle<cr>",
+                    desc = "Winbar",
+                    nowait = true,
+                    remap = false,
+                },
+            })
+        end
+    end
+
+    local trouble_mappings = {}
+    if use_trouble then
+        trouble_mappings = {
+            { "<leader>x", group = "Trouble", nowait = true, remap = false },
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>xl",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>xq",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List",
+                nowait = true,
+                remap = false,
+            },
+            {
+                "<leader>xs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols",
+                nowait = true,
+                remap = false,
+            },
+        }
+    end
+
     local mappings = {
         -- [";"] = { "<cmd>Alpha<cr>", "Dashboard" },
         {
@@ -818,200 +981,6 @@ function M.setup()
         -- require("dapui").close()
         -- require("dapui").toggle()
 
-        -- l = {
-        --     name = "LSP",
-        --
-        --     -- Code Action
-        --     -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
-        --
-        --     -- d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-        --
-        --     f = { "<cmd>Lspsaga finder<cr>", "Finder" },
-        --     -- f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
-        --     -- F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
-        --
-        --     i = { "<cmd>LspInfo<cr>", "Info" },
-        --     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-        --     j = {
-        --         "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
-        --         "Next Diagnostic",
-        --     },
-        --     k = {
-        --         "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
-        --         "Prev Diagnostic",
-        --     },
-        --     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-        --
-        --     -- o = { "<cmd>SymbolsOutline<cr>", "Outline" },
-        --     o = { "<cmd>Lspsaga outline<cr>", "Outline" },
-        --
-        --     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-        --
-        --     -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        --     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-        --
-        --     R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-        --
-        --     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        --     S = {
-        --         "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-        --         "Workspace Symbols",
-        --     },
-        --
-        --     -- t = { '<cmd>lua require("functions").toggle_diagnostics()<cr>', "Toggle Diagnostics" },
-        --     t = { "<cmd>Lspsaga term_toggle<cr>", "Terminal" },
-        --
-        --     -- w = {
-        --     --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-        --     --     "Workspace Diagnostics",
-        --     -- },
-        --     w = { "<cmd>Lspsaga winbar_toggle<cr>", "Winbar" },
-        -- },
-        { "<leader>l", group = "LSP", nowait = true, remap = false },
-        {
-            "<leader>la",
-            "<cmd>Lspsaga code_action<cr>",
-            desc = "Code Action",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lf",
-            "<cmd>Lspsaga finder<cr>",
-            desc = "Finder",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>li",
-            "<cmd>LspInfo<cr>",
-            desc = "Info",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lI",
-            "<cmd>LspInstallInfo<cr>",
-            desc = "Installer Info",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lj",
-            "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>",
-            desc = "Next Diagnostic",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lk",
-            "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>",
-            desc = "Prev Diagnostic",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>ll",
-            "<cmd>lua vim.lsp.codelens.run()<cr>",
-            desc = "CodeLens Action",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lo",
-            "<cmd>Lspsaga outline<cr>",
-            desc = "Outline",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lq",
-            "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>",
-            desc = "Quickfix",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lr",
-            "<cmd>Lspsaga rename<cr>",
-            desc = "Rename",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lR",
-            "<cmd>Telescope lsp_references<cr>",
-            desc = "References",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>ls",
-            "<cmd>Telescope lsp_document_symbols<cr>",
-            desc = "Document Symbols",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lS",
-            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            desc = "Workspace Symbols",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lt",
-            "<cmd>Lspsaga term_toggle<cr>",
-            desc = "Terminal",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>lw",
-            "<cmd>Lspsaga winbar_toggle<cr>",
-            desc = "Winbar",
-            nowait = true,
-            remap = false,
-        },
-
-        { "<leader>x", group = "Trouble", nowait = true, remap = false },
-        {
-            "<leader>xx",
-            "<cmd>Trouble diagnostics toggle<cr>",
-            desc = "Diagnostics",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>xX",
-            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            desc = "Buffer Diagnostics",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>xl",
-            "<cmd>Trouble loclist toggle<cr>",
-            desc = "Location List",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>xq",
-            "<cmd>Trouble qflist toggle<cr>",
-            desc = "Quickfix List",
-            nowait = true,
-            remap = false,
-        },
-        {
-            "<leader>xs",
-            "<cmd>Trouble symbols toggle focus=false<cr>",
-            desc = "Symbols",
-            nowait = true,
-            remap = false,
-        },
-
         -- s = {
         --     name = "Lspsaga",
         --     a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
@@ -1054,6 +1023,9 @@ function M.setup()
         --   p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
         -- },
     }
+
+    vim.list_extend(mappings, lsp_mappings)
+    vim.list_extend(mappings, trouble_mappings)
 
     local vopts = {
         mode = "v", -- VISUAL mode

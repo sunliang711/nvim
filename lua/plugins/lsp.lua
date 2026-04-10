@@ -1,31 +1,17 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
-        { "neovim/nvim-lspconfig" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        -- lsp source for nvim-cmp
-        { "ray-x/lsp_signature.nvim" },
-        { "SmiteshP/nvim-navic" },
         {
-            "glepnir/lspsaga.nvim",
-            branch = "main",
-        },
-        {
-            "rust-lang/rust.vim",
-        },
-        {
-            "nvimtools/none-ls.nvim",
-        },
-        {
-            "j-hui/fidget.nvim",
-            tag = "legacy",
+            "hrsh7th/cmp-nvim-lsp",
+            -- cmp 关闭时不要加载补全能力桥接插件
+            enabled = PLUGINS.cmp.enabled,
+            cond = PLUGINS.cmp.enabled,
         },
     },
     enabled = PLUGINS.lsp.enabled,
     cond = PLUGINS.lsp.enabled,
     config = function()
-        require("plugin-configs.lsp").setup()
+        require("plugin-configs.lsp.handlers").setup()
+        require("plugin-configs.lsp.servers").setup()
     end,
 }

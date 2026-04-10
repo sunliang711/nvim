@@ -1,0 +1,4 @@
+WRN 2026-04-10T17:29:46.233 ?.13174    server_start:197: Failed to start server: operation not permitted: /var/folders/3z/5n5463_91273pbyxv92gksbw0000gq/T/nvim.eagle/DGdbCQ/nvim.13174.0
+WRN 2026-04-10T17:29:46.233 ?.13173    server_start:197: Failed to start server: operation not permitted: /var/folders/3z/5n5463_91273pbyxv92gksbw0000gq/T/nvim.eagle/qeknxz/nvim.13173.0
+WRN 2026-04-10T17:30:41.037 ?.13442    server_start:197: Failed to start server: operation not permitted: /var/folders/3z/5n5463_91273pbyxv92gksbw0000gq/T/nvim.eagle/pbhmxT/nvim.13442.0
+WRN 2026-04-10T17:30:41.038 ?.13441    server_start:197: Failed to start server: operation not permitted: /var/folders/3z/5n5463_91273pbyxv92gksbw0000gq/T/nvim.eagle/5Tge66/nvim.13441.0
