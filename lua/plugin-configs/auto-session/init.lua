@@ -11,7 +11,8 @@ function M.setup()
         pcall(telescope.load_extension, "session-lens")
     end
 
-    vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+    -- 不恢复 session 保存时的 cwd，避免启动于项目根时被窗口级 lcd 带偏
+    vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,terminal,localoptions"
     session.setup({
         enabled = true,
         auto_restore_last_session = false,
