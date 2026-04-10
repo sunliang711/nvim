@@ -86,7 +86,7 @@ function M.setup()
             -- b.diagnostics.markdownlint,
             -- b.diagnostics.eslint_d,
             with_root_file(b.diagnostics.selene, "selene.toml"),
-            with_diagnostics_code(b.diagnostics.shellcheck),
+            -- with_diagnostics_code(b.diagnostics.shellcheck),
 
             -- code actions
             b.code_actions.gitsigns,
