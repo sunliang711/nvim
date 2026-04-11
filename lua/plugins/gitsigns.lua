@@ -1,3 +1,5 @@
+local enabled = PLUGINS.gitsigns == nil or PLUGINS.gitsigns.enabled ~= false
+
 return {
     "lewis6991/gitsigns.nvim",
     lazy = false,
@@ -55,4 +57,6 @@ return {
     config = function()
         require("plugin-configs.gitsigns").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

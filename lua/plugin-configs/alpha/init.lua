@@ -9,6 +9,7 @@ function M.setup()
 	local icons = require("icons")
 
 	local dashboard = require("alpha.themes.dashboard")
+	local use_telescope = PLUGINS.telescope == nil or PLUGINS.telescope.enabled ~= false
 	-- local dashboard = require "alpha.themes.startify"
 	dashboard.section.header.val = {
 		[[                               __                ]],
@@ -18,21 +19,26 @@ function M.setup()
 		[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
 		[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 	}
-	dashboard.section.buttons.val = {
-		dashboard.button("f", icons.documents.Files .. " Find file", ":Telescope find_files <CR>"),
-		dashboard.button("e", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
-		dashboard.button(
+	local buttons = {}
+	-- telescope 关闭时移除相关入口，避免 dashboard 调用不存在的命令
+	if use_telescope then
+		table.insert(buttons, dashboard.button("f", icons.documents.Files .. " Find file", ":Telescope find_files <CR>"))
+	end
+	table.insert(buttons, dashboard.button("e", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"))
+	if use_telescope then
+		table.insert(buttons, dashboard.button(
 			"p",
 			icons.git.Repo .. " Find project",
 			":lua require('telescope').extensions.projects.projects()<CR>"
-		),
-		dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"),
-		dashboard.button("t", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"),
-		-- dashboard.button("s", icons.ui.SignIn .. " Find Session", ":Telescope sessions save_current=false <CR>"),
-		dashboard.button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
-		dashboard.button("u", icons.ui.CloudDownload .. " Update", ":PackerSync<CR>"),
-		dashboard.button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"),
-	}
+		))
+		table.insert(buttons, dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"))
+		table.insert(buttons, dashboard.button("t", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"))
+	end
+	-- dashboard.button("s", icons.ui.SignIn .. " Find Session", ":Telescope sessions save_current=false <CR>"),
+	table.insert(buttons, dashboard.button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"))
+	table.insert(buttons, dashboard.button("u", icons.ui.CloudDownload .. " Update", ":PackerSync<CR>"))
+	table.insert(buttons, dashboard.button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"))
+	dashboard.section.buttons.val = buttons
 	local function footer()
 		-- NOTE: requires the fortune-mod package to work
 		-- local handle = io.popen("fortune")

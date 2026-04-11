@@ -1,3 +1,5 @@
+local enabled = PLUGINS.hop == nil or PLUGINS.hop.enabled ~= false
+
 return {
 
     "phaazon/hop.nvim",
@@ -11,4 +13,6 @@ return {
     config = function()
         require("plugin-configs.hop").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

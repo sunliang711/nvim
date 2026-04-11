@@ -1,3 +1,5 @@
+local enabled = PLUGINS.telescope == nil or PLUGINS.telescope.enabled ~= false
+
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -30,4 +32,6 @@ return {
     config = function()
         require("plugin-configs.telescope").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

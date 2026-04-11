@@ -1,4 +1,5 @@
 local use_lspsaga = PLUGINS.lsp.enabled and PLUGINS.lsp.saga
+local use_telescope = PLUGINS.telescope == nil or PLUGINS.telescope.enabled ~= false
 
 local keys = {
     {
@@ -8,7 +9,8 @@ local keys = {
     },
     {
         "<leader>lf",
-        use_lspsaga and "<cmd>Lspsaga finder<cr>" or "<cmd>Telescope lsp_definitions<cr>",
+        use_lspsaga and "<cmd>Lspsaga finder<cr>"
+            or (use_telescope and "<cmd>Telescope lsp_definitions<cr>" or "<cmd>lua vim.lsp.buf.definition()<cr>"),
         desc = "Finder",
     },
     { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
@@ -25,7 +27,8 @@ local keys = {
     { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
     {
         "<leader>lo",
-        use_lspsaga and "<cmd>Lspsaga outline<cr>" or "<cmd>Telescope lsp_document_symbols<cr>",
+        use_lspsaga and "<cmd>Lspsaga outline<cr>"
+            or (use_telescope and "<cmd>Telescope lsp_document_symbols<cr>" or "<cmd>lua vim.lsp.buf.document_symbol()<cr>"),
         desc = "Outline",
     },
     { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
@@ -34,9 +37,16 @@ local keys = {
         use_lspsaga and "<cmd>Lspsaga rename<cr>" or "<cmd>lua vim.lsp.buf.rename()<cr>",
         desc = "Rename",
     },
-    { "<leader>lR", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-    { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
-    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+    {
+        "<leader>lR",
+        use_telescope and "<cmd>Telescope lsp_references<cr>" or "<cmd>lua vim.lsp.buf.references()<cr>",
+        desc = "References",
+    },
+    {
+        "<leader>ls",
+        use_telescope and "<cmd>Telescope lsp_document_symbols<cr>" or "<cmd>lua vim.lsp.buf.document_symbol()<cr>",
+        desc = "Document Symbols",
+    },
 }
 
 if PLUGINS.lsp.mason then
@@ -46,6 +56,10 @@ end
 if use_lspsaga then
     table.insert(keys, { "<leader>lt", "<cmd>Lspsaga term_toggle<cr>", desc = "Terminal" })
     table.insert(keys, { "<leader>lw", "<cmd>Lspsaga winbar_toggle<cr>", desc = "Winbar" })
+end
+
+if use_telescope then
+    table.insert(keys, { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" })
 end
 
 return {

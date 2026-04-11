@@ -1,3 +1,5 @@
+local enabled = PLUGINS.alpha == nil or PLUGINS.alpha.enabled ~= false
+
 return {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -8,4 +10,6 @@ return {
     config = function()
         require("plugin-configs.alpha").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

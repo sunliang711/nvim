@@ -23,6 +23,13 @@ function M.setup()
             autocmd FileType go set nolist
         augroup end
     ]])
+
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        pattern = vim.fn.stdpath("config") .. "/lua/config.lua",
+        callback = function()
+            require("functions").reload_plugin_config()
+        end,
+    })
 end
 
 return M

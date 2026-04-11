@@ -1,3 +1,5 @@
+local enabled = PLUGINS.toggleterm == nil or PLUGINS.toggleterm.enabled ~= false
+
 return {
     "akinsho/toggleterm.nvim",
     lazy = false,
@@ -11,4 +13,6 @@ return {
     config = function()
         require("plugin-configs.toggleterm").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

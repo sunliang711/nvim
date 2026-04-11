@@ -1,9 +1,11 @@
+local enabled = PLUGINS.mini_icons == nil or PLUGINS.mini_icons.enabled ~= false
+
 return {
     "echasnovski/mini.icons",
     dependencies = {},
     version='*',
-    -- enabled = PLUGINS.nvim_cmp.enabled,
-    -- cond = PLUGINS.nvim_cmp.enabled,
+    enabled = enabled,
+    cond = enabled,
     config = function()
         require("plugin-configs.miniicons").setup()
     end,

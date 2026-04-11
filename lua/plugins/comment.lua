@@ -1,3 +1,5 @@
+local enabled = PLUGINS.comment == nil or PLUGINS.comment.enabled ~= false
+
 return {
     "numToStr/Comment.nvim",
     lazy = false,
@@ -18,4 +20,6 @@ return {
     config = function()
         require("plugin-configs.comment").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }

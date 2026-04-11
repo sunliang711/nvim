@@ -97,6 +97,7 @@ function M.setup()
         { "<leader>oL", "<cmd>set background=light<cr>", desc = "set background to light" },
         { "<leader>oC", "<cmd>checkhealth<cr>", desc = "Check Health" },
         { "<leader>oe", "<cmd>edit ~/.config/nvim/init.lua<cr>", desc = "edit init.lua" },
+        { "<leader>op", '<cmd>lua require("functions").open_plugin_config()<cr>', desc = "edit config.lua" },
         { "<leader>h", "<cmd>set hlsearch!<cr>", desc = "No Highlight" },
         { "<leader>fw", "<cmd>wall<cr>", desc = "save all" },
         { "<leader>fq", "<cmd>wqall<cr>", desc = "save all and quit" },

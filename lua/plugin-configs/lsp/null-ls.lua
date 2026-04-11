@@ -27,6 +27,7 @@ function M.setup()
     end
 
     local b = null_ls.builtins
+    local use_gitsigns = PLUGINS.gitsigns == nil or PLUGINS.gitsigns.enabled ~= false
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
     -- local formatting = null_ls.builtins.formatting
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -89,7 +90,7 @@ function M.setup()
             -- with_diagnostics_code(b.diagnostics.shellcheck),
 
             -- code actions
-            b.code_actions.gitsigns,
+            use_gitsigns and b.code_actions.gitsigns or nil,
             b.code_actions.gitrebase,
 
             -- hover

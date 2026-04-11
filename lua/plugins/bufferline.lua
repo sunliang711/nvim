@@ -1,3 +1,5 @@
+local enabled = PLUGINS.bufferline == nil or PLUGINS.bufferline.enabled ~= false
+
 return {
     "akinsho/bufferline.nvim",
     version = "*",
@@ -17,4 +19,6 @@ return {
     config = function()
         require("plugin-configs.bufferline").setup()
     end,
+    enabled = enabled,
+    cond = enabled,
 }
