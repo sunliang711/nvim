@@ -3,7 +3,7 @@ PLUGINS = {
         enabled = true,
     },
     lsp = {
-        enabled = true,
+        enabled = false,
         mason = true,
         saga = true,
         none_ls = true,
@@ -12,7 +12,7 @@ PLUGINS = {
         navic = true,
     },
     treesitter = {
-        enabled = true,
+        enabled = false,
         autotag = true,
         endwise = true,
     },
