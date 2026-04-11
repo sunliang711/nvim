@@ -2,6 +2,9 @@ PLUGINS = {
     cmp = {
         enabled = true,
     },
+    trouble = {
+        enabled = true,
+    },
     lsp = {
         enabled = false,
         mason = true,
@@ -20,8 +23,5 @@ PLUGINS = {
         enabled = false,
         cmp = true,
         -- http_proxy = "TODO",
-    },
-    trouble = {
-        enabled = true,
     },
 }
