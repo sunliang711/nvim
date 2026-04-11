@@ -73,17 +73,21 @@ function M.setup()
     }
 
     local mappings = {
-        { "<leader>b", group = "Buffer manage" },
-        { "<leader>f", group = "File" },
+        { "<leader>b", group = "Buffer" },
+        { "<leader>c", group = "Config" },
+        { "<leader>f", group = "Find / File" },
         { "<leader>g", group = "Git" },
         { "<leader>l", group = "LSP" },
         { "<leader>o", group = "Options" },
-        { "<leader>p", group = "Package Manage" },
+        { "<leader>p", group = "Plugin" },
         { "<leader>q", group = "Quickfix" },
         { "<leader>t", group = "Telescope" },
         { "<leader>T", group = "Terminal" },
-        { "<leader>w", group = "Window and Tab" },
+        { "<leader>w", group = "Window" },
         { "<leader>x", group = "Trouble" },
+        { "<leader>ch", "<cmd>checkhealth<cr>", desc = "Check Health" },
+        { "<leader>ce", "<cmd>edit ~/.config/nvim/init.lua<cr>", desc = "edit init.lua" },
+        { "<leader>cp", '<cmd>lua require("functions").open_plugin_config()<cr>', desc = "edit config.lua" },
         { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "sync plugins" },
         { "<leader>pl", "<cmd>Lazy log<cr>", desc = "lazy log" },
         { "<leader>pp", "<cmd>Lazy show<cr>", desc = "lazy show" },
@@ -95,10 +99,7 @@ function M.setup()
         { "<leader>os", '<cmd>lua require("functions").toggle_option("spell")<cr>', desc = "Spell" },
         { "<leader>oD", "<cmd>set background=dark<cr>", desc = "set background to dark" },
         { "<leader>oL", "<cmd>set background=light<cr>", desc = "set background to light" },
-        { "<leader>oC", "<cmd>checkhealth<cr>", desc = "Check Health" },
-        { "<leader>oe", "<cmd>edit ~/.config/nvim/init.lua<cr>", desc = "edit init.lua" },
-        { "<leader>op", '<cmd>lua require("functions").open_plugin_config()<cr>', desc = "edit config.lua" },
-        { "<leader>h", "<cmd>set hlsearch!<cr>", desc = "No Highlight" },
+        { "<leader>oh", "<cmd>set hlsearch!<cr>", desc = "No Highlight" },
         { "<leader>fw", "<cmd>wall<cr>", desc = "save all" },
         { "<leader>fq", "<cmd>wqall<cr>", desc = "save all and quit" },
         { "<leader>fQ", "<cmd>qall!<cr>", desc = "quit without save!!" },
@@ -106,14 +107,9 @@ function M.setup()
         { "<leader>wj", "<c-w>j", desc = "bottom window" },
         { "<leader>wk", "<c-w>k", desc = "top window" },
         { "<leader>wl", "<c-w>l", desc = "right window" },
-        { "<leader>w[", "<cmd>bprevious<cr>", desc = "left tab" },
-        { "<leader>w]", "<cmd>bnext<cr>", desc = "right tab" },
         { "<leader>w-", "<cmd>split<cr>", desc = "HSplit" },
         { "<leader>w|", "<cmd>vsplit<cr>", desc = "VSplit" },
         { "<leader>wq", "<cmd>q<cr>", desc = "Close Window" },
-        { "<leader>qn", "<cmd>cnext<cr>", desc = "next quickfix location" },
-        { "<leader>qp", "<cmd>cprevious<cr>", desc = "previous quickfix location" },
-        { "<leader>qc", "<cmd>cclose<cr>", desc = "close quickfix window" },
         { "<leader>qj", "<cmd>cnext<cr>", desc = "next quickfix location" },
         { "<leader>qk", "<cmd>cprevious<cr>", desc = "previous quickfix location" },
         { "<leader>qq", "<cmd>cclose<cr>", desc = "close quickfix window" },
@@ -121,7 +117,7 @@ function M.setup()
 
     if PLUGINS.nvimtree == nil or PLUGINS.nvimtree.enabled ~= false then
         table.insert(mappings, { "<leader>oi", '<cmd>lua require("functions").toggle_nvimtree_gitignore()<cr>', desc = "toggle nvim-tree gitignore" })
-        table.insert(mappings, { "<leader>wf", "<cmd>NvimTreeFindFile<cr>", desc = "focus file in nvim tree" })
+        table.insert(mappings, { "<leader>fE", "<cmd>NvimTreeFindFile<cr>", desc = "focus file in nvim tree" })
     end
 
     which_key.setup(setup)

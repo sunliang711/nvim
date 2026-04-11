@@ -119,7 +119,7 @@ cp lua/config-example.lua lua/config.lua
 
 常用操作：
 
-- `,op`：快速打开 `lua/config.lua`
+- `,cp`：快速打开 `lua/config.lua`
 - 保存 `lua/config.lua`：自动重新加载配置
 
 当前热重载策略是保守模式：
@@ -157,8 +157,8 @@ config.lua reloaded, restart Neovim if plugin switches did not fully apply
 
 | 快捷键 | 说明 |
 | --- | --- |
-| `,e` | 打开/关闭 `nvim-tree` |
-| `,wf` | 在 `nvim-tree` 中定位当前文件 |
+| `,fe` | 打开/关闭 `nvim-tree` |
+| `,fE` | 在 `nvim-tree` 中定位当前文件 |
 | `,ff` | 查找文件 |
 | `,fF` | 查找文件，带预览 |
 | `,ft` | 全局文本搜索 |
@@ -181,8 +181,6 @@ config.lua reloaded, restart Neovim if plugin switches did not fully apply
 
 | 快捷键 | 说明 |
 | --- | --- |
-| `,op` | 打开 `lua/config.lua` |
-| `,oe` | 打开 `init.lua` |
 | `,ow` | 切换自动换行 |
 | `,or` | 切换相对行号 |
 | `,ol` | 切换当前行高亮 |
@@ -191,8 +189,16 @@ config.lua reloaded, restart Neovim if plugin switches did not fully apply
 | `,oi` | 切换 `nvim-tree` 的 gitignore 过滤 |
 | `,oD` | 背景设为 dark |
 | `,oL` | 背景设为 light |
-| `,oC` | 运行 `:checkhealth` |
-| `,h` | 切换搜索高亮 |
+| `,oh` | 切换搜索高亮 |
+
+### 配置入口
+
+| 快捷键 | 说明 |
+| --- | --- |
+| `,cp` | 打开 `lua/config.lua` |
+| `,ce` | 打开 `init.lua` |
+| `,ch` | 运行 `:checkhealth` |
+| `,cd` | 打开 Dashboard |
 
 ### 保存与退出
 
@@ -256,7 +262,6 @@ config.lua reloaded, restart Neovim if plugin switches did not fully apply
 | `gl` | Hop 按行跳转 |
 | `gp` | Hop 按模式跳转 |
 | `,/` | 注释当前行或选中区域 |
-| `,;` | 打开 Dashboard |
 | `,xx` | Trouble 诊断列表 |
 | `,xX` | 当前 Buffer 诊断列表 |
 | `,xl` | Location List |
@@ -323,8 +328,8 @@ Buffer 内常用键：
 
 全局快捷键：
 
-- `,e`：打开/关闭文件树
-- `,wf`：在文件树中定位当前文件
+- `,fe`：打开/关闭文件树
+- `,fE`：在文件树中定位当前文件
 - `,oi`：切换是否隐藏 `.gitignore` 文件
 
 进入文件树后，常用按键：
@@ -405,11 +410,11 @@ copilot = {
 - 打开 Neovim
 - 按 `,` 查看 `which-key` 菜单
 - 用 `,ff` / `,ft` 搜索文件和文本
-- 用 `,e` 或 `,wf` 配合文件树浏览项目
+- 用 `,fe` 或 `,fE` 配合文件树浏览项目
 
 ### 2. 调整插件开关
 
-- 按 `,op` 打开 `lua/config.lua`
+- 按 `,cp` 打开 `lua/config.lua`
 - 修改对应 `enabled` 开关
 - 保存文件，等待自动重载
 - 如果关闭的是已加载插件，按提示重启 Neovim

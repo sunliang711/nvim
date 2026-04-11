@@ -6,14 +6,14 @@ return {
     keys = {
         {
             "<leader>/",
-            '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>',
+            "<Plug>(comment_toggle_linewise_current)",
             mode = "n",
             desc = "Comment",
         },
         {
             "<leader>/",
-            '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>',
-            mode = "v",
+            "<Plug>(comment_toggle_linewise_visual)",
+            mode = "x",
             desc = "Comment",
         },
     },
