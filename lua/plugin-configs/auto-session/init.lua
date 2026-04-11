@@ -35,12 +35,10 @@ function M.setup()
 
     session.setup(opts)
 
-    if telescope_status_ok then
-        vim.keymap.set("n", "<Leader>a", "<cmd>SessionSearch<CR>", {
-            noremap = true,
-            silent = true,
-        })
-    end
+    vim.keymap.set("n", "<Leader>a", "<cmd>AutoSession search<CR>", {
+        noremap = true,
+        silent = true,
+    })
 end
 
 return M

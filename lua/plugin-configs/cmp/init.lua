@@ -22,7 +22,11 @@ function M.setup()
         return
     end
 
+    -- 热重载时先清理旧 autocmd，避免重复注册。
+    local luasnip_cleanup_group = vim.api.nvim_create_augroup("CmpLuaSnipCleanup", { clear = true })
+
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
+        group = luasnip_cleanup_group,
         callback = function()
             local luasnip = require("luasnip")
             if luasnip.expand_or_jumpable() then
@@ -39,10 +43,6 @@ function M.setup()
         local col = vim.fn.col(".") - 1
         return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
     end
-
-    local icons = require("icons")
-
-    local kind_icons = icons.kind
 
     local sources = {
         { name = "buffer", group_index = 2 },

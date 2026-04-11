@@ -105,6 +105,9 @@ function M.setup()
             update_root = true,
             ignore_list = {},
         },
+        filters = {
+            git_ignored = false,
+        },
         on_attach = on_attach,
         -- view = {
         --     side = "left",

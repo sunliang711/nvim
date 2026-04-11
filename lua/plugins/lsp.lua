@@ -50,7 +50,7 @@ local keys = {
 }
 
 if PLUGINS.lsp.mason then
-    table.insert(keys, { "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "Installer Info" })
+    table.insert(keys, { "<leader>lI", "<cmd>Mason<cr>", desc = "Mason" })
 end
 
 if use_lspsaga then

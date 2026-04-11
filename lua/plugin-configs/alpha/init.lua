@@ -10,6 +10,7 @@ function M.setup()
 
 	local dashboard = require("alpha.themes.dashboard")
 	local use_telescope = PLUGINS.telescope == nil or PLUGINS.telescope.enabled ~= false
+	local use_auto_session = PLUGINS.auto_session == nil or PLUGINS.auto_session.enabled ~= false
 	-- local dashboard = require "alpha.themes.startify"
 	dashboard.section.header.val = {
 		[[                               __                ]],
@@ -25,18 +26,15 @@ function M.setup()
 		table.insert(buttons, dashboard.button("f", icons.documents.Files .. " Find file", ":Telescope find_files <CR>"))
 	end
 	table.insert(buttons, dashboard.button("e", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"))
+	if use_auto_session then
+		table.insert(buttons, dashboard.button("s", icons.ui.SignIn .. " Find session", ":AutoSession search <CR>"))
+	end
 	if use_telescope then
-		table.insert(buttons, dashboard.button(
-			"p",
-			icons.git.Repo .. " Find project",
-			":lua require('telescope').extensions.projects.projects()<CR>"
-		))
 		table.insert(buttons, dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"))
 		table.insert(buttons, dashboard.button("t", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"))
 	end
-	-- dashboard.button("s", icons.ui.SignIn .. " Find Session", ":Telescope sessions save_current=false <CR>"),
 	table.insert(buttons, dashboard.button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"))
-	table.insert(buttons, dashboard.button("u", icons.ui.CloudDownload .. " Update", ":PackerSync<CR>"))
+	table.insert(buttons, dashboard.button("u", icons.ui.CloudDownload .. " Update", ":Lazy sync<CR>"))
 	table.insert(buttons, dashboard.button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"))
 	dashboard.section.buttons.val = buttons
 	local function footer()

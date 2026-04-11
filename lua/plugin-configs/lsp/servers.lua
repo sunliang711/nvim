@@ -14,8 +14,7 @@ function M.setup()
         -- "yamlls",
         "jsonls",
         "bashls",
-        "solidity",
-        "solc", -- solidity needs solc
+        "solc", -- solidity files use solc
         -- 'solang',
         "emmet_ls",
     }
@@ -49,6 +48,10 @@ function M.setup()
 
         if server == "lua_ls" then
             opts = require("plugin-configs.lsp.settings.lua_ls")
+        end
+
+        if server == "solc" then
+            opts = require("plugin-configs.lsp.settings.solc")
         end
 
         enable_server(server, opts)

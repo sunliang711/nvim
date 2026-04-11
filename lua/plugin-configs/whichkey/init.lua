@@ -111,7 +111,6 @@ function M.setup()
         { "<leader>w-", "<cmd>split<cr>", desc = "HSplit" },
         { "<leader>w|", "<cmd>vsplit<cr>", desc = "VSplit" },
         { "<leader>wq", "<cmd>q<cr>", desc = "Close Window" },
-        { "<leader>wf", "<cmd>NvimTreeFindFile<cr>", desc = "focus file in nvim tree" },
         { "<leader>qn", "<cmd>cnext<cr>", desc = "next quickfix location" },
         { "<leader>qp", "<cmd>cprevious<cr>", desc = "previous quickfix location" },
         { "<leader>qc", "<cmd>cclose<cr>", desc = "close quickfix window" },
@@ -119,6 +118,11 @@ function M.setup()
         { "<leader>qk", "<cmd>cprevious<cr>", desc = "previous quickfix location" },
         { "<leader>qq", "<cmd>cclose<cr>", desc = "close quickfix window" },
     }
+
+    if PLUGINS.nvimtree == nil or PLUGINS.nvimtree.enabled ~= false then
+        table.insert(mappings, { "<leader>oi", '<cmd>lua require("functions").toggle_nvimtree_gitignore()<cr>', desc = "toggle nvim-tree gitignore" })
+        table.insert(mappings, { "<leader>wf", "<cmd>NvimTreeFindFile<cr>", desc = "focus file in nvim tree" })
+    end
 
     which_key.setup(setup)
     which_key.add(mappings)

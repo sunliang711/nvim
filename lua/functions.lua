@@ -61,6 +61,54 @@ function M.open_plugin_config()
     vim.cmd("edit " .. vim.fn.fnameescape(get_config_path()))
 end
 
+function M.toggle_nvimtree_gitignore()
+    local config_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+    if not config_ok or nvim_tree_config.g == nil or nvim_tree_config.g.filters == nil then
+        vim.notify("nvim-tree is not ready", vim.log.levels.ERROR)
+        return
+    end
+
+    local api_ok, api = pcall(require, "nvim-tree.api")
+    local core_ok, core = pcall(require, "nvim-tree.core")
+    local explorer = nil
+    local visible = false
+
+    if api_ok then
+        visible = api.tree.is_visible()
+    end
+
+    if core_ok then
+        explorer = core.get_explorer()
+    end
+
+    local current = nvim_tree_config.g.filters.git_ignored
+    if explorer ~= nil and explorer.filters ~= nil and explorer.filters.state ~= nil then
+        current = explorer.filters.state.git_ignored
+    end
+
+    local next_state = not current
+    nvim_tree_config.g.filters.git_ignored = next_state
+
+    if explorer ~= nil and explorer.filters ~= nil and explorer.filters.state ~= nil then
+        explorer.filters.state.git_ignored = next_state
+
+        if visible then
+            local node = explorer:get_node_at_cursor()
+            explorer:reload_explorer()
+            if node ~= nil then
+                explorer:focus_node_or_parent(node)
+            end
+        end
+    end
+
+    if next_state then
+        vim.notify("nvim-tree gitignored files hidden", vim.log.levels.INFO)
+        return
+    end
+
+    vim.notify("nvim-tree gitignored files shown", vim.log.levels.INFO)
+end
+
 function M.reload_plugin_config()
     local config_path = get_config_path()
     local ok, err = pcall(dofile, config_path)

@@ -14,7 +14,7 @@ return {
         event = "InsertEnter",
         config = function()
             if PLUGINS.copilot.http_proxy ~= nil and PLUGINS.copilot.http_proxy ~= "" then
-                vim.notify("PRoxy not empty")
+                vim.notify("Copilot proxy configured", vim.log.levels.INFO)
                 vim.g.copilot_proxy = PLUGINS.copilot.http_proxy
             end
             require("plugin-configs.copilot").setup()

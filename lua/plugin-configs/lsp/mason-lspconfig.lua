@@ -19,7 +19,6 @@ function M.setup()
             "cssls",
             "jsonls",
             "bashls",
-            "solidity",
             "solc",
             "emmet_ls",
         },
