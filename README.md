@@ -185,6 +185,8 @@ config.lua reloaded, restart Neovim if plugin switches did not fully apply
 | `,or` | 切换相对行号 |
 | `,ol` | 切换当前行高亮 |
 | `,oc` | 切换当前列高亮 |
+| `,od` | 切换 Telescope 是否显示隐藏文件 |
+| `,og` | 切换 Telescope 是否显示 `.gitignore` 中的文件 |
 | `,os` | 切换拼写检查 |
 | `,oi` | 切换 `nvim-tree` 的 gitignore 过滤 |
 | `,oD` | 背景设为 dark |

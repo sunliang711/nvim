@@ -5,15 +5,27 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     lazy = false,
     keys = {
-        { "<leader>fF", "<cmd>Telescope find_files<cr>", desc = "Find Files (With Previewer)" },
+        {
+            "<leader>fF",
+            function()
+                require("functions").telescope_find_files()
+            end,
+            desc = "Find Files (With Previewer)",
+        },
         {
             "<leader>ff",
             function()
-                require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ previewer = false }))
+                require("functions").telescope_find_files(require("telescope.themes").get_dropdown({ previewer = false }))
             end,
             desc = "Find Files",
         },
-        { "<leader>ft", "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Find Text" },
+        {
+            "<leader>ft",
+            function()
+                require("functions").telescope_live_grep(require("telescope.themes").get_ivy())
+            end,
+            desc = "Find Text",
+        },
         { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffer List" },
         { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
         { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Commands" },

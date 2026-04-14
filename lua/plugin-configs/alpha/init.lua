@@ -23,7 +23,10 @@ function M.setup()
 	local buttons = {}
 	-- telescope 关闭时移除相关入口，避免 dashboard 调用不存在的命令
 	if use_telescope then
-		table.insert(buttons, dashboard.button("f", icons.documents.Files .. " Find file", ":Telescope find_files <CR>"))
+		table.insert(
+			buttons,
+			dashboard.button("f", icons.documents.Files .. " Find file", ':lua require("functions").telescope_find_files() <CR>')
+		)
 	end
 	table.insert(buttons, dashboard.button("e", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"))
 	if use_auto_session then
@@ -31,7 +34,10 @@ function M.setup()
 	end
 	if use_telescope then
 		table.insert(buttons, dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"))
-		table.insert(buttons, dashboard.button("t", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"))
+		table.insert(
+			buttons,
+			dashboard.button("t", icons.ui.List .. " Find text", ':lua require("functions").telescope_live_grep() <CR>')
+		)
 	end
 	table.insert(buttons, dashboard.button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"))
 	table.insert(buttons, dashboard.button("u", icons.ui.CloudDownload .. " Update", ":Lazy sync<CR>"))

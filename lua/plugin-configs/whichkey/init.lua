@@ -96,6 +96,8 @@ function M.setup()
         { "<leader>or", '<cmd>lua require("functions").toggle_option("relativenumber")<cr>', desc = "Relative" },
         { "<leader>ol", '<cmd>lua require("functions").toggle_option("cursorline")<cr>', desc = "Cursorline" },
         { "<leader>oc", '<cmd>lua require("functions").toggle_option("cursorcolumn")<cr>', desc = "Cursorcolumn" },
+        { "<leader>od", '<cmd>lua require("functions").toggle_telescope_hidden()<cr>', desc = "Telescope Hidden" },
+        { "<leader>og", '<cmd>lua require("functions").toggle_telescope_no_ignore()<cr>', desc = "Telescope Gitignore" },
         { "<leader>os", '<cmd>lua require("functions").toggle_option("spell")<cr>', desc = "Spell" },
         { "<leader>oD", "<cmd>set background=dark<cr>", desc = "set background to dark" },
         { "<leader>oL", "<cmd>set background=light<cr>", desc = "set background to light" },

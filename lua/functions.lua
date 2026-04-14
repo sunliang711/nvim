@@ -4,6 +4,45 @@ local function get_config_path()
     return vim.fn.stdpath("config") .. "/lua/config.lua"
 end
 
+local function get_telescope_search_state()
+    if vim.g.telescope_search_hidden == nil then
+        vim.g.telescope_search_hidden = false
+    end
+
+    if vim.g.telescope_search_no_ignore == nil then
+        vim.g.telescope_search_no_ignore = false
+    end
+
+    return {
+        hidden = vim.g.telescope_search_hidden,
+        no_ignore = vim.g.telescope_search_no_ignore,
+    }
+end
+
+local function extend_telescope_additional_args(opts, extra_args)
+    if #extra_args == 0 then
+        return opts
+    end
+
+    local original = opts.additional_args
+    opts.additional_args = function(prompt)
+        local args = vim.deepcopy(extra_args)
+
+        if type(original) == "function" then
+            local original_args = original(prompt)
+            if type(original_args) == "table" then
+                vim.list_extend(args, original_args)
+            end
+        elseif type(original) == "table" then
+            vim.list_extend(args, original)
+        end
+
+        return args
+    end
+
+    return opts
+end
+
 local function get_option_store(name)
     local ok, info = pcall(vim.api.nvim_get_option_info2, name, {})
     if ok then
@@ -55,6 +94,69 @@ function M.toggle_option(name)
     end
 
     store[name] = not value
+end
+
+function M.toggle_telescope_hidden()
+    local next_state = not get_telescope_search_state().hidden
+    vim.g.telescope_search_hidden = next_state
+
+    if next_state then
+        vim.notify("telescope hidden files shown", vim.log.levels.INFO)
+        return
+    end
+
+    vim.notify("telescope hidden files hidden", vim.log.levels.INFO)
+end
+
+function M.toggle_telescope_no_ignore()
+    local next_state = not get_telescope_search_state().no_ignore
+    vim.g.telescope_search_no_ignore = next_state
+
+    if next_state then
+        vim.notify("telescope gitignored files shown", vim.log.levels.INFO)
+        return
+    end
+
+    vim.notify("telescope gitignored files hidden", vim.log.levels.INFO)
+end
+
+function M.telescope_find_files(opts)
+    local builtin_ok, builtin = pcall(require, "telescope.builtin")
+    if not builtin_ok then
+        vim.notify("telescope is not ready", vim.log.levels.ERROR)
+        return
+    end
+
+    local state = get_telescope_search_state()
+    local final_opts = vim.tbl_deep_extend("force", opts or {}, {
+        hidden = state.hidden,
+        no_ignore = state.no_ignore,
+    })
+
+    builtin.find_files(final_opts)
+end
+
+function M.telescope_live_grep(opts)
+    local builtin_ok, builtin = pcall(require, "telescope.builtin")
+    if not builtin_ok then
+        vim.notify("telescope is not ready", vim.log.levels.ERROR)
+        return
+    end
+
+    local state = get_telescope_search_state()
+    local rg_args = {}
+    local final_opts = vim.tbl_deep_extend("force", {}, opts or {})
+
+    if state.hidden then
+        table.insert(rg_args, "--hidden")
+    end
+
+    if state.no_ignore then
+        table.insert(rg_args, "--no-ignore")
+    end
+
+    extend_telescope_additional_args(final_opts, rg_args)
+    builtin.live_grep(final_opts)
 end
 
 function M.open_plugin_config()
