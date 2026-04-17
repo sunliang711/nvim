@@ -119,7 +119,7 @@ function M.setup()
 
     if PLUGINS.nvimtree == nil or PLUGINS.nvimtree.enabled ~= false then
         table.insert(mappings, { "<leader>oi", '<cmd>lua require("functions").toggle_nvimtree_gitignore()<cr>', desc = "toggle nvim-tree gitignore" })
-        table.insert(mappings, { "<leader>fE", "<cmd>NvimTreeFindFile<cr>", desc = "focus file in nvim tree" })
+        table.insert(mappings, { "<leader>fE", '<cmd>lua require("functions").find_file_in_nvimtree_project_root()<cr>', desc = "focus file in nvim tree" })
     end
 
     which_key.setup(setup)

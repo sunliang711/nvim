@@ -4,6 +4,54 @@ local function get_config_path()
     return vim.fn.stdpath("config") .. "/lua/config.lua"
 end
 
+local function get_current_buffer_path()
+    local path = vim.api.nvim_buf_get_name(0)
+    if path == nil or path == "" then
+        return vim.fn.getcwd()
+    end
+
+    return vim.fn.fnamemodify(path, ":p")
+end
+
+local function get_project_root(path)
+    local absolute_path = path
+    if absolute_path == nil or absolute_path == "" then
+        absolute_path = get_current_buffer_path()
+    end
+
+    if vim.fn.isdirectory(absolute_path) ~= 1 then
+        absolute_path = vim.fn.fnamemodify(absolute_path, ":h")
+    end
+
+    -- 优先向上查找 Git 根目录，找不到时回退到当前文件所在目录。
+    local git_dir = vim.fs.find(".git", {
+        path = absolute_path,
+        upward = true,
+        limit = 1,
+    })[1]
+
+    if git_dir ~= nil then
+        return vim.fs.dirname(git_dir)
+    end
+
+    return absolute_path
+end
+
+local function set_cwd_to_project_root(path)
+    local project_root = get_project_root(path)
+    if project_root == nil or project_root == "" then
+        return nil
+    end
+
+    local current_cwd = vim.fn.getcwd()
+    if current_cwd ~= project_root then
+        -- 让 nvim-tree 后续的 update_root 优先使用项目根目录。
+        vim.cmd("cd " .. vim.fn.fnameescape(project_root))
+    end
+
+    return project_root
+end
+
 local function get_telescope_search_state()
     if vim.g.telescope_search_hidden == nil then
         vim.g.telescope_search_hidden = false
@@ -161,6 +209,42 @@ end
 
 function M.open_plugin_config()
     vim.cmd("edit " .. vim.fn.fnameescape(get_config_path()))
+end
+
+function M.toggle_nvimtree_project_root()
+    local api_ok, api = pcall(require, "nvim-tree.api")
+    if not api_ok then
+        vim.notify("nvim-tree is not ready", vim.log.levels.ERROR)
+        return
+    end
+
+    if api.tree.is_visible() then
+        api.tree.close()
+        return
+    end
+
+    local project_root = set_cwd_to_project_root()
+    api.tree.open({
+        path = project_root,
+        find_file = true,
+        update_root = true,
+        focus = true,
+    })
+end
+
+function M.find_file_in_nvimtree_project_root()
+    local api_ok, api = pcall(require, "nvim-tree.api")
+    if not api_ok then
+        vim.notify("nvim-tree is not ready", vim.log.levels.ERROR)
+        return
+    end
+
+    set_cwd_to_project_root()
+    api.tree.find_file({
+        open = true,
+        update_root = true,
+        focus = true,
+    })
 end
 
 function M.toggle_nvimtree_gitignore()

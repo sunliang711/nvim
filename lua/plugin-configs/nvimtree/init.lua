@@ -102,8 +102,10 @@ function M.setup()
         },
         update_focused_file = {
             enable = true,
-            update_root = true,
-            ignore_list = {},
+            update_root = {
+                enable = true,
+                ignore_list = {},
+            },
         },
         filters = {
             git_ignored = false,
