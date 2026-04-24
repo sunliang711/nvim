@@ -28,7 +28,7 @@ PLUGINS = {
         enabled = true,
     },
     auto_session = {
-        enabled = true,
+        enabled = false,
     },
     autopairs = {
         enabled = true,
