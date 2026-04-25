@@ -137,7 +137,7 @@ local function lsp_keymaps(bufnr)
         map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
     end
     map("n", "gr", vim.lsp.buf.references, "LSP References")
-    map("n", "gf", function()
+    map("n", "<leader>lF", function()
         vim.lsp.buf.format({ async = true })
     end, "LSP Format")
     map("n", "gl", vim.diagnostic.open_float, "Line Diagnostics")

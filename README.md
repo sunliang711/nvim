@@ -312,7 +312,7 @@ Buffer 内常用键：
 | `gy` | type definition |
 | `gr` | references |
 | `K` | hover |
-| `gf` | format |
+| `<leader>lF` | format |
 | `gl` | 当前行诊断 |
 
 说明：
